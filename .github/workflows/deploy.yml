@@ -1,0 +1,43 @@
+name: Deploy to GitHub Pages<font></font>
+<font></font>
+permissions:<font></font>
+  contents: write # Required to push to the repository<font></font>
+  pages: write # Required for GitHub Pages deployment<font></font>
+<font></font>
+on:<font></font>
+  push:<font></font>
+    branches:<font></font>
+      - main # Make sure you have the correct name of your branch here<font></font>
+<font></font>
+jobs:<font></font>
+  deploy:<font></font>
+    runs-on: ubuntu-latest<font></font>
+    steps:<font></font>
+      # Checkout the code<font></font>
+      - name: Checkout code<font></font>
+        uses: actions/checkout@v2<font></font>
+<font></font>
+      # Set up Node.js<font></font>
+      - name: Set up Node.js<font></font>
+        uses: actions/setup-node@v3<font></font>
+        with:<font></font>
+          node-version: '20' # Adjust Node.js version as needed<font></font>
+<font></font>
+      # Install dependencies<font></font>
+      - name: Install dependencies<font></font>
+        run: |<font></font>
+          npm install<font></font>
+<font></font>
+      # Build the app<font></font>
+      - name: Build the app<font></font>
+        run: |<font></font>
+          npm run build<font></font>
+<font></font>
+      # Deploy to GitHub Pages<font></font>
+      - name: Deploy to GitHub Pages<font></font>
+        uses: JamesIves/github-pages-deploy-action@v4<font></font>
+        with:<font></font>
+          branch: gh-pages # Branch where the app will be deployed<font></font>
+          folder: dist # Folder containing the built React app<font></font>
+        env:<font></font>
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} # Automatically generated token for authentication
