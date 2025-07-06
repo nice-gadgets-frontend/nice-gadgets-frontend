@@ -1,0 +1,30 @@
+name: Lint<font></font>
+<font></font>
+on:<font></font>
+  pull_request:<font></font>
+    types: [opened, synchronize, reopened]<font></font>
+<font></font>
+jobs:<font></font>
+  fix-style:<font></font>
+    name: Run fix-style on PR<font></font>
+    runs-on: ubuntu-latest<font></font>
+<font></font>
+    steps:<font></font>
+      # Checkout the code<font></font>
+      - name: Checkout code<font></font>
+        uses: actions/checkout@v2<font></font>
+<font></font>
+      # Set up Node.js<font></font>
+      - name: Set up Node.js<font></font>
+        uses: actions/setup-node@v3<font></font>
+        with:<font></font>
+          node-version: '20' # Adjust Node.js version as needed<font></font>
+<font></font>
+      # Install dependencies<font></font>
+      - name: Install dependencies<font></font>
+        run: |<font></font>
+          npm install<font></font>
+<font></font>
+      # Run Linter and Prettier<font></font>
+      - name: Run fix-style<font></font>
+        run: npm run fix-style
