@@ -1,5 +1,6 @@
 import { Outlet } from 'react-router-dom';
 import { Navbar } from './components/Molecules/Navbar/Navbar';
+import { Footer } from './components/Molecules/Footer/Footer';
 
 export const Layout = () => {
   return (
@@ -8,9 +9,7 @@ export const Layout = () => {
       <main className="flex-grow px-4 py-6">
         <Outlet />
       </main>
-      <footer className="text-center py-4 text-gray-500 text-sm">
-        © 2025 Nice Gadgets
-      </footer>
+      <Footer />
     </div>
   );
 };
