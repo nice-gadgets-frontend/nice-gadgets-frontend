@@ -15,7 +15,7 @@ export const FavouritesButton: React.FC<FavouritesButtonType> = ({
       className={classNames(
         'bg-[#323542] hover:bg-[#4A4D58] w-[40px] flex justify-center items-center cursor-pointer',
         {
-          'border border-[#3B3E4A] bg-transparent text-[#EB5757] ': selected,
+          'border border-[#3B3E4A] bg-transparent text-[#EB5757]': selected,
         },
       )}
     >
