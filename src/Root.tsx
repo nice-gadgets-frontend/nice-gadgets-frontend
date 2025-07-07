@@ -1,6 +1,6 @@
 import { Routes, Route, Navigate } from 'react-router-dom';
 import { Layout } from './Layout';
-import { HomePage } from './components/organisms/Pages/homepage';
+import { HomePage } from './components/organisms/Pages/Home.Page';
 import { PhonesCatalogPage } from './components/organisms/Pages/PhonesCatalogPage';
 import { TabletsCatalogPage } from './components/organisms/Pages/TabletsCatalogPage';
 import { AccessoriesCatalogPage } from './components/organisms/Pages/AccessoriesCatalogPage';
