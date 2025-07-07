@@ -1,7 +1,7 @@
-import './App.css';
+import './style.css';
 
 export const App = () => (
   <div className="App">
-    <h1>Product Catalog1</h1>
+    <h1 className="text-black">Product Catalog1</h1>
   </div>
 );

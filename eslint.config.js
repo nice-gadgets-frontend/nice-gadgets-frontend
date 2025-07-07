@@ -29,9 +29,9 @@ export default tseslint.config(
     },
     rules: {
       ...reactHooks.configs.recommended.rules,
-      ...react.configs.recommended.rules, // This way we use recommended set of rules from "eslint-plugin-react" plugin
+      ...react.configs.recommended.rules,
 
-      'react/react-in-jsx-scope': 'off', // This rule is included in "recommended", but since React 17 it is not needed!
+      'react/react-in-jsx-scope': 'off',
 
       'react-refresh/only-export-components': [
         'warn',
