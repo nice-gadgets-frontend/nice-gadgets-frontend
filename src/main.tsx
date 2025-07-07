@@ -6,8 +6,6 @@ import './index.css';
 import './styles/theme/dark.css';
 
 
-
-createRoot(document.getElementById('root') as HTMLElement).render(<App />);
 ReactDOM.createRoot(document.getElementById('root')!).render(
   <React.StrictMode>
     <BrowserRouter>
