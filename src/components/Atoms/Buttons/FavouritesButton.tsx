@@ -1,12 +1,11 @@
-import classNames from 'classnames';
-import { FaHeart, FaRegHeart } from 'react-icons/fa';
 import React from 'react';
+import classNames from 'classnames';
+import { Heart } from 'lucide-react';
 
 type FavouritesButtonType = {
   selected?: boolean;
 };
 
-// <FavouritesButton />
 export const FavouritesButton: React.FC<FavouritesButtonType> = ({
   selected,
 }) => {
@@ -19,7 +18,7 @@ export const FavouritesButton: React.FC<FavouritesButtonType> = ({
         },
       )}
     >
-      {selected ? <FaHeart size={16} /> : <FaRegHeart size={16} />}
+      {selected ? <Heart size={16} fill="#EB5757" /> : <Heart size={16} />}
     </button>
   );
 };
