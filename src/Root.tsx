@@ -7,6 +7,7 @@ import { AccessoriesCatalogPage } from './components/organisms/Pages/Catalog/Acc
 import { FavouritesPage } from './components/organisms/Pages/FavouritesPage';
 import { CartPage } from './components/organisms/Pages/CartPage';
 import { ErrorPage } from './components/organisms/Pages/ErrorPage';
+import { MenuPage } from './components/organisms/Pages/MenuPage';
 
 const Root = () => {
   return (
@@ -47,6 +48,10 @@ const Root = () => {
         <Route
           path="cart"
           element={<CartPage />}
+        />
+        <Route
+          path="menu"
+          element={<MenuPage />}
         />
         <Route
           path="*"
