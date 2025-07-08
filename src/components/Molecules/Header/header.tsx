@@ -3,7 +3,7 @@ import { NavLink } from 'react-router-dom';
 import { FavouritesPageIcon } from '../../Atoms/Icons/FavouritePageIcon';
 import { MenuIcon } from '../../Atoms/Icons/MenuIcon';
 import { ShoppingBagIcon } from '../../Atoms/Icons/ShoppingBagIcon';
-import { X } from 'lucide-react'; // хрестик для закриття мобільного меню
+import { CloseIcon } from '../../Atoms/Icons/CloseMenuIcon';
 
 export const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -16,10 +16,10 @@ export const Navbar = () => {
 
   return (
     <header className="bg-[#0F1121] text-[#F1F2F9] h-[64px] flex items-center">
-      <div className="w-full px-8 md:w-[calc(100%-64px)] xl:w-[1136px]">
+      <div className="w-full px-8 sm:w-[calc(100%-64px)] xl:w-[1136px]">
         <div className="grid grid-cols-24 gap-x-4 items-center h-full">
           {/* Logo */}
-          <div className="col-span-12 md:col-start-1 md:col-span-4 flex justify-start items-center">
+          <div className="col-span-12 sm:col-start-1 sm:col-span-4 flex justify-start items-center">
             <img
               src="/gadgets/img/nice-gadgets-logo.png"
               alt="Nice Gadgets Logo"
@@ -28,7 +28,7 @@ export const Navbar = () => {
           </div>
 
           {/* Desktop Nav */}
-          <div className="hidden md:grid md:col-start-10 md:col-span-8 grid-cols-4 gap-x-[24px] text-[12px] tracking-[0.04em] uppercase font-[Mont-SemiBold]">
+          <div className="hidden sm:grid sm:col-start-10 sm:col-span-8 grid-cols-4 gap-x-[24px] text-[12px] tracking-[0.04em] uppercase font-[Mont-SemiBold]">
             <NavLink
               to="/home"
               className={({ isActive }) =>
@@ -72,7 +72,7 @@ export const Navbar = () => {
           </div>
 
           {/* Desktop Icons */}
-          <div className="hidden md:flex md:col-start-20 md:col-span-5 justify-end gap-x-4">
+          <div className="hidden sm:flex sm:col-start-20 sm:col-span-5 justify-end gap-x-4">
             <NavLink
               to="/favourites"
               aria-label="Favourites"
@@ -98,13 +98,13 @@ export const Navbar = () => {
           </div>
 
           {/* Mobile Menu Icon */}
-          <div className="col-span-12 flex justify-end items-center md:hidden">
+          <div className="col-span-12 flex justify-end items-center sm:hidden">
             <button
               onClick={toggleMenu}
               aria-label="Menu Toggle"
             >
               {isMenuOpen ?
-                <X size={24} />
+                <CloseIcon />
               : <MenuIcon />}
             </button>
           </div>
@@ -113,7 +113,7 @@ export const Navbar = () => {
 
       {/* Mobile Menu Panel */}
       {isMenuOpen && (
-        <div className="absolute top-[64px] left-0 w-full bg-[#0F1121] px-8 py-4 flex flex-col gap-4 text-[14px] uppercase border-t border-[#2c2f3a] z-50 md:hidden">
+        <div className="absolute top-[64px] left-0 w-full bg-[#0F1121] px-8 py-4 flex flex-col gap-4 text-[14px] uppercase border-t border-[#2c2f3a] z-50 sm:hidden">
           <NavLink
             to="/home"
             onClick={closeMenu}
