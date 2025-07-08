@@ -1,11 +1,11 @@
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Navigation, Pagination, A11y, Autoplay } from 'swiper/modules';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
-// @ts-ignore
+// @ts-expect-error
 import 'swiper/css';
-// @ts-ignore
+// @ts-expect-error
 import 'swiper/css/navigation';
-// @ts-ignore
+// @ts-expect-error
 import 'swiper/css/pagination';
 
 import './Slider.css';
