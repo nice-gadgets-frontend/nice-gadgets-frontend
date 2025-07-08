@@ -1,112 +1,163 @@
+import { useState } from 'react';
 import { NavLink } from 'react-router-dom';
 import { FavouritesPageIcon } from '../../Atoms/Icons/FavouritePageIcon';
 import { MenuIcon } from '../../Atoms/Icons/MenuIcon';
 import { ShoppingBagIcon } from '../../Atoms/Icons/ShoppingBagIcon';
+import { X } from 'lucide-react'; // хрестик для закриття мобільного меню
 
 export const Navbar = () => {
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+
+  const toggleMenu = () => {
+    setIsMenuOpen((prev) => !prev);
+  };
+
+  const closeMenu = () => setIsMenuOpen(false);
+
   return (
-    <header className="bg-[#0f1121] text-white">
-      <div className="max-w-7xl mx-auto flex items-center justify-between px-6 py-4 border-b border-gray-700">
-        <img
-          src="/gadgets/img/nice-gadgets-logo.png"
-          alt="nice gadgets logo"
-        />
-        <nav className="flex gap-6 items-center">
+    <header className="bg-[#0F1121] text-[#F1F2F9] h-[64px] flex items-center">
+      <div className="w-full px-8 md:w-[calc(100%-64px)] xl:w-[1136px]">
+        <div className="grid grid-cols-24 gap-x-4 items-center h-full">
+          {/* Logo */}
+          <div className="col-span-12 md:col-start-1 md:col-span-4 flex justify-start items-center">
+            <img
+              src="/gadgets/img/nice-gadgets-logo.png"
+              alt="Nice Gadgets Logo"
+              className="h-[32px]"
+            />
+          </div>
+
+          {/* Desktop Nav */}
+          <div className="hidden md:grid md:col-start-10 md:col-span-8 grid-cols-4 gap-x-[24px] text-[12px] tracking-[0.04em] uppercase font-[Mont-SemiBold]">
+            <NavLink
+              to="/home"
+              className={({ isActive }) =>
+                isActive ?
+                  'border-b-2 border-white'
+                : 'text-gray-400 hover:text-white border-b-2 border-transparent transition-all duration-200'
+              }
+            >
+              Home
+            </NavLink>
+            <NavLink
+              to="/phones"
+              className={({ isActive }) =>
+                isActive ?
+                  'border-b-2 border-white'
+                : 'text-gray-400 hover:text-white border-b-2 border-transparent transition-all duration-200'
+              }
+            >
+              Phones
+            </NavLink>
+            <NavLink
+              to="/tablets"
+              className={({ isActive }) =>
+                isActive ?
+                  'border-b-2 border-white'
+                : 'text-gray-400 hover:text-white border-b-2 border-transparent transition-all duration-200'
+              }
+            >
+              Tablets
+            </NavLink>
+            <NavLink
+              to="/accessories"
+              className={({ isActive }) =>
+                isActive ?
+                  'border-b-2 border-white'
+                : 'text-gray-400 hover:text-white border-b-2 border-transparent transition-all duration-200'
+              }
+            >
+              Accessories
+            </NavLink>
+          </div>
+
+          {/* Desktop Icons */}
+          <div className="hidden md:flex md:col-start-20 md:col-span-5 justify-end gap-x-4">
+            <NavLink
+              to="/favourites"
+              aria-label="Favourites"
+              className={({ isActive }) =>
+                isActive ?
+                  'text-white border-b-2 border-white'
+                : 'text-gray-400 hover:text-white border-b-2 border-transparent transition-all duration-200'
+              }
+            >
+              <FavouritesPageIcon />
+            </NavLink>
+            <NavLink
+              to="/cart"
+              aria-label="Cart"
+              className={({ isActive }) =>
+                isActive ?
+                  'text-white border-b-2 border-white'
+                : 'text-gray-400 hover:text-white border-b-2 border-transparent transition-all duration-200'
+              }
+            >
+              <ShoppingBagIcon />
+            </NavLink>
+          </div>
+
+          {/* Mobile Menu Icon */}
+          <div className="col-span-12 flex justify-end items-center md:hidden">
+            <button
+              onClick={toggleMenu}
+              aria-label="Menu Toggle"
+            >
+              {isMenuOpen ?
+                <X size={24} />
+              : <MenuIcon />}
+            </button>
+          </div>
+        </div>
+      </div>
+
+      {/* Mobile Menu Panel */}
+      {isMenuOpen && (
+        <div className="absolute top-[64px] left-0 w-full bg-[#0F1121] px-8 py-4 flex flex-col gap-4 text-[14px] uppercase border-t border-[#2c2f3a] z-50 md:hidden">
           <NavLink
             to="/home"
-            className={({ isActive }) =>
-              `uppercase text-sm pb-1 border-b-2 font-medium tracking-wide transition-all duration-200 ${
-                isActive ? 'border-white' : (
-                  'border-transparent text-gray-400 hover:text-white'
-                )
-              }`
-            }
+            onClick={closeMenu}
+            className="hover:text-white text-gray-400"
           >
             Home
           </NavLink>
-
           <NavLink
             to="/phones"
-            className={({ isActive }) =>
-              `uppercase text-sm pb-1 border-b-2 font-medium tracking-wide transition-all duration-200 ${
-                isActive ? 'border-white' : (
-                  'border-transparent text-gray-400 hover:text-white'
-                )
-              }`
-            }
+            onClick={closeMenu}
+            className="hover:text-white text-gray-400"
           >
             Phones
           </NavLink>
-
           <NavLink
             to="/tablets"
-            className={({ isActive }) =>
-              `uppercase text-sm pb-1 border-b-2 font-medium tracking-wide transition-all duration-200 ${
-                isActive ? 'border-white' : (
-                  'border-transparent text-gray-400 hover:text-white'
-                )
-              }`
-            }
+            onClick={closeMenu}
+            className="hover:text-white text-gray-400"
           >
             Tablets
           </NavLink>
-
           <NavLink
             to="/accessories"
-            className={({ isActive }) =>
-              `uppercase text-sm pb-1 border-b-2 font-medium tracking-wide transition-all duration-200 ${
-                isActive ? 'border-white' : (
-                  'border-transparent text-gray-400 hover:text-white'
-                )
-              }`
-            }
+            onClick={closeMenu}
+            className="hover:text-white text-gray-400"
           >
             Accessories
           </NavLink>
-
           <NavLink
             to="/favourites"
-            className={({ isActive }) =>
-              `pb-1 border-b-2 transition-all duration-200 ${
-                isActive ?
-                  'border-white text-white'
-                : 'border-transparent text-gray-400 hover:text-white'
-              }`
-            }
-            aria-label="Favourites"
+            onClick={closeMenu}
+            className="flex items-center gap-2 hover:text-white text-gray-400"
           >
-            <FavouritesPageIcon />
+            <FavouritesPageIcon /> Favourites
           </NavLink>
-
           <NavLink
             to="/cart"
-            className={({ isActive }) =>
-              `pb-1 border-b-2 transition-all duration-200 ${
-                isActive ?
-                  'border-white text-white'
-                : 'border-transparent text-gray-400 hover:text-white'
-              }`
-            }
-            aria-label="Cart"
+            onClick={closeMenu}
+            className="flex items-center gap-2 hover:text-white text-gray-400"
           >
-            <ShoppingBagIcon />
+            <ShoppingBagIcon /> Cart
           </NavLink>
-
-          <NavLink
-            to="/Menu"
-            className={({ isActive }) =>
-              `pb-1 border-b-2 transition-all duration-200 ${
-                isActive ?
-                  'border-white text-white'
-                : 'border-transparent text-gray-400 hover:text-white'
-              }`
-            }
-            aria-label="Menu"
-          >
-            <MenuIcon />
-          </NavLink>
-        </nav>
-      </div>
+        </div>
+      )}
     </header>
   );
 };
