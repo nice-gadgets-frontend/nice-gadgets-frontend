@@ -3,6 +3,7 @@ import { NavLink } from 'react-router-dom';
 import { FavouritesPageIcon } from '../../Atoms/Icons/FavouritePageIcon';
 import { MenuIcon } from '../../Atoms/Icons/MenuIcon';
 import { ShoppingBagIcon } from '../../Atoms/Icons/ShoppingBagIcon';
+import { BurgerMenu } from '../BurgerMenu/BurgerMenu';
 import { CloseIcon } from '../../Atoms/Icons/CloseMenuIcon';
 
 export const Navbar = () => {
@@ -112,53 +113,11 @@ export const Navbar = () => {
         </div>
       </div>
 
-      {/* Mobile Menu */}
-      {isMenuOpen && (
-        <div className="absolute top-[64px] left-0 w-full bg-[#0F1121] px-6 py-4 flex flex-col gap-4 text-[14px] uppercase border-t border-[#2c2f3a] z-50 sm:hidden">
-          <NavLink
-            to="/home"
-            onClick={closeMenu}
-            className="hover:text-white text-gray-400"
-          >
-            Home
-          </NavLink>
-          <NavLink
-            to="/phones"
-            onClick={closeMenu}
-            className="hover:text-white text-gray-400"
-          >
-            Phones
-          </NavLink>
-          <NavLink
-            to="/tablets"
-            onClick={closeMenu}
-            className="hover:text-white text-gray-400"
-          >
-            Tablets
-          </NavLink>
-          <NavLink
-            to="/accessories"
-            onClick={closeMenu}
-            className="hover:text-white text-gray-400"
-          >
-            Accessories
-          </NavLink>
-          <NavLink
-            to="/favourites"
-            onClick={closeMenu}
-            className="flex items-center gap-2 hover:text-white text-gray-400"
-          >
-            <FavouritesPageIcon /> Favourites
-          </NavLink>
-          <NavLink
-            to="/cart"
-            onClick={closeMenu}
-            className="flex items-center gap-2 hover:text-white text-gray-400"
-          >
-            <ShoppingBagIcon /> Cart
-          </NavLink>
-        </div>
-      )}
+      {/* Mobile Menu Panel */}
+      <BurgerMenu
+        isOpen={isMenuOpen}
+        onClose={closeMenu}
+      />
     </header>
   );
 };
