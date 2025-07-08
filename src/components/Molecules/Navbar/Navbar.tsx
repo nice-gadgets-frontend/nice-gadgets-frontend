@@ -13,9 +13,10 @@ export const Navbar = () => {
   return (
     <header className="bg-[#0f1121] text-white">
       <div className="max-w-7xl mx-auto flex items-center justify-between px-6 py-4 border-b border-gray-700">
-        <div className="text-xl font-bold">
-          NICE<span className="text-yellow-400">👌</span>GADGETS
-        </div>
+        <img
+          src="/gadgets/img/nice-gadgets-logo.png"
+          alt="nice gadgets logo"
+        />
         <nav className="flex gap-6">
           {links.map(({ to, label }) => (
             <NavLink

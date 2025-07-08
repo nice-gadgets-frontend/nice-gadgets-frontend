@@ -1,9 +1,9 @@
 import { Routes, Route, Navigate } from 'react-router-dom';
 import { Layout } from './Layout';
-import { HomePage } from './components/organisms/Pages/Home.Page';
-import { PhonesCatalogPage } from './components/organisms/Pages/PhonesCatalogPage';
-import { TabletsCatalogPage } from './components/organisms/Pages/TabletsCatalogPage';
-import { AccessoriesCatalogPage } from './components/organisms/Pages/AccessoriesCatalogPage';
+import { HomePage } from './components/organisms/Pages/HomePage/Home.Page';
+import { PhonesCatalogPage } from './components/organisms/Pages/Catalog/Phone/PhonesCatalogPage';
+import { TabletsCatalogPage } from './components/organisms/Pages/Catalog/Tablets/TabletsCatalogPage';
+import { AccessoriesCatalogPage } from './components/organisms/Pages/Catalog/Accessories/AccessoriesCatalogPage';
 import { FavouritesPage } from './components/organisms/Pages/FavouritesPage';
 import { CartPage } from './components/organisms/Pages/CartPage';
 import { ErrorPage } from './components/organisms/Pages/ErrorPage';
