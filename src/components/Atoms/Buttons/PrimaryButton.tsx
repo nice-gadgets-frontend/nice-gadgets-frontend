@@ -14,7 +14,7 @@ export const PrimaryButton: React.FC<PrimaryButtonType> = ({
   return (
     <button
       className={classNames(
-        'px-[39.5px] py-[9.5px] cursor-pointer hover:bg-[#A378FF]',
+        'flex-1 py-[9.5px] cursor-pointer hover:bg-[#A378FF]',
         { 'bg-[#323542]': selected, 'bg-[#905BFF]': !selected },
       )}
     >
