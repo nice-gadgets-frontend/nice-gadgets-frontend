@@ -16,7 +16,7 @@ import React from 'react';
 export const Slider: React.FC = () => {
   return (
     <div className="bg-black">
-      <div className="grid grid-cols-[auto_1fr_auto] gap-0 sm:gap-4 items-center xl:w-[1136px] mx-auto sm:px-6">
+      <div className="grid grid-cols-[auto_1fr_auto] gap-0 sm:gap-4 items-center xl:w-[1136px] mx-auto ">
         <div className="navigate-left bg-[#323542] hidden sm:flex w-[32px] h-full cursor-pointer justify-center items-center">
           <ChevronLeft
             color="#fff"
