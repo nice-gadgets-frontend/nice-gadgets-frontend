@@ -1,15 +1,38 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { type Phone } from '../../../types/Phone';
 import '../../../styles/responsive.css';
 // import '../../../styles/theme/dark.css';
 import { PrimaryButton } from '../../Atoms/Buttons/PrimaryButton';
 import { FavouritesButton } from '../../Atoms/Buttons/FavouritesButton';
+import { useFavouritesStore } from '../../../services/useStore/useFavouritesStore';
+import { useInCartStore } from '../../../services/useStore/useInCartStore';
 
 type PhoneType = {
   phone: Phone;
 };
 
 export const CardItem: React.FC<PhoneType> = ({ phone }) => {
+  const itemsInFavourites = useFavouritesStore(
+    (state) => state.itemsInFavourites,
+  );
+  const addToFavourites = useFavouritesStore((state) => state.addToFavourites);
+  const addToCart = useInCartStore((state) => state.addToCart);
+
+  const isSelected = itemsInFavourites.includes(phone.id);
+  const [isInCart, setIsInCart] = useState(false);
+
+  const addToCartHandle = () => {
+    addToCart(phone.id);
+    setIsInCart(true);
+    setTimeout(() => {
+      setIsInCart(false);
+    }, 1500);
+  };
+
+  const addToFavouritesHandle = () => {
+    addToFavourites(phone.id);
+  };
+
   return (
     <div className="product-card text-[#F1F2F9] w-full font-[Mont-Regular] text-[14px] bg-[#161827] p-8 box-border flex flex-col justify-center gap-2">
       <div className="product-card__image h-[129px] sm:h-[196px] aspect-square flex justify-center box-border">
@@ -46,8 +69,16 @@ export const CardItem: React.FC<PhoneType> = ({ phone }) => {
         </div>
       </div>
       <div className="product-interaction flex flex-row justify-between gap-2">
-        <PrimaryButton>Add to cart</PrimaryButton>
-        <FavouritesButton />
+        <PrimaryButton
+          onClick={addToCartHandle}
+          isDisabled={isInCart}
+        >
+          {isInCart ? 'Added to cart' : 'Add to cart'}
+        </PrimaryButton>
+        <FavouritesButton
+          onClick={addToFavouritesHandle}
+          selected={isSelected}
+        />
       </div>
     </div>
   );
