@@ -1,23 +1,27 @@
 import products from '../../../../public/gadgets/products.json';
+import { useInCartStore } from '../../../services/useStore/useInCartStore';
 import { CartItem } from '../../Molecules/ShopingCartItem/CartItem';
 import { CartTotal } from '../../Molecules/ShopingCartItem/CartTotal';
 
-const mockCart = [
-  { itemId: 'apple-iphone-11-128gb-yellow', quantity: 1 },
-  { itemId: 'apple-iphone-8-64gb-gold', quantity: 2 },
-];
-
 export const CartPage = () => {
-  const items = mockCart.map(({ itemId, quantity }) => {
-    const product = products.find((p) => p.itemId === itemId);
+  const itemsIdsInCart = useInCartStore((state) => state.itemsIdsInCart);
+
+  const itemsInCart = itemsIdsInCart.map((item) => {
+    let product = products.find((p) => p.itemId === item.id);
+
+    // workaround for broken data
+    if (!product) {
+      product = { ...product!, itemId: item.id };
+    }
+
     return {
       ...product!,
-      quantity,
+      quantity: item.quantity,
     };
   });
 
-  const total = items.reduce(
-    (sum, item) => sum + item.price * item.quantity,
+  const total = itemsInCart.reduce(
+    (sum, item) => sum + (item.price ?? 0) * (item.quantity ?? 0),
     0,
   );
 
@@ -28,19 +32,17 @@ export const CartPage = () => {
       </h1>
 
       <div className="flex flex-col gap-6 w-full items-center">
-        {items.map((item) => (
+        {itemsInCart.map((item) => (
           <CartItem
             key={item.itemId}
-            name={item.name}
-            price={item.price}
-            image={item.image}
+            product={item}
             quantity={item.quantity}
           />
         ))}
 
         <CartTotal
           total={total}
-          count={items.length}
+          count={itemsInCart.length}
         />
       </div>
     </div>
