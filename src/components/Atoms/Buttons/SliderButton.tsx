@@ -1,17 +1,21 @@
 import classNames from 'classnames';
-import { ChevronRight } from 'lucide-react';
+import { ChevronLeft, ChevronRight } from 'lucide-react';
 import React from 'react';
 
 type SliderButtonType = {
+  rotate?: 'right' | 'left';
   disabled?: boolean;
 };
 
-// <SliderButton disabled?={true}/>
-export const SliderButton: React.FC<SliderButtonType> = ({ disabled }) => {
+// <SliderButton rotate?='left' disabled?={true}/>
+export const SliderButton: React.FC<SliderButtonType> = ({
+  disabled,
+  rotate = 'right',
+}) => {
   return (
     <button
       className={classNames(
-        'bg-[#323542] hover:bg-[#4A4D58] w-[40px] flex justify-center items-center',
+        'bg-[#323542] hover:bg-[#4A4D58] w-[32px] h-[32px] flex justify-center items-center',
         {
           'border border-[#3B3E4A] bg-transparent text-[#4A4D58] hover:bg-transparent':
             disabled,
@@ -19,14 +23,14 @@ export const SliderButton: React.FC<SliderButtonType> = ({ disabled }) => {
         },
       )}
     >
-      {disabled ?
+      {rotate === 'right' ?
         <ChevronRight
           size={20}
-          color="#4A4D58"
+          color={disabled ? '#4A4D58' : '#ffffff'}
         />
-      : <ChevronRight
+      : <ChevronLeft
           size={20}
-          color="#ffffff"
+          color={disabled ? '#4A4D58' : '#ffffff'}
         />
       }
     </button>
