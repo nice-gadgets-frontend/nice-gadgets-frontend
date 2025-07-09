@@ -53,11 +53,11 @@ export const BrandNewmodelsSection: React.FC<BrandNewmodelsSectionType> = ({
             }}
           >
             {filteredPhones.map((phone) => (
-              <SwiperSlide className="xl:!w-[272px] sm:!w-[237px] xs:!w-[212px] !w-[212px]">
-                <CardItem
-                  key={phone.id}
-                  phone={phone}
-                />
+              <SwiperSlide
+                key={phone.id}
+                className="xl:!w-[272px] sm:!w-[237px] xs:!w-[212px] !w-[212px]"
+              >
+                <CardItem phone={phone} />
               </SwiperSlide>
             ))}
           </Swiper>
