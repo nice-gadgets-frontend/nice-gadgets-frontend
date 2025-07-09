@@ -17,7 +17,7 @@ export const CartItem: React.FC<CartItemProps> = ({
       <div className="flex items-center gap-6 w-full">
         <button className="text-gray-500 hover:text-red-500 text-xl">×</button>
         <img
-          src={`/${image}`}
+          src={`/gadgets/${image}`}
           alt={name}
           className="w-[66px] h-[66px] object-contain"
         />
