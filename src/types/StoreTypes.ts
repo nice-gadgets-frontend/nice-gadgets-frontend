@@ -4,7 +4,7 @@ export type FavouritesStore = {
 };
 
 export type InCartStore = {
-  itemsInCart: ItemInCart[];
+  itemsIdsInCart: ItemInCart[];
   addToCart: (id: string) => void;
   deleteFromCart: (id: string) => void;
   changeQuantity: (id: string, quantity: number) => void;

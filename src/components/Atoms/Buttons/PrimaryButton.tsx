@@ -17,10 +17,10 @@ export const PrimaryButton: React.FC<PrimaryButtonType> = ({
     <button
       disabled={isDisabled}
       onClick={onClick}
-      className={classNames(
-        'flex-1 py-[9.5px] cursor-pointer hover:bg-[#A378FF]',
-        { 'bg-[#323542]': isDisabled, 'bg-[#905BFF]': !isDisabled },
-      )}
+      className={classNames('flex-1 py-[9.5px] cursor-pointer', {
+        'bg-[#323542] cursor-not-allowed': isDisabled,
+        'bg-[#905BFF] hover:bg-[#A378FF]': !isDisabled,
+      })}
     >
       {children}
     </button>
