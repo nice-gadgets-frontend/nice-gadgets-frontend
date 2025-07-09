@@ -36,10 +36,10 @@ export const HotPricesSection: React.FC<HotPricesSectionType> = ({
             Hot prices
           </span>
           <div className="navigation flex flex-row-reverse gap-4">
-            <div className="navigate-brand-new-right">
+            <div className="navigate-hot-prices-right">
               <SliderButton />
             </div>
-            <div className="navigate-brand-new-left">
+            <div className="navigate-hot-prices-left">
               <SliderButton rotate="left" />
             </div>
           </div>
@@ -51,8 +51,8 @@ export const HotPricesSection: React.FC<HotPricesSectionType> = ({
             slidesPerView="auto"
             spaceBetween={16}
             navigation={{
-              nextEl: '.navigate-brand-new-right',
-              prevEl: '.navigate-brand-new-left',
+              nextEl: '.navigate-hot-prices-right',
+              prevEl: '.navigate-hot-prices-left',
             }}
           >
             {filteredPhones.map((phone) => (
