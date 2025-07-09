@@ -1,28 +1,27 @@
 import React, { useState } from 'react';
-import { type Phone } from '../../../types/Phone';
 import '../../../styles/responsive.css';
-// import '../../../styles/theme/dark.css';
 import { PrimaryButton } from '../../Atoms/Buttons/PrimaryButton';
 import { FavouritesButton } from '../../Atoms/Buttons/FavouritesButton';
 import { useFavouritesStore } from '../../../services/useStore/useFavouritesStore';
 import { useInCartStore } from '../../../services/useStore/useInCartStore';
+import type { ProductType } from '../../../types/ProductType';
 
 type PhoneType = {
-  phone: Phone;
+  product: ProductType;
 };
 
-export const CardItem: React.FC<PhoneType> = ({ phone }) => {
+export const CardItem: React.FC<PhoneType> = ({ product }) => {
   const itemsInFavourites = useFavouritesStore(
     (state) => state.itemsInFavourites,
   );
   const addToFavourites = useFavouritesStore((state) => state.addToFavourites);
   const addToCart = useInCartStore((state) => state.addToCart);
 
-  const isSelected = itemsInFavourites.includes(phone.id);
+  const isSelected = itemsInFavourites.includes(product.itemId);
   const [isInCart, setIsInCart] = useState(false);
 
   const addToCartHandle = () => {
-    addToCart(phone.id);
+    addToCart(product.itemId);
     setIsInCart(true);
     setTimeout(() => {
       setIsInCart(false);
@@ -30,7 +29,7 @@ export const CardItem: React.FC<PhoneType> = ({ phone }) => {
   };
 
   const addToFavouritesHandle = () => {
-    addToFavourites(phone.id);
+    addToFavourites(product.itemId);
   };
 
   return (
@@ -38,17 +37,19 @@ export const CardItem: React.FC<PhoneType> = ({ phone }) => {
       <div className="product-card__image h-[129px] sm:h-[196px] aspect-square flex justify-center box-border">
         <img
           className="w-full h-full object-contain object-center"
-          src={`gadgets/${phone.images[0]}`}
+          src={`gadgets/${product.image}`}
           alt="phone"
         />
       </div>
-      <div className="product-card__name leading-[21px] pt-4">{phone.name}</div>
+      <div className="product-card__name leading-[21px] pt-4">
+        {product.name}
+      </div>
       <div className="product-card__price flex gap-2">
         <div className="product-card__price font-[Mont-Bold] text-[22px] leading-[31px]">
-          ${phone.priceDiscount}
+          ${product.price}
         </div>
         <div className="product-card__price font-[Mont-Bold] text-gray line-through text-secondary text-[22px] leading-[31px]">
-          ${phone.priceRegular}
+          ${product.fullPrice}
         </div>
       </div>
       <div className="bg-[#3B3E4A] w-full h-[1px]"></div>
@@ -56,16 +57,16 @@ export const CardItem: React.FC<PhoneType> = ({ phone }) => {
         <div className="product-card__feature feature-screen flex justify-between">
           <span className="text-[#75767F]">Screen</span>
           <p className="product-card-screen break-words overflow-wrap-anywhere text-right  ml-10">
-            {phone.screen}
+            {product.screen}
           </p>
         </div>
         <div className="product-card__feature feature-capacity flex justify-between">
           <span className="text-[#75767F]">Capacity</span>
-          <p className="product-card-screen">{phone.capacity}</p>
+          <p className="product-card-screen">{product.capacity}</p>
         </div>
         <div className="product-card__feature feature-ram flex justify-between">
           <span className="text-[#75767F]">RAM</span>
-          <p className="product-card-screen">{phone.ram}</p>
+          <p className="product-card-screen">{product.ram}</p>
         </div>
       </div>
       <div className="product-interaction flex flex-row justify-between gap-2">
