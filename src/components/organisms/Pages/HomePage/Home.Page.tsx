@@ -12,7 +12,6 @@ export const HomePage = () => {
   useEffect(() => {
     getPhones().then((phones) => {
       setPhonesFromJSON(phones);
-      console.log(phones);
     });
   }, []);
 
