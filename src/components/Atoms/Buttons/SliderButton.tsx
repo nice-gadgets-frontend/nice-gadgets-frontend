@@ -15,7 +15,7 @@ export const SliderButton: React.FC<SliderButtonType> = ({
   return (
     <button
       className={classNames(
-        'bg-[#323542] hover:bg-[#4A4D58] w-[40px] h-[40px] flex justify-center items-center',
+        'bg-[#323542] hover:bg-[#4A4D58] w-[32px] h-[32px] flex justify-center items-center',
         {
           'border border-[#3B3E4A] bg-transparent text-[#4A4D58] hover:bg-transparent':
             disabled,

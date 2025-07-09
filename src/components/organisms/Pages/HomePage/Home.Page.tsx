@@ -4,6 +4,7 @@ import { ShopByCategory } from '../../../Molecules/ShopByCategory/ShopByCategory
 import { BrandNewmodelsSection } from './Sections/BrandNewModelsSection';
 import { getPhones } from '../../../../services/getPhones';
 import type { Phone } from '../../../../types/Phone';
+import { HotPricesSection } from './Sections/HotPricesSection';
 
 export const HomePage = () => {
   const [phonesFromJSON, setPhonesFromJSON] = useState<Phone[]>([]);
@@ -11,6 +12,7 @@ export const HomePage = () => {
   useEffect(() => {
     getPhones().then((phones) => {
       setPhonesFromJSON(phones);
+      console.log(phones);
     });
   }, []);
 
@@ -20,6 +22,7 @@ export const HomePage = () => {
       <Slider />
       <BrandNewmodelsSection phones={phonesFromJSON} />
       <ShopByCategory />
+      <HotPricesSection phones={phonesFromJSON} />
     </>
   );
 };
