@@ -10,26 +10,26 @@ import 'swiper/css/navigation';
 import 'swiper/css/pagination';
 // import '../../../../../styles/theme/dark.css';
 
-import type { Phone } from '../../../../../types/Phone';
 import { CardItem } from '../../../../Molecules/CardItem/CardItem';
 import { SliderButton } from '../../../../Atoms/Buttons/SliderButton';
 import { useState } from 'react';
+import type { ProductType } from '../../../../../types/ProductType';
 
 type HotPricesSectionType = {
-  phones: Phone[];
+  products: ProductType[];
 };
 
 export const HotPricesSection: React.FC<HotPricesSectionType> = ({
-  phones,
+  products,
 }) => {
   const [isBeginning, setIsBeginning] = useState(true);
   const [isEnd, setIsEnd] = useState(false);
 
-  let filteredPhones = [...phones];
+  let filteredProducts = [...products];
 
-  filteredPhones = filteredPhones.sort(
+  filteredProducts = filteredProducts.sort(
     (a, b) =>
-      b.priceRegular - b.priceDiscount - (a.priceRegular - a.priceDiscount),
+      b.fullPrice - b.price - (a.fullPrice - a.price),
   );
 
   return (
@@ -63,12 +63,12 @@ export const HotPricesSection: React.FC<HotPricesSectionType> = ({
               setIsEnd(swiper.isEnd);
             }}
           >
-            {filteredPhones.map((phone) => (
+            {filteredProducts.map((product) => (
               <SwiperSlide
-                key={phone.id}
+                key={product.id}
                 className="xl:!w-[272px] sm:!w-[237px] xs:!w-[212px] !w-[212px]"
               >
-                <CardItem phone={phone} />
+                <CardItem product={product} />
               </SwiperSlide>
             ))}
           </Swiper>
