@@ -13,6 +13,7 @@ import 'swiper/css/pagination';
 import type { Phone } from '../../../../../types/Phone';
 import { CardItem } from '../../../../Molecules/CardItem/CardItem';
 import { SliderButton } from '../../../../Atoms/Buttons/SliderButton';
+import { useState } from 'react';
 
 type BrandNewmodelsSectionType = {
   phones: Phone[];
@@ -21,6 +22,9 @@ type BrandNewmodelsSectionType = {
 export const BrandNewmodelsSection: React.FC<BrandNewmodelsSectionType> = ({
   phones,
 }) => {
+  const [isBeginning, setIsBeginning] = useState(true);
+  const [isEnd, setIsEnd] = useState(false);
+
   let filteredPhones = [...phones];
 
   filteredPhones = filteredPhones.reverse();
@@ -34,10 +38,13 @@ export const BrandNewmodelsSection: React.FC<BrandNewmodelsSectionType> = ({
           </span>
           <div className="navigation flex flex-row-reverse gap-4">
             <div className="navigate-brand-new-right">
-              <SliderButton />
+              <SliderButton disabled={isEnd} />
             </div>
             <div className="navigate-brand-new-left">
-              <SliderButton rotate="left" />
+              <SliderButton
+                disabled={isBeginning}
+                rotate="left"
+              />
             </div>
           </div>
         </div>
@@ -50,6 +57,10 @@ export const BrandNewmodelsSection: React.FC<BrandNewmodelsSectionType> = ({
             navigation={{
               nextEl: '.navigate-brand-new-right',
               prevEl: '.navigate-brand-new-left',
+            }}
+            onSlideChange={(swiper) => {
+              setIsBeginning(swiper.isBeginning);
+              setIsEnd(swiper.isEnd);
             }}
           >
             {filteredPhones.map((phone) => (

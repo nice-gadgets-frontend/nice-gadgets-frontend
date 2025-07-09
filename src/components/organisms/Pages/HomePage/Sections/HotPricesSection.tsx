@@ -13,6 +13,7 @@ import 'swiper/css/pagination';
 import type { Phone } from '../../../../../types/Phone';
 import { CardItem } from '../../../../Molecules/CardItem/CardItem';
 import { SliderButton } from '../../../../Atoms/Buttons/SliderButton';
+import { useState } from 'react';
 
 type HotPricesSectionType = {
   phones: Phone[];
@@ -21,6 +22,9 @@ type HotPricesSectionType = {
 export const HotPricesSection: React.FC<HotPricesSectionType> = ({
   phones,
 }) => {
+  const [isBeginning, setIsBeginning] = useState(true);
+  const [isEnd, setIsEnd] = useState(false);
+
   let filteredPhones = [...phones];
 
   filteredPhones = filteredPhones.sort(
@@ -36,11 +40,11 @@ export const HotPricesSection: React.FC<HotPricesSectionType> = ({
             Hot prices
           </span>
           <div className="navigation flex flex-row-reverse gap-4">
-            <div className="navigate-brand-new-right">
-              <SliderButton />
+            <div className="navigate-hot-prices-right">
+              <SliderButton disabled={isEnd}/>
             </div>
-            <div className="navigate-brand-new-left">
-              <SliderButton rotate="left" />
+            <div className="navigate-hot-prices-left">
+              <SliderButton disabled={isBeginning} rotate="left" />
             </div>
           </div>
         </div>
@@ -51,8 +55,12 @@ export const HotPricesSection: React.FC<HotPricesSectionType> = ({
             slidesPerView="auto"
             spaceBetween={16}
             navigation={{
-              nextEl: '.navigate-brand-new-right',
-              prevEl: '.navigate-brand-new-left',
+              nextEl: '.navigate-hot-prices-right',
+              prevEl: '.navigate-hot-prices-left',
+            }}
+            onSlideChange={(swiper) => {
+              setIsBeginning(swiper.isBeginning);
+              setIsEnd(swiper.isEnd);
             }}
           >
             {filteredPhones.map((phone) => (
