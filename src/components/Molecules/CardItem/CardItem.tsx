@@ -33,17 +33,19 @@ export const CardItem: React.FC<PhoneType> = ({ product }) => {
   };
 
   return (
-    <div className="product-card text-[#F1F2F9] w-full font-[Mont-Regular] text-[14px] bg-[#161827] p-8 box-border flex flex-col justify-center gap-2">
-      <div className="product-card__image h-[129px] sm:h-[196px] aspect-square flex justify-center box-border">
+    <div className="product-card text-[#F1F2F9] max-w-[212px] sm:max-w-[237px] lg:max-w-[272px] font-[Mont-Regular] text-[14px] bg-[#161827] p-8 box-border flex flex-col justify-center gap-2 min-h-[439px] sm:min-h-[512px]">
+      <div className="product-card__image max-h-[129px] sm:max-h-[168px] lg:max-h-[196px] aspect-square flex justify-center box-border">
         <img
           className="w-full h-full object-contain object-center"
           src={`gadgets/${product.image}`}
           alt="phone"
         />
       </div>
-      <div className="product-card__name leading-[21px] pt-4">
+
+      <div className="product-card__name leading-[21px] pt-4 min-h-[58px]">
         {product.name}
       </div>
+
       <div className="product-card__price flex gap-2">
         <div className="product-card__price font-[Mont-Bold] text-[22px] leading-[31px]">
           ${product.price}
@@ -52,11 +54,13 @@ export const CardItem: React.FC<PhoneType> = ({ product }) => {
           ${product.fullPrice}
         </div>
       </div>
+
       <div className="bg-[#3B3E4A] w-full h-[1px]"></div>
-      <div className="product-card__features gap-2 font-[Mont-SemiBold] text-[12px]">
+
+      <div className="product-card__features flex flex-col gap-2 sm:gap-3 font-[Mont-SemiBold] text-[12px] flex-grow">
         <div className="product-card__feature feature-screen flex justify-between">
           <span className="text-[#75767F]">Screen</span>
-          <p className="product-card-screen break-words overflow-wrap-anywhere text-right  ml-10">
+          <p className="product-card-screen break-words overflow-wrap-anywhere text-right ml-10">
             {product.screen}
           </p>
         </div>
@@ -69,7 +73,8 @@ export const CardItem: React.FC<PhoneType> = ({ product }) => {
           <p className="product-card-screen">{product.ram}</p>
         </div>
       </div>
-      <div className="product-interaction flex flex-row justify-between gap-2">
+
+      <div className="product-interaction flex flex-row justify-between gap-2 sm:gap-3 mt-auto">
         <PrimaryButton
           onClick={addToCartHandle}
           isDisabled={isInCart}

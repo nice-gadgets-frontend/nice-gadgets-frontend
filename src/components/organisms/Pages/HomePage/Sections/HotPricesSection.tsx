@@ -28,8 +28,7 @@ export const HotPricesSection: React.FC<HotPricesSectionType> = ({
   let filteredProducts = [...products];
 
   filteredProducts = filteredProducts.sort(
-    (a, b) =>
-      b.fullPrice - b.price - (a.fullPrice - a.price),
+    (a, b) => b.fullPrice - b.price - (a.fullPrice - a.price),
   );
 
   return (
@@ -41,10 +40,13 @@ export const HotPricesSection: React.FC<HotPricesSectionType> = ({
           </span>
           <div className="navigation flex flex-row-reverse gap-4">
             <div className="navigate-hot-prices-right">
-              <SliderButton disabled={isEnd}/>
+              <SliderButton disabled={isEnd} />
             </div>
             <div className="navigate-hot-prices-left">
-              <SliderButton disabled={isBeginning} rotate="left" />
+              <SliderButton
+                disabled={isBeginning}
+                rotate="left"
+              />
             </div>
           </div>
         </div>
@@ -66,7 +68,7 @@ export const HotPricesSection: React.FC<HotPricesSectionType> = ({
             {filteredProducts.map((product) => (
               <SwiperSlide
                 key={product.id}
-                className="xl:!w-[272px] sm:!w-[237px] xs:!w-[212px] !w-[212px]"
+                className="max-w-[212px] sm:max-w-[237px] lg:max-w-[272px]"
               >
                 <CardItem product={product} />
               </SwiperSlide>

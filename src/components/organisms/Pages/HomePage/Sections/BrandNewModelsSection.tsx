@@ -62,11 +62,37 @@ export const BrandNewmodelsSection: React.FC<BrandNewmodelsSectionType> = ({
               setIsBeginning(swiper.isBeginning);
               setIsEnd(swiper.isEnd);
             }}
+            breakpoints={{
+              320: {
+                slidesPerView: 1.2,
+                spaceBetween: 16,
+              },
+              480: {
+                slidesPerView: 1.8,
+                spaceBetween: 16,
+              },
+              640: {
+                slidesPerView: 2.2,
+                spaceBetween: 16,
+              },
+              768: {
+                slidesPerView: 2.8,
+                spaceBetween: 16,
+              },
+              1024: {
+                slidesPerView: 3.5,
+                spaceBetween: 16,
+              },
+              1200: {
+                slidesPerView: 4,
+                spaceBetween: 16,
+              },
+            }}
           >
             {filteredProducts.map((product) => (
               <SwiperSlide
                 key={product.itemId}
-                className="xl:!w-[272px] sm:!w-[237px] xs:!w-[212px] !w-[212px]"
+                className="max-w-[212px] sm:max-w-[237px] lg:max-w-[272px]"
               >
                 <CardItem product={product} />
               </SwiperSlide>
