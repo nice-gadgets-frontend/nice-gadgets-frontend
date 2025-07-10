@@ -6,11 +6,12 @@ import { useFavouritesStore } from '../../../services/useStore/useFavouritesStor
 import { useInCartStore } from '../../../services/useStore/useInCartStore';
 import type { ProductType } from '../../../types/ProductType';
 
-type PhoneType = {
+type CardItemProps = {
   product: ProductType;
+  className?: string;
 };
 
-export const CardItem: React.FC<PhoneType> = ({ product }) => {
+export const CardItem: React.FC<CardItemProps> = ({ product, className }) => {
   const itemsInFavourites = useFavouritesStore(
     (state) => state.itemsInFavourites,
   );
@@ -33,7 +34,11 @@ export const CardItem: React.FC<PhoneType> = ({ product }) => {
   };
 
   return (
-    <div className="product-card text-[#F1F2F9] max-w-[212px] sm:max-w-[237px] lg:max-w-[272px] font-[Mont-Regular] text-[14px] bg-[#161827] p-8 box-border flex flex-col justify-center gap-2 min-h-[439px] sm:min-h-[512px]">
+    <div className={`
+      product-card text-[#F1F2F9] font-[Mont-Regular] text-[14px] bg-[#161827] p-8 box-border
+      flex flex-col justify-center gap-2
+      ${className}
+    `}>
       <div className="product-card__image max-h-[129px] sm:max-h-[168px] lg:max-h-[196px] aspect-square flex justify-center box-border">
         <img
           className="w-full h-full object-contain object-center"
