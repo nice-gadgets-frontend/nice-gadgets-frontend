@@ -8,6 +8,8 @@ import cn from "classnames";
 type PaginationProps = {
   totalItems: number;
   perPage: number;
+  onPageChange: (page: number) => void;
+  currentPage: number;
 };
 
 const DEFAULT_PAGE = 1;
