@@ -42,7 +42,6 @@ export const CardItem: React.FC<CardItemProps> = ({ product, className }) => {
   };
 
   return (
-
     <div
       className={`
       product-card text-[#F1F2F9] font-[Mont-Regular] text-[14px] bg-[#161827] p-8 box-border
