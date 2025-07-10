@@ -39,9 +39,10 @@ export const CardSkeleton = () => {
       <div className="product-interaction flex flex-row justify-between gap-2 sm:gap-3 mt-auto">
         <PrimaryButton
           onClick={() => {}}
-          children={'Loading...'}
           isDisabled={true}
-        ></PrimaryButton>
+        >
+          Loading...
+        </PrimaryButton>
         <FavouritesButton onClick={() => {}} />
       </div>
     </div>

@@ -101,8 +101,11 @@ export const BrandNewmodelsSection: React.FC<BrandNewmodelsSectionType> = ({
                   <CardItem product={product} />
                 </SwiperSlide>
               ))
-            : Array.from({ length: 8 }).map(() => (
-                <SwiperSlide className="max-w-[212px] sm:max-w-[237px] lg:max-w-[272px]">
+            : Array.from({ length: 8 }).map((_, i) => (
+                <SwiperSlide
+                  key={i}
+                  className="max-w-[212px] sm:max-w-[237px] lg:max-w-[272px]"
+                >
                   <CardSkeleton />
                 </SwiperSlide>
               ))
