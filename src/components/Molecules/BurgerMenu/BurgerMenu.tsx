@@ -2,6 +2,8 @@ import { NavLink, useLocation } from 'react-router-dom';
 import { FavouritesPageIcon } from '../../Atoms/Icons/FavouritePageIcon';
 import { ShoppingBagIcon } from '../../Atoms/Icons/ShoppingBagIcon';
 import { X } from 'lucide-react';
+import { useInCartStore } from '../../../services/useStore/useInCartStore';
+import { useFavouritesStore } from '../../../services/useStore/useFavouritesStore';
 
 type Props = {
   isOpen: boolean;
@@ -10,6 +12,15 @@ type Props = {
 
 export const BurgerMenu = ({ isOpen, onClose }: Props) => {
   const location = useLocation();
+  const itemsIdsInCart = useInCartStore((state) => state.itemsIdsInCart);
+  const totalItemsCount = itemsIdsInCart.reduce(
+    (sum, item) => sum + (item.quantity ?? 0),
+    0,
+  );
+  const itemIdsInFavourites = useFavouritesStore(
+    (state) => state.itemsInFavourites,
+  );
+  const itemsInFavouritesCount = itemIdsInFavourites.length;
 
   if (!isOpen) return null;
 
@@ -97,7 +108,7 @@ export const BurgerMenu = ({ isOpen, onClose }: Props) => {
           className="w-1/2 flex justify-center py-4"
         >
           <div className="relative flex flex-col items-center">
-            <FavouritesPageIcon />
+            <FavouritesPageIcon itemsInFavourites={itemsInFavouritesCount} />
             {location.pathname === '/favourites' && (
               <span className="absolute -bottom-1 w-6 border-t-2 border-white" />
             )}
@@ -109,7 +120,7 @@ export const BurgerMenu = ({ isOpen, onClose }: Props) => {
           className="w-1/2 flex justify-center py-4"
         >
           <div className="relative flex flex-col items-center">
-            <ShoppingBagIcon />
+            <ShoppingBagIcon totalItemsCount={totalItemsCount} />
             {location.pathname === '/cart' && (
               <span className="absolute -bottom-1 w-6 border-t-2 border-white" />
             )}

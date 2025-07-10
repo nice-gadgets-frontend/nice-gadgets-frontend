@@ -1,25 +1,14 @@
-//import { Link } from 'react-router-dom';
 import { ShoppingBag } from 'lucide-react';
 import { CounterBadgeIcon } from './CounterBadgeIcon';
 import { Link } from 'react-router-dom';
 
-type ShoppingBagIconProps = {
-  cartItems?: object[];
+type ShoppingBagProps = {
+  totalItemsCount: number;
 };
 
-export const ShoppingBagIcon = ({ cartItems }: ShoppingBagIconProps) => {
-  return (
-    <Link
-      to="cart"
-      className="relative inline-block p-2 cursor-pointer"
-    >
-      <ShoppingBag
-        size={16}
-        color="#F1F2F9"
-      />
-      {(cartItems?.length ?? 0) > 0 && (
-        <CounterBadgeIcon itemCount={cartItems!.length} />
-      )}
-    </Link>
-  );
-};
+export const ShoppingBagIcon = ({ totalItemsCount }: ShoppingBagProps) => (
+  <Link to="/cart" className="relative inline-block p-2 cursor-pointer">
+    <ShoppingBag size={16} color="#F1F2F9" />
+    {totalItemsCount > 0 && <CounterBadgeIcon itemCount={totalItemsCount} />}
+  </Link>
+);
