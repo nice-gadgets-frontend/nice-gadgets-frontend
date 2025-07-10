@@ -4,11 +4,11 @@ import { CounterBadgeIcon } from './CounterBadgeIcon';
 import { Link } from 'react-router-dom';
 
 type FavouritesPageIconProps = {
-  favouriteItems?: object[];
+  itemsInFavourites?: number;
 };
 
 export const FavouritesPageIcon = ({
-  favouriteItems,
+  itemsInFavourites,
 }: FavouritesPageIconProps) => {
   return (
     <Link
@@ -19,8 +19,8 @@ export const FavouritesPageIcon = ({
         size={16}
         color="#F1F2F9"
       />
-      {(favouriteItems?.length ?? 0) > 0 && (
-        <CounterBadgeIcon itemCount={favouriteItems!.length} />
+      {itemsInFavourites! > 0 && (
+        <CounterBadgeIcon itemCount={itemsInFavourites!} />
       )}
     </Link>
   );
