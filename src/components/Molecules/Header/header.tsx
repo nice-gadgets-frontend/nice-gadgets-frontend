@@ -5,9 +5,18 @@ import { MenuIcon } from '../../Atoms/Icons/MenuIcon';
 import { ShoppingBagIcon } from '../../Atoms/Icons/ShoppingBagIcon';
 import { BurgerMenu } from '../BurgerMenu/BurgerMenu';
 import { CloseIcon } from '../../Atoms/Icons/CloseMenuIcon';
+import { useInCartStore } from '../../../services/useStore/useInCartStore';
+import { useFavouritesStore } from '../../../services/useStore/useFavouritesStore';
 
 export const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const itemsIdsInCart = useInCartStore((state) => state.itemsIdsInCart);
+  const totalItemsCount = itemsIdsInCart.reduce(
+    (sum, item) => sum + (item.quantity ?? 0),
+    0,
+  );
+  const itemIdsInFavourites = useFavouritesStore((state) => state.itemsInFavourites);
+  const itemsInFavouritesCount = itemIdsInFavourites.length;
 
   const toggleMenu = () => {
     setIsMenuOpen((prev) => !prev);
@@ -85,7 +94,7 @@ export const Navbar = () => {
               : 'text-gray-400 hover:text-white border-b-2 border-transparent transition-all duration-200'
             }
           >
-            <FavouritesPageIcon />
+            <FavouritesPageIcon itemsInFavourites={itemsInFavouritesCount} />
           </NavLink>
           <NavLink
             to="/cart"
@@ -96,7 +105,7 @@ export const Navbar = () => {
               : 'text-gray-400 hover:text-white border-b-2 border-transparent transition-all duration-200'
             }
           >
-            <ShoppingBagIcon />
+            <ShoppingBagIcon totalItemsCount={totalItemsCount} />
           </NavLink>
         </div>
 

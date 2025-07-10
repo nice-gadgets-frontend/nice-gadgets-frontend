@@ -4,7 +4,8 @@ import { CartItem } from '../../Molecules/ShopingCartItem/CartItem';
 import { CartTotal } from '../../Molecules/ShopingCartItem/CartTotal';
 
 export const CartPage = () => {
-  const itemsIdsInCart = useInCartStore((state) => state.itemsIdsInCart);
+const itemsIdsInCart = useInCartStore((state) => state.itemsIdsInCart);
+const totalItemsCount = itemsIdsInCart.reduce((sum, item) => sum + (item.quantity ?? 0), 0);
 
   const itemsInCart = itemsIdsInCart.map((item) => {
     let product = products.find((p) => p.itemId === item.id);
@@ -50,12 +51,11 @@ export const CartPage = () => {
           </div>
 
           {/* CartTotal block */}
-          <div className="w-full md:w-auto">
-            <CartTotal
-              total={total}
-              count={itemsInCart.length}
-            />
-          </div>
+          <div className="w-full md:w-auto"></div>
+          <CartTotal
+            total={total}
+            count={totalItemsCount}
+          />
         </div>
       </div>
     </div>
