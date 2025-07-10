@@ -10,10 +10,13 @@ import 'swiper/css/navigation';
 import 'swiper/css/pagination';
 // import '../../../../../styles/theme/dark.css';
 
+import 'react-loading-skeleton/dist/skeleton.css';
+
 import { CardItem } from '../../../../Molecules/CardItem/CardItem';
 import { SliderButton } from '../../../../Atoms/Buttons/SliderButton';
 import { useState } from 'react';
 import type { ProductType } from '../../../../../types/ProductType';
+import { CardSkeleton } from '../../../../Molecules/CardSkeleton/CardSkeleton';
 
 type BrandNewmodelsSectionType = {
   products: ProductType[];
@@ -89,14 +92,24 @@ export const BrandNewmodelsSection: React.FC<BrandNewmodelsSectionType> = ({
               },
             }}
           >
-            {filteredProducts.map((product) => (
-              <SwiperSlide
-                key={product.itemId}
-                className="max-w-[212px] sm:max-w-[237px] lg:max-w-[272px]"
-              >
-                <CardItem product={product} />
-              </SwiperSlide>
-            ))}
+            {filteredProducts.length > 0 ?
+              filteredProducts.map((product) => (
+                <SwiperSlide
+                  key={product.itemId}
+                  className="max-w-[212px] sm:max-w-[237px] lg:max-w-[272px]"
+                >
+                  <CardItem product={product} />
+                </SwiperSlide>
+              ))
+            : Array.from({ length: 8 }).map((_, i) => (
+                <SwiperSlide
+                  key={i}
+                  className="max-w-[212px] sm:max-w-[237px] lg:max-w-[272px]"
+                >
+                  <CardSkeleton />
+                </SwiperSlide>
+              ))
+            }
           </Swiper>
         </div>
       </div>
