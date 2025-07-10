@@ -8,6 +8,7 @@ import { FavouritesPage } from './components/organisms/Pages/FavouritesPage/Favo
 import { CartPage } from './components/organisms/Pages/CartPage';
 import { ErrorPage } from './components/organisms/Pages/ErrorPage';
 import { MenuPage } from './components/organisms/Pages/MenuPage';
+import { ProductDetailPage } from './components/organisms/ProductDetailPage/ProductDetailsPage';
 
 const Root = () => {
   return (
@@ -40,6 +41,10 @@ const Root = () => {
         <Route
           path="accessories"
           element={<AccessoriesCatalogPage />}
+        />
+        <Route
+          path="product/:category/:itemId"
+          element={<ProductDetailPage />}
         />
         <Route
           path="favourites"

@@ -5,6 +5,7 @@ import { FavouritesButton } from '../../Atoms/Buttons/FavouritesButton';
 import { useFavouritesStore } from '../../../services/useStore/useFavouritesStore';
 import { useInCartStore } from '../../../services/useStore/useInCartStore';
 import type { ProductType } from '../../../types/ProductType';
+import { useNavigate } from 'react-router-dom';
 
 type CardItemProps = {
   product: ProductType;
@@ -21,6 +22,8 @@ export const CardItem: React.FC<CardItemProps> = ({ product, className }) => {
   const isSelected = itemsInFavourites.includes(product.itemId);
   const [isInCart, setIsInCart] = useState(false);
 
+  const navigate = useNavigate();
+
   const addToCartHandle = () => {
     addToCart(product.itemId);
     setIsInCart(true);
@@ -33,13 +36,20 @@ export const CardItem: React.FC<CardItemProps> = ({ product, className }) => {
     addToFavourites(product.itemId);
   };
 
+    const handleCardClick = () => {
+    navigate(`/product/${product.category}/${product.itemId}`);
+  };
+
   return (
     <div className={`
       product-card text-[#F1F2F9] font-[Mont-Regular] text-[14px] bg-[#161827] p-8 box-border
       flex flex-col justify-center gap-2
       ${className}
     `}>
-      <div className="product-card__image max-h-[129px] sm:max-h-[168px] lg:max-h-[196px] aspect-square flex justify-center box-border">
+      <div 
+        className="cursor-pointer product-card__image max-h-[129px] sm:max-h-[168px] lg:max-h-[196px] aspect-square flex justify-center box-border"
+        onClick={handleCardClick}
+      >
         <img
           className="w-full h-full object-contain object-center"
           src={`gadgets/${product.image}`}
