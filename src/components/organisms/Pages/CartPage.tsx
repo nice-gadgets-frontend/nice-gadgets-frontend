@@ -1,24 +1,62 @@
-import products from '../../../../public/gadgets/products.json';
+import { useEffect, useState } from 'react';
 import { useInCartStore } from '../../../services/useStore/useInCartStore';
 import { CartItem } from '../../Molecules/ShopingCartItem/CartItem';
 import { CartTotal } from '../../Molecules/ShopingCartItem/CartTotal';
+import type { ProductType } from '../../../types/ProductType';
+
+type ProductWithQuantity = ProductType & { quantity: number };
 
 export const CartPage = () => {
-const itemsIdsInCart = useInCartStore((state) => state.itemsIdsInCart);
-const totalItemsCount = itemsIdsInCart.reduce((sum, item) => sum + (item.quantity ?? 0), 0);
+  const [products, setProducts] = useState<ProductType[]>([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
 
-  const itemsInCart = itemsIdsInCart.map((item) => {
-    let product = products.find((p) => p.itemId === item.id);
+  const itemsIdsInCart = useInCartStore((state) => state.itemsIdsInCart);
 
-    if (!product) {
-      product = { ...product!, itemId: item.id };
-    }
+  useEffect(() => {
+    fetch('/gadgets/products.json')
+      .then((res) => {
+        if (!res.ok) throw new Error(`Failed to fetch products: ${res.status}`);
+        return res.json();
+      })
+      .then((data: ProductType[]) => {
+        setProducts(data);
+        setLoading(false);
+      })
+      .catch((err) => {
+        setError(err instanceof Error ? err.message : 'Unknown error');
+        setLoading(false);
+      });
+  }, []);
 
-    return {
-      ...product!,
-      quantity: item.quantity,
-    };
-  });
+  if (loading) {
+    return (
+      <div className="flex justify-center items-center min-h-screen text-white">
+        Loading products...
+      </div>
+    );
+  }
+
+  if (error) {
+    return (
+      <div className="flex justify-center items-center min-h-screen text-red-500">
+        Error loading products: {error}
+      </div>
+    );
+  }
+
+  const itemsInCart = itemsIdsInCart
+    .map((item) => {
+      const product = products.find((p) => p.itemId === item.id);
+      if (!product) return null;
+      return { ...product, quantity: item.quantity } as ProductWithQuantity;
+    })
+    .filter(Boolean) as ProductWithQuantity[];
+
+  const totalItemsCount = itemsInCart.reduce(
+    (sum, item) => sum + (item.quantity ?? 0),
+    0,
+  );
 
   const total = itemsInCart.reduce(
     (sum, item) => sum + (item.price ?? 0) * (item.quantity ?? 0),
@@ -32,30 +70,33 @@ const totalItemsCount = itemsIdsInCart.reduce((sum, item) => sum + (item.quantit
 
         <div
           className="
-            grid 
-            grid-cols-1 
-            md:grid-cols-[1fr_288px] 
+            grid
+            grid-cols-1
+            xl:grid-cols-[1fr_288px]
             gap-6
             items-start
           "
         >
-          {/* List of CartItems */}
-          <div className="flex flex-col gap-6">
-            {itemsInCart.map((item) => (
-              <CartItem
-                key={item.itemId}
-                product={item}
-                quantity={item.quantity}
-              />
-            ))}
+          {/* Cart items */}
+          <div className="order-1">
+            <div className="flex flex-col gap-4 md:gap-6 xl:row-start-1">
+              {itemsInCart.map((item) => (
+                <CartItem
+                  key={item.itemId}
+                  product={item}
+                  quantity={item.quantity}
+                />
+              ))}
+            </div>
           </div>
 
-          {/* CartTotal block */}
-          <div className="w-full md:w-auto"></div>
-          <CartTotal
-            total={total}
-            count={totalItemsCount}
-          />
+          {/* Cart total */}
+          <div className="order-2">
+            <CartTotal
+              total={total}
+              count={totalItemsCount}
+            />
+          </div>
         </div>
       </div>
     </div>
