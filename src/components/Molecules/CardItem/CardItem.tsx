@@ -7,12 +7,13 @@ import { useInCartStore } from '../../../services/useStore/useInCartStore';
 import type { ProductType } from '../../../types/ProductType';
 import { useNavigate } from 'react-router-dom';
 
-type PhoneType = {
+type CardItemProps = {
   product: ProductType;
   className?: string;
 };
 
-export const CardItem: React.FC<PhoneType> = ({ product, className }) => {
+
+export const CardItem: React.FC<CardItemProps> = ({ product, className }) => {
   const itemsInFavourites = useFavouritesStore(
     (state) => state.itemsInFavourites,
   );
@@ -41,6 +42,7 @@ export const CardItem: React.FC<PhoneType> = ({ product, className }) => {
   };
 
   return (
+
     <div
       className={`
       product-card text-[#F1F2F9] font-[Mont-Regular] text-[14px] bg-[#161827] p-8 box-border
