@@ -11,36 +11,13 @@ export const CartItem: React.FC<CartItemProps> = ({ product, quantity }) => {
   const increaseItemInCart = useInCartStore((state) => state.increase);
   const decreaseItemInCart = useInCartStore((state) => state.decrease);
 
-  const deleteItemFromCartHandle = () => {
-    deleteFromCart(product.itemId);
-  };
-
-  const increaseItemInCartHandle = () => {
-    increaseItemInCart(product.itemId);
-  };
-
-  const decreaseItemInCartHandle = () => {
-    decreaseItemInCart(product.itemId);
-  };
-
   return (
-    <div
-      className="
-        grid 
-        grid-cols-[auto_66px_1fr] 
-        md:grid-cols-[auto_66px_1fr_auto_auto] 
-        items-center 
-        gap-4 
-        p-6 
-        bg-[#161827] 
-        text-white 
-        w-full
-      "
-    >
+    <div className="grid grid-cols-[24px_66px_1fr_auto] items-center gap-4 p-4 md:p-6 bg-[#161827] text-white w-full rounded-md">
       {/* Delete button */}
       <button
-        className="text-gray-500 hover:text-red-500 text-xl"
-        onClick={deleteItemFromCartHandle}
+        onClick={() => deleteFromCart(product.itemId)}
+        className="text-white text-xl hover:text-red-500"
+        aria-label="Remove item"
       >
         ×
       </button>
@@ -52,30 +29,32 @@ export const CartItem: React.FC<CartItemProps> = ({ product, quantity }) => {
         className="w-[66px] h-[66px] object-contain"
       />
 
-      {/* Name */}
-      <p className="text-sm md:text-base font-medium leading-tight col-span-2 md:col-span-1">
+      {/* Product name */}
+      <p className="text-sm md:text-base font-medium leading-tight">
         {product.name}
       </p>
 
-      {/* Quantity counter */}
-      <div className="flex items-center bg-[#0F1121] px-2 py-1 justify-center">
-        <button
-          className="w-6 h-6 text-white text-lg"
-          onClick={decreaseItemInCartHandle}
-        >
-          −
-        </button>
-        <span className="px-3">{quantity}</span>
-        <button
-          className="w-6 h-6 text-white text-lg"
-          onClick={increaseItemInCartHandle}
-        >
-          +
-        </button>
-      </div>
-
       {/* Price */}
       <p className="text-lg font-semibold text-right">${product.price}</p>
+
+      {/* Quantity controls */}
+      <div className="col-span-4 md:col-start-3 md:col-span-2 flex items-center justify-end gap-2 mt-2 md:mt-0">
+        <div className="flex items-center bg-[#0F1121] border border-[#3B3E4A] rounded-md">
+          <button
+            onClick={() => decreaseItemInCart(product.itemId)}
+            className="w-8 h-8 text-xl border-r border-[#3B3E4A] hover:bg-[#1E2030] transition"
+          >
+            −
+          </button>
+          <span className="px-4">{quantity}</span>
+          <button
+            onClick={() => increaseItemInCart(product.itemId)}
+            className="w-8 h-8 text-xl border-l border-[#3B3E4A] hover:bg-[#1E2030] transition"
+          >
+            +
+          </button>
+        </div>
+      </div>
     </div>
   );
 };
