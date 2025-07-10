@@ -16,15 +16,15 @@ export const CategoryCard = ({
 
   switch (categoryType) {
     case 'Phones':
-      imgSrc = '/public/gadgets/img/category-phones-test.png';
+      imgSrc = '/gadgets/img/category-phones-test.png';
       bgColor = '#6D6474';
       break;
     case 'Tablets':
-      imgSrc = '/public/gadgets/img/category-tablets-test.png';
+      imgSrc = '/gadgets/img/category-tablets-test.png';
       bgColor = '#8D8D92';
       break;
     case 'Accessories':
-      imgSrc = '/public/gadgets/img/category-accessories-test.png';
+      imgSrc = '/gadgets/img/category-accessories-test.png';
       bgColor = '#973D5F';
       break;
     default:

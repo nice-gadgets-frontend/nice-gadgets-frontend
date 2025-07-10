@@ -2,16 +2,16 @@ import { useEffect, useState } from 'react';
 import { Slider } from '../../../Atoms/Slider/Slider';
 import { ShopByCategory } from '../../../Molecules/ShopByCategory/ShopByCategory';
 import { BrandNewmodelsSection } from './Sections/BrandNewModelsSection';
-import { getPhones } from '../../../../services/getPhones';
-import type { Phone } from '../../../../types/Phone';
+import { getProducts } from '../../../../services/getProducts';
 import { HotPricesSection } from './Sections/HotPricesSection';
+import type { ProductType } from '../../../../types/ProductType';
 
 export const HomePage = () => {
-  const [phonesFromJSON, setPhonesFromJSON] = useState<Phone[]>([]);
+  const [productsFromJSON, setProductsFromJSON] = useState<ProductType[]>([]);
 
   useEffect(() => {
-    getPhones().then((phones) => {
-      setPhonesFromJSON(phones);
+    getProducts().then((products) => {
+      setProductsFromJSON(products);
     });
   }, []);
 
@@ -19,9 +19,9 @@ export const HomePage = () => {
     <>
       <h2 className="text-white">Home Page</h2>
       <Slider />
-      <BrandNewmodelsSection phones={phonesFromJSON} />
+      <BrandNewmodelsSection products={productsFromJSON} />
       <ShopByCategory />
-      <HotPricesSection phones={phonesFromJSON} />
+      <HotPricesSection products={productsFromJSON} />
     </>
   );
 };

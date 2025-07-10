@@ -1,44 +1,81 @@
-import { Plus, Minus } from 'lucide-react';
+import { useInCartStore } from '../../../services/useStore/useInCartStore';
+import type { ProductType } from '../../../types/ProductType';
 
 type CartItemProps = {
-  name: string;
-  price: number;
-  image: string;
+  product: ProductType;
   quantity: number;
 };
 
-export const CartItem: React.FC<CartItemProps> = ({
-  name,
-  price,
-  image,
-  quantity,
-}) => {
+export const CartItem: React.FC<CartItemProps> = ({ product, quantity }) => {
+  const deleteFromCart = useInCartStore((state) => state.deleteFromCart);
+  const increaseItemInCart = useInCartStore((state) => state.increase);
+  const decreaseItemInCart = useInCartStore((state) => state.decrease);
+
+  const deleteItemFromCartHandle = () => {
+    deleteFromCart(product.itemId);
+  };
+
+  const increaseItemInCartHandle = () => {
+    increaseItemInCart(product.itemId);
+  };
+
+  const decreaseItemInCartHandle = () => {
+    decreaseItemInCart(product.itemId);
+  };
+
   return (
-    <div className="grid grid-cols-1 md:grid-cols-[1fr_auto] items-center gap-4 p-6 bg-[#161827] text-white w-full">
-      {/* Left section */}
-      <div className="grid grid-cols-[auto_66px_1fr] items-center gap-6">
-        <button className="text-gray-500 hover:text-red-500 text-xl">×</button>
-        <img
-          src={`/gadgets/${image}`}
-          alt={name}
-          className="w-[66px] h-[66px] object-contain"
-        />
-        <p className="text-sm md:text-base font-medium leading-tight">{name}</p>
+    <div
+      className="
+        grid 
+        grid-cols-[auto_66px_1fr] 
+        md:grid-cols-[auto_66px_1fr_auto_auto] 
+        items-center 
+        gap-4 
+        p-6 
+        bg-[#161827] 
+        text-white 
+        w-full
+      "
+    >
+      {/* Delete button */}
+      <button
+        className="text-gray-500 hover:text-red-500 text-xl"
+        onClick={deleteItemFromCartHandle}
+      >
+        ×
+      </button>
+
+      {/* Image */}
+      <img
+        src={`gadgets/${product.image}`}
+        alt={product.name}
+        className="w-[66px] h-[66px] object-contain"
+      />
+
+      {/* Name */}
+      <p className="text-sm md:text-base font-medium leading-tight col-span-2 md:col-span-1">
+        {product.name}
+      </p>
+
+      {/* Quantity counter */}
+      <div className="flex items-center bg-[#0F1121] px-2 py-1 justify-center">
+        <button
+          className="w-6 h-6 text-white text-lg"
+          onClick={decreaseItemInCartHandle}
+        >
+          −
+        </button>
+        <span className="px-3">{quantity}</span>
+        <button
+          className="w-6 h-6 text-white text-lg"
+          onClick={increaseItemInCartHandle}
+        >
+          +
+        </button>
       </div>
 
-      {/* Counter + Price */}
-      <div className="flex items-center justify-end gap-4">
-        <div className="flex items-center bg-[#0F1121] px-2 py-1">
-          <button className="w-6 h-6 text-white">
-            <Minus size={16} />
-          </button>
-          <span className="px-3">{quantity}</span>
-          <button className="w-6 h-6 text-white">
-            <Plus size={16} />
-          </button>
-        </div>
-        <p className="text-lg font-semibold">${price}</p>
-      </div>
+      {/* Price */}
+      <p className="text-lg font-semibold text-right">${product.price}</p>
     </div>
   );
 };
