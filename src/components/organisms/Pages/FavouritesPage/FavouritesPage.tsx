@@ -22,27 +22,6 @@ export const FavouritesPage = () => {
   );
   const itemsInFavouritesCount = itemsInFavourites.length;
 
-  //whole page background color bg-black
-
-  //desktop grid (1200px+): fixed width 24-column grid, column 32px, gutter 16px
-  //tablet grid (640-1199px): stretch 12-column grid (640-1199px) side margins 24px, gutter 16px
-  //mobile grid (320-639px): stretch 4 column grid, side margins 16px, gutter 16px
-
-  //location-wrapper on phone has 16px left margin (basically grid 1st column); 8px gap between children; direction row; children aligned left
-  //location font-size 12px, lineheight 100%, color #75767F, font-[Mont-Regular]
-
-  //distance between location-wrapper and title-wrapper 24px
-
-  //title-wrapper direction column, gap between children 8px, children aligned left
-  //title color #F1F2F9, font size 32px, leniheight 41px, letter spacing -1%, font-[Mont-Bold]
-
-  //subtitle color #75767F, font [Mont-Regular], size 14px, lineheight 21px
-
-  //distance between title-wrapper and content-wrapper 32px
-
-  //content wrapper according to grid
-  //card sizes for better grid undertendment  max-w-[212px] sm:max-w-[237px] lg:max-w-[272px] min-h-[439px] sm:min-h-[512px]
-
   return (
     <div className="bg-black lg:max-w-[1200px] lg:mx-auto px-4 sm:px-6 lg:px-0">
       <div className="location-wrapper flex flex-row items-center gap-x-2 mb-6 sm:mb-6 lg:mb-8">
