@@ -4,12 +4,17 @@ import { BrowserRouter } from 'react-router-dom';
 import Root from './Root';
 import './index.css';
 import './styles/theme/dark.css';
-
+import { SkeletonTheme } from 'react-loading-skeleton';
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
   <React.StrictMode>
-    <BrowserRouter>
-      <Root />
-    </BrowserRouter>
+    <SkeletonTheme
+      baseColor="#202020"
+      highlightColor="#444"
+    >
+      <BrowserRouter>
+        <Root />
+      </BrowserRouter>
+    </SkeletonTheme>
   </React.StrictMode>,
 );
