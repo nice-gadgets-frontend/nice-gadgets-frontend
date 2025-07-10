@@ -10,7 +10,6 @@ import 'swiper/css/navigation';
 import 'swiper/css/pagination';
 // import '../../../../../styles/theme/dark.css';
 
-import Skeleton, { SkeletonTheme } from 'react-loading-skeleton';
 import 'react-loading-skeleton/dist/skeleton.css';
 
 import { CardItem } from '../../../../Molecules/CardItem/CardItem';
