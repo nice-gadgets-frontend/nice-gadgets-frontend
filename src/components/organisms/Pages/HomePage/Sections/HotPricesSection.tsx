@@ -51,7 +51,7 @@ export const HotPricesSection: React.FC<HotPricesSectionType> = ({
           </div>
         </div>
 
-        <div className="mx-auto">
+        <div className="mx-auto -mr-4 sm:-mr-6 lg:mx-0">
           <Swiper
             modules={[Navigation, A11y]}
             slidesPerView="auto"

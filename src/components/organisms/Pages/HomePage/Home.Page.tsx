@@ -18,7 +18,9 @@ export const HomePage = () => {
   return (
     <>
       <h2 className="text-white">Home Page</h2>
-      <Slider />
+      <div className="-mx-4 sm:mx-0">
+        <Slider />
+      </div>
       <BrandNewmodelsSection products={productsFromJSON} />
       <ShopByCategory />
       <HotPricesSection products={productsFromJSON} />
