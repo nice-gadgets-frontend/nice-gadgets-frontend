@@ -12,7 +12,7 @@ export const CartItem: React.FC<CartItemProps> = ({ product, quantity }) => {
   const decreaseItemInCart = useInCartStore((state) => state.decrease);
 
   return (
-    <div className="grid grid-cols-[24px_66px_1fr_auto] items-center gap-4 p-4 md:p-6 bg-[#161827] text-white w-full rounded-md">
+    <div className="flex flex-col sm:grid sm:grid-cols-[24px_66px_1fr_auto_auto] items-start sm:items-center gap-4 p-4 md:p-6 bg-[#161827] text-white w-full">
       {/* Delete button */}
       <button
         onClick={() => deleteFromCart(product.itemId)}
@@ -22,7 +22,7 @@ export const CartItem: React.FC<CartItemProps> = ({ product, quantity }) => {
         ×
       </button>
 
-      {/* Image */}
+      {/* Product image */}
       <img
         src={`gadgets/${product.image}`}
         alt={product.name}
@@ -30,30 +30,53 @@ export const CartItem: React.FC<CartItemProps> = ({ product, quantity }) => {
       />
 
       {/* Product name */}
-      <p className="text-sm md:text-base font-medium leading-tight">
+      <p className="text-sm sm:text-base font-medium leading-tight sm:col-span-1">
         {product.name}
       </p>
 
-      {/* Price */}
-      <p className="text-lg font-semibold text-right">${product.price}</p>
-
-      {/* Quantity controls */}
-      <div className="col-span-4 md:col-start-3 md:col-span-2 flex items-center justify-end gap-2 mt-2 md:mt-0">
+      {/* Quantity controls (shown only on sm+) */}
+      <div className="hidden sm:flex items-center gap-2">
         <button
           onClick={() => decreaseItemInCart(product.itemId)}
-          className="w-8 h-8 flex items-center justify-center border border-[#3B3E4A] rounded-md hover:bg-[#1E2030] transition"
+          className="w-8 h-8 flex items-center justify-center border border-[#3B3E4A] hover:bg-[#1E2030] transition"
         >
           <span className="text-xl">−</span>
         </button>
-
         <span className="w-6 text-center">{quantity}</span>
-
         <button
           onClick={() => increaseItemInCart(product.itemId)}
-          className="w-8 h-8 flex items-center justify-center border border-[#3B3E4A] rounded-md hover:bg-[#1E2030] transition"
+          className="w-8 h-8 flex items-center justify-center border border-[#3B3E4A] hover:bg-[#1E2030] transition"
         >
           <span className="text-xl">+</span>
         </button>
+      </div>
+
+      {/* Price (shown only on sm+) */}
+      <p className="hidden sm:block text-lg font-semibold text-right">
+        ${product.price}
+      </p>
+
+      {/* Mobile-only block for quantity + price */}
+      <div className="flex justify-between items-center sm:hidden mt-2 w-full">
+        {/* Quantity controls */}
+        <div className="flex items-center gap-2">
+          <button
+            onClick={() => decreaseItemInCart(product.itemId)}
+            className="w-8 h-8 flex items-center justify-center border border-[#3B3E4A] hover:bg-[#1E2030] transition"
+          >
+            <span className="text-xl">−</span>
+          </button>
+          <span className="w-6 text-center">{quantity}</span>
+          <button
+            onClick={() => increaseItemInCart(product.itemId)}
+            className="w-8 h-8 flex items-center justify-center border border-[#3B3E4A] hover:bg-[#1E2030] transition"
+          >
+            <span className="text-xl">+</span>
+          </button>
+        </div>
+
+        {/* Price */}
+        <p className="text-lg font-semibold">${product.price}</p>
       </div>
     </div>
   );
