@@ -17,7 +17,6 @@ export const CartTotal: React.FC<CartTotalProps> = ({ total, count }) => {
           bg-[#905BFF] 
           hover:bg-[#7E4FE0] 
           py-3 
-          rounded-md 
           font-semibold 
           transition-colors
         "
