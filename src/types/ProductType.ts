@@ -9,7 +9,7 @@ export interface ProductType {
   color: string;
   priceDiscount: number;
   priceRegular: number;
-  price?:number;
+  price:number;
   resolution?: string;
   processor?: string;
   capacityAvailable?: string[];
