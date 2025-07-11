@@ -30,7 +30,9 @@ export const BrandNewmodelsSection: React.FC<BrandNewmodelsSectionType> = ({
 
   let filteredProducts = [...products];
 
-  filteredProducts = filteredProducts.sort((a, b) => b.year - a.year);
+filteredProducts = filteredProducts
+  .filter((p) => p.year !== undefined)
+  .sort((a, b) => b.year! - a.year!);
 
   return (
     <div className="bg-black pt-[80px]">
