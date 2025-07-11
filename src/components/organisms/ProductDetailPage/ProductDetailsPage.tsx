@@ -44,51 +44,6 @@ export const ProductDetailPage: React.FC = () => {
   const navigate = useNavigate();
   const location = useLocation();
 
-  // useEffect(() => {
-  //   if (!itemId || !category) return;
-
-  //   const basePath = '/gadgets';
-  //   const url = `${basePath}/${category}.json`;
-
-  //   fetch(url)
-  //     .then((res) => {
-  //       if (!res.ok) {
-  //         throw new Error(`Failed to load ${url}: ${res.statusText}`);
-  //       }
-  //       return res.json();
-  //     })
-  //     .then((products: ProductType[]) => {
-  //       const found = products.find((p) => p.id === itemId);
-
-  //       if (found) {
-  //         setProduct(found);
-  //         setAllProducts(products);
-
-  //         setSelectedColor(found.color || found.colorsAvailable?.[0] || null);
-
-  //         setSelectedCapacity((prevCapacity) => {
-  //           if (
-  //             prevCapacity &&
-  //             found.capacityAvailable?.includes(prevCapacity)
-  //           ) {
-  //             return prevCapacity;
-  //           } else {
-  //             return found.capacity || found.capacityAvailable?.[0] || null;
-  //           }
-  //         });
-
-  //         console.log('Found product:', found);
-  //       } else {
-  //         console.log('Product not found');
-  //         setProduct(null);
-  //       }
-  //     })
-  //     .catch((error) => {
-  //       console.error('Error loading data:', error);
-  //       setProduct(null);
-  //     });
-  // }, [itemId, category]);
-
   useEffect(() => {
     if (!category) return;
 
