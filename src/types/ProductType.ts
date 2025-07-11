@@ -22,6 +22,7 @@ export interface ProductType {
   zoom?: string;
   cell?: string[];
   description: DescriptionSection[];
+  namespaceId?: string;
 };
 
 export interface DescriptionSection {
