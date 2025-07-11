@@ -57,7 +57,9 @@ export const CardItem: React.FC<CardItemProps> = ({ product, className }) => {
         />
       </div>
 
-      <div className="product-card__name leading-[21px] pt-4 min-h-[58px]">
+      <div 
+      onClick={handleCardClick}
+      className="cursor-pointer product-card__name leading-[21px] pt-4 min-h-[58px]">
         {product.name}
       </div>
 
