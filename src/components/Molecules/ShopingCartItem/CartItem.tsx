@@ -39,21 +39,21 @@ export const CartItem: React.FC<CartItemProps> = ({ product, quantity }) => {
 
       {/* Quantity controls */}
       <div className="col-span-4 md:col-start-3 md:col-span-2 flex items-center justify-end gap-2 mt-2 md:mt-0">
-        <div className="flex items-center bg-[#0F1121] border border-[#3B3E4A] rounded-md">
-          <button
-            onClick={() => decreaseItemInCart(product.itemId)}
-            className="w-8 h-8 text-xl border-r border-[#3B3E4A] hover:bg-[#1E2030] transition"
-          >
-            −
-          </button>
-          <span className="px-4">{quantity}</span>
-          <button
-            onClick={() => increaseItemInCart(product.itemId)}
-            className="w-8 h-8 text-xl border-l border-[#3B3E4A] hover:bg-[#1E2030] transition"
-          >
-            +
-          </button>
-        </div>
+        <button
+          onClick={() => decreaseItemInCart(product.itemId)}
+          className="w-8 h-8 flex items-center justify-center border border-[#3B3E4A] rounded-md hover:bg-[#1E2030] transition"
+        >
+          <span className="text-xl">−</span>
+        </button>
+
+        <span className="w-6 text-center">{quantity}</span>
+
+        <button
+          onClick={() => increaseItemInCart(product.itemId)}
+          className="w-8 h-8 flex items-center justify-center border border-[#3B3E4A] rounded-md hover:bg-[#1E2030] transition"
+        >
+          <span className="text-xl">+</span>
+        </button>
       </div>
     </div>
   );
