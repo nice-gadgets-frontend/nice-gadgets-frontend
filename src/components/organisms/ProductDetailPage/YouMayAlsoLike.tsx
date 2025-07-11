@@ -13,6 +13,7 @@ import { CardItem } from '../../Molecules/CardItem/CardItem';
 import { SliderButton } from '../../Atoms/Buttons/SliderButton';
 import { useState } from 'react';
 import type { ProductType } from '../../../types/ProductType';
+import { useNavigate } from 'react-router-dom';
 
 type YouMayAlsoLikeProps = {
   youMayAlsoLikeProducts: ProductType[];
@@ -22,9 +23,16 @@ type YouMayAlsoLikeProps = {
 // перемішування карток
 function shuffleProductsArray<T>(products: T[]): T[] {
   const productsCopy = [...products];
-  for (let currentIndex = productsCopy.length - 1; currentIndex > 0; currentIndex--) {
+  for (
+    let currentIndex = productsCopy.length - 1;
+    currentIndex > 0;
+    currentIndex--
+  ) {
     const randomIndex = Math.floor(Math.random() * (currentIndex + 1));
-    [productsCopy[currentIndex], productsCopy[randomIndex]] = [productsCopy[randomIndex], productsCopy[currentIndex]];
+    [productsCopy[currentIndex], productsCopy[randomIndex]] = [
+      productsCopy[randomIndex],
+      productsCopy[currentIndex],
+    ];
   }
   return productsCopy;
 }
@@ -35,14 +43,24 @@ export const YouMayAlsoLike: React.FC<YouMayAlsoLikeProps> = ({
   const [isBeginning, setIsBeginning] = useState(true);
   const [isEnd, setIsEnd] = useState(false);
 
+  const navigate = useNavigate();
+
   // по категорії
   const filteredProducts = youMayAlsoLikeProducts.filter(
-    (product) => product.category === currentProductCategory
+    (product) => product.category === currentProductCategory,
   );
 
   // перемішати і взяти перші 8 рандомних
   const randomProducts = shuffleProductsArray(filteredProducts).slice(0, 8);
-
+  console.log('Random products:', randomProducts);
+  console.log('Current category:', currentProductCategory);
+  console.log('All products:', youMayAlsoLikeProducts);
+  console.log(
+    'Random products IDs:',
+    randomProducts.map((p) => p.itemId),
+  );
+  console.log('Filtered products:', filteredProducts);
+  console.log('Example product:', youMayAlsoLikeProducts[0]);
   return (
     <div className="bg-black pt-[80px]">
       <div className="xl:w-[1136px] mx-auto">
@@ -57,7 +75,10 @@ export const YouMayAlsoLike: React.FC<YouMayAlsoLikeProps> = ({
               <SliderButton disabled={isEnd} />
             </div>
             <div className="navigate-you-may-left">
-              <SliderButton disabled={isBeginning} rotate="left" />
+              <SliderButton
+                disabled={isBeginning}
+                rotate="left"
+              />
             </div>
           </div>
         </div>
@@ -79,18 +100,27 @@ export const YouMayAlsoLike: React.FC<YouMayAlsoLikeProps> = ({
           {randomProducts.map((product) => {
             const adaptedProduct = {
               ...product,
-              price: product.priceDiscount,
-              fullPrice: product.priceRegular,
-              image: product.image,
+              itemId: product.itemId ?? product.id,
+              price: product.priceDiscount ?? product.price,
+              fullPrice: product.priceRegular ?? product.fullPrice,
+              image: product.image ?? product.images?.[0] ?? '',
             };
 
             return (
-              <SwiperSlide
-                key={product.itemId}
-                className="xl:!w-[272px] sm:!w-[237px] xs:!w-[212px] !w-[212px]"
+            <SwiperSlide
+              key={adaptedProduct.itemId}
+              className="xl:!w-[272px] sm:!w-[237px] xs:!w-[212px] !w-[212px]"
+            >
+              <div
+                onClick={() => {
+                  window.scrollTo({ top: 0, behavior: 'smooth' });
+                  navigate(`/product/${currentProductCategory}/${adaptedProduct.id ?? adaptedProduct.itemId}`);
+                }}
+                className='cursor-pointer'
               >
                 <CardItem product={adaptedProduct} />
-              </SwiperSlide>
+              </div>
+            </SwiperSlide>
             );
           })}
         </Swiper>

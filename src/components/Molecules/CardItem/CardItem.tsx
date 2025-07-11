@@ -36,30 +36,28 @@ export const CardItem: React.FC<CardItemProps> = ({ product, className }) => {
     addToFavourites(product.itemId);
   };
 
-    const handleCardClick = () => {
+  const handleCardClick = () => {
     navigate(`/product/${product.category}/${product.itemId}`);
   };
 
   return (
-    <div className={`
-      product-card text-[#F1F2F9] font-[Mont-Regular] text-[14px] bg-[#161827] p-8 box-border
+    <div
+      onClick={handleCardClick}
+      className={`
+      cursor-pointer product-card text-[#F1F2F9] font-[Mont-Regular] text-[14px] bg-[#161827] p-8 box-border
       flex flex-col justify-center gap-2
       ${className}
-    `}>
-      <div 
-        className="cursor-pointer product-card__image max-h-[129px] sm:max-h-[168px] lg:max-h-[196px] aspect-square flex justify-center box-border"
-        onClick={handleCardClick}
-      >
+    `}
+    >
+      <div className="product-card__image max-h-[129px] sm:max-h-[168px] lg:max-h-[196px] aspect-square flex justify-center box-border">
         <img
           className="w-full h-full object-contain object-center"
-          src={`gadgets/${product.image}`}
+          src={`/gadgets/${product.image}`}
           alt="phone"
         />
       </div>
 
-      <div 
-      onClick={handleCardClick}
-      className="cursor-pointer product-card__name leading-[21px] pt-4 min-h-[58px]">
+      <div className="product-card__name leading-[21px] pt-4 min-h-[58px]">
         {product.name}
       </div>
 
@@ -93,13 +91,19 @@ export const CardItem: React.FC<CardItemProps> = ({ product, className }) => {
 
       <div className="product-interaction flex flex-row justify-between gap-2 sm:gap-3 mt-auto">
         <PrimaryButton
-          onClick={addToCartHandle}
+          onClick={(e) => {
+            e.stopPropagation();
+            addToCartHandle();
+          }}
           isDisabled={isInCart}
         >
           {isInCart ? 'Added to cart' : 'Add to cart'}
         </PrimaryButton>
         <FavouritesButton
-          onClick={addToFavouritesHandle}
+          onClick={(e) => {
+            e.stopPropagation();
+            addToFavouritesHandle();
+          }}
           selected={isSelected}
         />
       </div>

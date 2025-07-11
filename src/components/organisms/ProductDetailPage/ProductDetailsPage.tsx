@@ -117,14 +117,6 @@ export const ProductDetailPage: React.FC = () => {
       });
   }, [itemId, category, location.search]);
 
-  // const updateUrl = (newProductId: string, color: string | null, capacity: string | null) => {
-  //   const params = new URLSearchParams();
-  //   if (color) params.set('color', color);
-  //   if (capacity) params.set('capacity', capacity);
-
-  //   navigate(`/product/${category}/${newProductId}?${params.toString()}`);
-  // };
-
   const updateUrl = (
     newProductId: string,
     color: string | null,
