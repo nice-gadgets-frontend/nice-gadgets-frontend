@@ -1,3 +1,5 @@
+// Navbar.tsx
+
 import { useState } from 'react';
 import { NavLink } from 'react-router-dom';
 import { FavouritesPageIcon } from '../../Atoms/Icons/FavouritePageIcon';
@@ -15,7 +17,9 @@ export const Navbar = () => {
     (sum, item) => sum + (item.quantity ?? 0),
     0,
   );
-  const itemIdsInFavourites = useFavouritesStore((state) => state.itemsInFavourites);
+  const itemIdsInFavourites = useFavouritesStore(
+    (state) => state.itemsInFavourites,
+  );
   const itemsInFavouritesCount = itemIdsInFavourites.length;
 
   const toggleMenu = () => {
@@ -25,7 +29,7 @@ export const Navbar = () => {
   const closeMenu = () => setIsMenuOpen(false);
 
   return (
-    <header className="bg-[#0F1121] text-[#F1F2F9] h-[64px] flex items-center px-6">
+    <header className="bg-[var(--color-black)] text-[var(--color-white)] h-[64px] flex items-center px-6 drop-shadow-[0_1px_1px_var(--color-surface-2)]">
       <div className="flex justify-between items-center w-full">
         {/* Ліва частина: Лого + Навігація */}
         <div className="flex items-center gap-12">
@@ -44,8 +48,8 @@ export const Navbar = () => {
               to="/home"
               className={({ isActive }) =>
                 isActive ?
-                  'border-b-2 border-white'
-                : 'text-gray-400 hover:text-white border-b-2 border-transparent transition-all duration-200'
+                  'border-b-2 border-[var(--color-white)]'
+                : 'text-[var(--color-secondary)] hover:text-[var(--color-white)] border-b-2 border-transparent transition-all duration-200'
               }
             >
               Home
@@ -54,8 +58,8 @@ export const Navbar = () => {
               to="/phones"
               className={({ isActive }) =>
                 isActive ?
-                  'border-b-2 border-white'
-                : 'text-gray-400 hover:text-white border-b-2 border-transparent transition-all duration-200'
+                  'border-b-2 border-[var(--color-white)]'
+                : 'text-[var(--color-secondary)] hover:text-[var(--color-white)] border-b-2 border-transparent transition-all duration-200'
               }
             >
               Phones
@@ -64,8 +68,8 @@ export const Navbar = () => {
               to="/tablets"
               className={({ isActive }) =>
                 isActive ?
-                  'border-b-2 border-white'
-                : 'text-gray-400 hover:text-white border-b-2 border-transparent transition-all duration-200'
+                  'border-b-2 border-[var(--color-white)]'
+                : 'text-[var(--color-secondary)] hover:text-[var(--color-white)] border-b-2 border-transparent transition-all duration-200'
               }
             >
               Tablets
@@ -74,8 +78,8 @@ export const Navbar = () => {
               to="/accessories"
               className={({ isActive }) =>
                 isActive ?
-                  'border-b-2 border-white'
-                : 'text-gray-400 hover:text-white border-b-2 border-transparent transition-all duration-200'
+                  'border-b-2 border-[var(--color-white)]'
+                : 'text-[var(--color-secondary)] hover:text-[var(--color-white)] border-b-2 border-transparent transition-all duration-200'
               }
             >
               Accessories
@@ -90,8 +94,8 @@ export const Navbar = () => {
             aria-label="Favourites"
             className={({ isActive }) =>
               isActive ?
-                'text-white border-b-2 border-white'
-              : 'text-gray-400 hover:text-white border-b-2 border-transparent transition-all duration-200'
+                'text-[var(--color-white)] border-b-2 border-[var(--color-white)]'
+              : 'text-[var(--color-secondary)] hover:text-[var(--color-white)] border-b-2 border-transparent transition-all duration-200'
             }
           >
             <FavouritesPageIcon itemsInFavourites={itemsInFavouritesCount} />
@@ -101,8 +105,8 @@ export const Navbar = () => {
             aria-label="Cart"
             className={({ isActive }) =>
               isActive ?
-                'text-white border-b-2 border-white'
-              : 'text-gray-400 hover:text-white border-b-2 border-transparent transition-all duration-200'
+                'text-[var(--color-white)] border-b-2 border-[var(--color-white)]'
+              : 'text-[var(--color-secondary)] hover:text-[var(--color-white)] border-b-2 border-transparent transition-all duration-200'
             }
           >
             <ShoppingBagIcon totalItemsCount={totalItemsCount} />
