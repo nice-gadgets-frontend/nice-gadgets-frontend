@@ -12,11 +12,11 @@ export const CartItem: React.FC<CartItemProps> = ({ product, quantity }) => {
   const decreaseItemInCart = useInCartStore((state) => state.decrease);
 
   return (
-    <div className="flex flex-col sm:grid sm:grid-cols-[24px_66px_1fr_auto_auto] items-start sm:items-center gap-4 p-4 md:p-6 bg-[#161827] text-white w-full">
+    <div className="flex flex-col sm:grid sm:grid-cols-[24px_66px_1fr_auto_auto] items-start sm:items-center gap-4 p-4 md:p-6 bg-[var(--color-surface-1)] text-[var(--color-white)] w-full">
       {/* Delete button */}
       <button
         onClick={() => deleteFromCart(product.itemId)}
-        className="text-white text-xl hover:text-red-500"
+        className="text-[var(--color-white)] text-xl hover:text-[var(--color-red)]"
         aria-label="Remove item"
       >
         ×
@@ -38,14 +38,14 @@ export const CartItem: React.FC<CartItemProps> = ({ product, quantity }) => {
       <div className="hidden sm:flex items-center gap-2">
         <button
           onClick={() => decreaseItemInCart(product.itemId)}
-          className="w-8 h-8 flex items-center justify-center border border-[#3B3E4A] hover:bg-[#1E2030] transition"
+          className="w-8 h-8 flex items-center justify-center border border-[var(--color-elements)] hover:bg-[var(--color-surface-2)] transition"
         >
           <span className="text-xl">−</span>
         </button>
         <span className="w-6 text-center">{quantity}</span>
         <button
           onClick={() => increaseItemInCart(product.itemId)}
-          className="w-8 h-8 flex items-center justify-center border border-[#3B3E4A] hover:bg-[#1E2030] transition"
+          className="w-8 h-8 flex items-center justify-center border border-[var(--color-elements)] hover:bg-[var(--color-surface-2)] transition"
         >
           <span className="text-xl">+</span>
         </button>
@@ -62,14 +62,14 @@ export const CartItem: React.FC<CartItemProps> = ({ product, quantity }) => {
         <div className="flex items-center gap-2">
           <button
             onClick={() => decreaseItemInCart(product.itemId)}
-            className="w-8 h-8 flex items-center justify-center border border-[#3B3E4A] hover:bg-[#1E2030] transition"
+            className="w-8 h-8 flex items-center justify-center border border-[var(--color-elements)] hover:bg-[var(--color-surface-2)] transition"
           >
             <span className="text-xl">−</span>
           </button>
           <span className="w-6 text-center">{quantity}</span>
           <button
             onClick={() => increaseItemInCart(product.itemId)}
-            className="w-8 h-8 flex items-center justify-center border border-[#3B3E4A] hover:bg-[#1E2030] transition"
+            className="w-8 h-8 flex items-center justify-center border border-[var(--color-elements)] hover:bg-[var(--color-surface-2)] transition"
           >
             <span className="text-xl">+</span>
           </button>
