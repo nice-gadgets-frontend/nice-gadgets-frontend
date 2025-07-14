@@ -5,6 +5,7 @@ import { CardItem } from '../../../Molecules/CardItem/CardItem';
 import { getProducts } from '../../../../services/getProducts';
 import { useEffect, useState } from 'react';
 import type { ProductType } from '../../../../types/ProductType';
+import { CardSkeleton } from '../../../Molecules/CardSkeleton/CardSkeleton';
 
 export const FavouritesPage = () => {
   const itemIdsInFavourites = useFavouritesStore(
@@ -40,13 +41,28 @@ export const FavouritesPage = () => {
         </span>
       </div>
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-x-4 gap-y-10 justify-items-center">
-        {itemsInFavourites.map((product) => (
+        {/* {itemsInFavourites.map((product) => (
           <CardItem
             key={product.itemId}
             product={product}
             className="w-full max-w-[287px] min-h-[440px] sm:max-w-[288px] sm:min-h-[506px]"
           />
-        ))}
+        ))} */}
+        {itemsInFavourites.length > 0 ?
+          itemsInFavourites.map((product) => (
+            <CardItem
+              key={product.id}
+              product={product}
+              className="w-full max-w-[287px] min-h-[440px] sm:max-w-[288px] sm:min-h-[506px]"
+            />
+          ))
+        : Array.from({ length: 4 }).map((_, i) => (
+            <CardSkeleton
+              key={i}
+              className="w-full max-w-[287px] min-h-[440px] sm:max-w-[288px] sm:min-h-[506px]"
+            />
+          ))
+        }
       </div>
     </div>
   );
