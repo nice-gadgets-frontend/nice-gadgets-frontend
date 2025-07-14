@@ -3,6 +3,7 @@ import { useInCartStore } from '../../../services/useStore/useInCartStore';
 import { CartItem } from '../../Molecules/ShopingCartItem/CartItem';
 import { CartTotal } from '../../Molecules/ShopingCartItem/CartTotal';
 import type { ProductType } from '../../../types/ProductType';
+import { CartItemSkeleton } from '../../Molecules/ShoppingCartItemSkeleton/CartItemSkeleton';
 
 type ProductWithQuantity = ProductType & { quantity: number };
 
@@ -29,13 +30,13 @@ export const CartPage = () => {
       });
   }, []);
 
-  if (loading) {
-    return (
-      <div className="flex justify-center items-center min-h-screen text-white">
-        Loading products...
-      </div>
-    );
-  }
+  // if (loading) {
+  //   return (
+  //     <div className="flex justify-center items-center min-h-screen text-white">
+  //       Loading products...
+  //     </div>
+  //   );
+  // }
 
   if (error) {
     return (
@@ -80,13 +81,18 @@ export const CartPage = () => {
           {/* Cart items */}
           <div className="order-1">
             <div className="flex flex-col gap-4 md:gap-6 xl:row-start-1">
-              {itemsInCart.map((item) => (
-                <CartItem
-                  key={item.itemId}
-                  product={item}
-                  quantity={item.quantity}
-                />
-              ))}
+              {itemsInCart.length > 0 ?
+                itemsInCart.map((item) => (
+                  <CartItem
+                    key={item.itemId}
+                    product={item}
+                    quantity={item.quantity}
+                  />
+                ))
+              : Array.from({ length: 2 }).map((_, i) => (
+                  <CartItemSkeleton key={i} />
+                ))
+              }
             </div>
           </div>
 
