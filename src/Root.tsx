@@ -8,6 +8,9 @@ import { FavouritesPage } from './components/organisms/Pages/FavouritesPage/Favo
 import { CartPage } from './components/organisms/Pages/CartPage';
 import { ErrorPage } from './components/organisms/Pages/ErrorPage';
 import { MenuPage } from './components/organisms/Pages/MenuPage';
+import { ProductDetailPage } from './components/organisms/ProductDetailPage/ProductDetailsPage';
+import { ContactsPage } from './components/organisms/Pages/ContactsPage/ContactsPage';
+import { RightsPage } from './components/organisms/Pages/RightsPage/RightsPage';
 
 const Root = () => {
   return (
@@ -42,6 +45,10 @@ const Root = () => {
           element={<AccessoriesCatalogPage />}
         />
         <Route
+          path="product/:category/:itemId"
+          element={<ProductDetailPage />}
+        />
+        <Route
           path="favourites"
           element={<FavouritesPage />}
         />
@@ -56,6 +63,14 @@ const Root = () => {
         <Route
           path="*"
           element={<ErrorPage />}
+        />
+        <Route
+          path="contacts"
+          element={<ContactsPage />}
+        />
+        <Route
+          path="rights"
+          element={<RightsPage />}
         />
       </Route>
     </Routes>

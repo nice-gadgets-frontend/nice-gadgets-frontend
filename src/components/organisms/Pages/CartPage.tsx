@@ -29,7 +29,7 @@ export const CartPage = () => {
 
   if (error) {
     return (
-      <div className="flex justify-center items-center min-h-screen text-red-500">
+      <div className="flex justify-center items-center min-h-screen text-[var(--color-red)]">
         Error loading products: {error}
       </div>
     );
@@ -54,19 +54,13 @@ export const CartPage = () => {
   );
 
   return (
-    <div className="px-4 py-8 bg-[#0F1121] min-h-screen flex justify-center">
+    <div className="px-4 py-8 bg-[var(--color-black)] min-h-screen flex justify-center">
       <div className="w-full max-w-[1040px]">
-        <h1 className="text-white text-3xl font-bold mb-6">Cart</h1>
+        <h1 className="text-[var(--color-white)] text-3xl font-bold mb-6">
+          Cart
+        </h1>
 
-        <div
-          className="
-            grid
-            grid-cols-1
-            xl:grid-cols-[1fr_288px]
-            gap-6
-            items-start
-          "
-        >
+        <div className="grid grid-cols-1 xl:grid-cols-[1fr_288px] gap-6 items-start">
           {/* Cart items */}
           <div className="order-1">
             <div className="flex flex-col gap-4 md:gap-6 xl:row-start-1">

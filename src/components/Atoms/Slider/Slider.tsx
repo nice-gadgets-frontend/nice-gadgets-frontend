@@ -12,8 +12,15 @@ import './Slider.css';
 import '../../../styles/responsive.css';
 
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
 
 export const Slider: React.FC = () => {
+  const navigate = useNavigate();
+
+  const handleSlideClick = () => {
+    navigate(`/product/phones/apple-iphone-14-pro-1tb-spaceblack`);
+  };
+
   return (
     <div className="bg-black">
       <div className="grid grid-cols-[auto_1fr_auto] gap-0 sm:gap-4 items-center xl:w-[1136px] mx-auto ">
@@ -41,7 +48,7 @@ export const Slider: React.FC = () => {
           className="w-full"
           style={{ margin: '0 0' }}
         >
-          <SwiperSlide>
+          <SwiperSlide onClick={() => handleSlideClick()}>
             <picture className="w-full h-full block">
               <source
                 media="(max-width: 639px)"
@@ -54,7 +61,7 @@ export const Slider: React.FC = () => {
               />
             </picture>
           </SwiperSlide>
-          <SwiperSlide>
+          <SwiperSlide onClick={() => handleSlideClick()}>
             <picture className="w-full h-full block">
               <source
                 media="(max-width: 639px)"
@@ -67,7 +74,7 @@ export const Slider: React.FC = () => {
               />
             </picture>
           </SwiperSlide>
-          <SwiperSlide>
+          <SwiperSlide onClick={() => handleSlideClick()}>
             <picture className="w-full h-full block">
               <source
                 media="(max-width: 639px)"
