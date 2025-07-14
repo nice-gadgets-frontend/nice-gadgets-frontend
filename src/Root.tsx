@@ -9,6 +9,7 @@ import { CartPage } from './components/organisms/Pages/CartPage';
 import { ErrorPage } from './components/organisms/Pages/ErrorPage';
 import { MenuPage } from './components/organisms/Pages/MenuPage';
 import { ProductDetailPage } from './components/organisms/ProductDetailPage/ProductDetailsPage';
+import { ContactsPage } from './components/organisms/Pages/ContactsPage/ContactsPage';
 
 const Root = () => {
   return (
@@ -61,6 +62,10 @@ const Root = () => {
         <Route
           path="*"
           element={<ErrorPage />}
+        />
+        <Route
+          path="contacts"
+          element={<ContactsPage />}
         />
       </Route>
     </Routes>

@@ -39,7 +39,7 @@ export const Footer = () => {
             "
           >
             <Link to={'/'}>github</Link>
-            <Link to={'/'}>contacts</Link>
+            <Link to={'contacts'}>contacts</Link>
             <Link to={'/'}>rights</Link>
           </div>
           <div className="col-span-4 justify-self-start grid grid-flow-col items-center gap-2 sm:col-span-3 sm:justify-self-end xl:col-start-20 xl:col-span-5">
