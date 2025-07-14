@@ -30,14 +30,6 @@ export const CartPage = () => {
       });
   }, []);
 
-  // if (loading) {
-  //   return (
-  //     <div className="flex justify-center items-center min-h-screen text-white">
-  //       Loading products...
-  //     </div>
-  //   );
-  // }
-
   if (error) {
     return (
       <div className="flex justify-center items-center min-h-screen text-red-500">
