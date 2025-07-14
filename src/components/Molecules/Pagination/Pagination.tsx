@@ -1,6 +1,5 @@
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import type React from "react";
-import { useSearchParams } from "react-router-dom";
 import { PaginationButton } from "../../Atoms/Buttons/PaginationButton";
 import cn from "classnames";
 
@@ -12,29 +11,19 @@ type PaginationProps = {
   currentPage: number;
 };
 
-const DEFAULT_PAGE = 1;
 
 export const Pagination: React.FC<PaginationProps> = ({
   totalItems,
   perPage,
+  onPageChange,
+  currentPage,
 }) => {
-  const [searchParams, setSearchParams] = useSearchParams();
-
-  const pageParam = Number(searchParams.get('page'));
-  const currentPage = pageParam >= 1 ? pageParam : DEFAULT_PAGE;
 
   const totalPages = Math.ceil(totalItems / perPage);
 
   const updatePage = (page: number) => {
-    const newParams = new URLSearchParams(searchParams);
-    
-    if (page === DEFAULT_PAGE) {
-      newParams.delete('page');
-    } else {
-      newParams.set('page', String(page));
-    }
-
-    setSearchParams(newParams);
+    if (page < 1 || page > totalPages) return;
+    onPageChange(page);
   }
 
   if (totalPages <= 1) {
