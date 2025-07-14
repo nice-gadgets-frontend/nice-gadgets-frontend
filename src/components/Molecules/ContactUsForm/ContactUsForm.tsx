@@ -55,7 +55,7 @@ export const ContactUsForm = () => {
             name="name"
             value={form.name}
             className="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm text-white"
-            placeholder="Anatolii Kosolapov"
+            placeholder="John Smith"
             onChange={onChangeInputHandle}
           />
           {errors.name && (
@@ -74,7 +74,7 @@ export const ContactUsForm = () => {
             name="email"
             value={form.email}
             className="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm text-white"
-            placeholder="alkotrener@example.com"
+            placeholder="you@example.com"
             onChange={onChangeInputHandle}
           />
           {errors.email && (
