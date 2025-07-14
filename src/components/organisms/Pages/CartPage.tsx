@@ -9,7 +9,6 @@ type ProductWithQuantity = ProductType & { quantity: number };
 
 export const CartPage = () => {
   const [products, setProducts] = useState<ProductType[]>([]);
-  const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
 
   const itemsIdsInCart = useInCartStore((state) => state.itemsIdsInCart);
@@ -22,11 +21,9 @@ export const CartPage = () => {
       })
       .then((data: ProductType[]) => {
         setProducts(data);
-        setLoading(false);
       })
       .catch((err) => {
         setError(err instanceof Error ? err.message : 'Unknown error');
-        setLoading(false);
       });
   }, []);
 
