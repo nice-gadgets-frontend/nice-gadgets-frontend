@@ -25,17 +25,29 @@ export const PhonesCatalogPage = () => {
   const [phones, setPhones] = useState<MergedPhone[]>([]);
   const [searchParams, setSearchParams] = useSearchParams();
 
-  //  const selected = Array.from(itemsOnPage)[0]; // наприклад "16" або "all"
+  const selected = Array.from(itemsOnPage)[0]; // наприклад "16" або "all"
   // const perPage = selected === "all" ? 50 : Number(selected); // конвертуємо
   const pageParam = Number(searchParams.get('page')) || 1;
-  const perPageParam = searchParams.get('perPage') || '16';
+  const perPageParam = searchParams.get('perPage') || selected;
 
-  const perPage = perPageParam === 'all' ? phones.length : Number(perPageParam);
+  const perPage = perPageParam === 'All'
+    ? phones.length || 16
+    : Number(perPageParam);
   const currentPage = pageParam;
 
   useEffect(() => {
-    Promise.all([getPhones(), getProducts()]).then(
-      ([phonesData, productsData]) => {
+    const selectedValue = Array.from(itemsOnPage)[0];
+
+    const newParams = new URLSearchParams(searchParams);
+    newParams.set('perPage', selectedValue);
+    newParams.set('page', '1');
+
+    setSearchParams(newParams);
+  }, [itemsOnPage]);
+
+  useEffect(() => {
+    Promise.all([getPhones(), getProducts()])
+      .then(([phonesData, productsData]) => {
         const merged = mergedPhonesWithProducts(phonesData, productsData);
         setPhones(merged);
       },
@@ -63,20 +75,32 @@ export const PhonesCatalogPage = () => {
     const start = (currentPage - 1) * perPage;
     const end = start + perPage;
     return sortedPhones.slice(start, end);
-  }, [sortedPhones, currentPage, perPage]);
+
+  }, [sortedPhones, currentPage, perPage])
 
   return (
+    
     <div className="flex-1 mt-10 bg-black">
-      <h1 className="text-xl font-bold text-white">Mobile phones</h1>
-      <p className="text-gray-400 mb-6"> {sortedPhones.length}</p>
+      <div className="w-full max-w-[1200px] mx-auto sm:px-6 lg:px-8">
+      <h1 className=" text-white font-extrabold text-3xl md:text-5xl font-[Mont-Regular]">Mobile phones</h1>
+      <p className="text-gray-400 mb-6 text-sm font-semibold"> {sortedPhones.length}</p>
 
-      <div className="flex flex-col bg-black min-h-screen px-4 sm:px-6 lg:px-8">
-        <CatalogFilters
-          sortBy={sortBy}
-          setSortBy={setSortBy}
-          itemsOnPage={itemsOnPage}
-          setItemsOnPage={setItemsOnPage}
-        />
+    
+    <div className="flex flex-col bg-black min-h-screen">
+      <CatalogFilters
+        sortBy={sortBy}
+        setSortBy={setSortBy}
+        itemsOnPage={itemsOnPage}
+        setItemsOnPage={setItemsOnPage}
+      />
+
+
+      <div className="w-full grid gap-y-10 gap-x-4 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 justify-center px-4 sm:px-6 xl:px-0 max-w-[1200px] mx-auto">
+        {paginatedPhones.map(phone => (
+          <CardItem key={phone.id} product={phone}/>
+        ))}
+
+      </div>
 
         <div className="grid gap-6 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
           {paginatedPhones.length > 0 ?
@@ -101,5 +125,6 @@ export const PhonesCatalogPage = () => {
         />
       </div>
     </div>
+</div>
   );
 };
