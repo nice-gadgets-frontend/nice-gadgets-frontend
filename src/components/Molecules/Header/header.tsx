@@ -33,7 +33,7 @@ export const Navbar = () => {
   const inactiveLink = 'text-secondary hover:text-primary';
 
   return (
-    <header className="relative bg-black text-primary h-[64px] flex items-center px-6 drop-shadow-[0_1px_1px_var(--color-surface-2)]">
+    <header className="relative border border-[var(--color-elements)] dark:border-0  bg-black text-primary h-[64px] flex items-center px-6 drop-shadow-[0_1px_1px_var(--color-surface-2)]">
       <div className="flex justify-between items-center w-full">
         {/* Ліва частина: Лого + Навігація */}
         <div className="flex items-center gap-12">

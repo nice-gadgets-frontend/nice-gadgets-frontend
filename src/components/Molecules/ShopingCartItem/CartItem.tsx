@@ -12,7 +12,7 @@ export const CartItem: React.FC<CartItemProps> = ({ product, quantity }) => {
   const decreaseItemInCart = useInCartStore((state) => state.decrease);
 
   return (
-    <div className="flex flex-col sm:grid sm:grid-cols-[24px_66px_1fr_auto_auto] items-start sm:items-center gap-4 p-4 md:p-6 bg-[var(--color-surface-1)] text-[var(--color-primary)] w-full">
+    <div className="border border-[var(--color-elements)] dark:border-0 flex flex-col sm:grid sm:grid-cols-[24px_66px_1fr_auto_auto] items-start sm:items-center gap-4 p-4 md:p-6 bg-[var(--color-surface-1)] text-[var(--color-primary)] w-full">
       {/* Delete button */}
       <button
         onClick={() => deleteFromCart(product.itemId)}
