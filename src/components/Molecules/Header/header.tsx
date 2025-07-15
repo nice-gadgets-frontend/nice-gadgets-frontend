@@ -39,10 +39,15 @@ export const Navbar = () => {
         <div className="flex items-center gap-12">
           {/* Logo */}
           <NavLink to="/home">
+             <img
+              src="/gadgets/img/light-theme-nice-gadgets-logo.png"
+              alt="Nice Gadgets Logo"
+              className="h-[32px] block dark:hidden"
+            />
             <img
               src="/gadgets/img/nice-gadgets-logo.png"
               alt="Nice Gadgets Logo"
-              className="h-[32px]"
+              className="h-[32px] hidden dark:block"
             />
           </NavLink>
 
@@ -92,6 +97,9 @@ export const Navbar = () => {
           >
             <ShoppingBagIcon totalItemsCount={totalItemsCount} />
           </NavLink>
+          <div className="h-[64px] flex items-center ">
+  <ThemeToggle />
+</div>
         </div>
 
         {/* Mobile Menu Icon */}
@@ -106,8 +114,6 @@ export const Navbar = () => {
           </button>
         </div>
       </div>
-
-      <ThemeToggle />
 
       {/* Mobile Menu Panel */}
       <BurgerMenu

@@ -23,10 +23,14 @@ export const Footer = () => {
         >
           <div className="col-span-4 justify-self-start grid items-center sm:col-span-3 xl:col-span-4">
             <img
+              src="/gadgets/img/light-theme-nice-gadgets-logo.png"
+              alt="Nice Gadgets Logo"
+              className="h-[32px] block dark:hidden"
+            />
+            <img
               src="/gadgets/img/nice-gadgets-logo.png"
-              alt="Logo Text"
-              width={89}
-              height={32}
+              alt="Nice Gadgets Logo"
+              className="h-[32px] hidden dark:block"
             />
           </div>
           <div
