@@ -54,9 +54,9 @@ export const CartPage = () => {
   );
 
   return (
-    <div className="px-4 py-8 bg-[var(--color-black)] min-h-screen flex justify-center">
+    <div className="px-4 py-8 bg-black min-h-screen flex justify-center">
       <div className="w-full max-w-[1040px]">
-        <h1 className="text-[var(--color-white)] text-3xl font-bold mb-6">
+        <h1 className="text-primary text-3xl font-bold mb-6">
           Cart
         </h1>
 
