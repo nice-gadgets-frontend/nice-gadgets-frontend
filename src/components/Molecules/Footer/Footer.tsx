@@ -41,6 +41,7 @@ export const Footer = () => {
             <Link to={'/'}>github</Link>
             <Link to={'contacts'}>contacts</Link>
             <Link to={'rights'}>rights</Link>
+            <Link to={'team'}>team</Link>
           </div>
           <div className="col-span-4 justify-self-start grid grid-flow-col items-center gap-2 sm:col-span-3 sm:justify-self-end xl:col-start-20 xl:col-span-5">
             <span className="font-[Mont-Regular] font-bold text-[12px] leading-tight text-right text-[var(--color-secondary)] mr-4 sm:mr-0">
