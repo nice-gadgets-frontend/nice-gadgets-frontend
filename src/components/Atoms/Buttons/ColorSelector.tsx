@@ -14,9 +14,9 @@ export const ColorSelector: React.FC<ColorSelectorType> = ({
   return (
     <div
       className={classNames(
-        'border hover:border-[#75767F] rounded-[50%] flex justify-center items-center w-8 h-8',
+        'border hover:border-secondary rounded-[50%] flex justify-center items-center w-8 h-8',
         {
-          'border-[#3B3E4A]': !selected,
+          'border-elements': !selected,
           'border-white': selected,
         },
       )}

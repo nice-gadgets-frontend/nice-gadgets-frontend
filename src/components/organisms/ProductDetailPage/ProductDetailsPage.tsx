@@ -131,19 +131,19 @@ export const ProductDetailPage: React.FC = () => {
 
   if (!product) {
     return (
-      <div className="text-white p-10">Product not found or loading...</div>
+      <div className="text-primary p-10">Product not found or loading...</div>
     );
   }
 
   const underlineSections = 'border-b border-b-[0.5px] border-elements';
 
   return (
-    <main className="max-w-6xl mx-auto font-[mont] text-white">
+    <main className="max-w-6xl mx-auto font-[mont] text-primary">
       {/* breadcrumb */}
-      <div className="flex items-center text-sm text-gray-400 mb-10 gap-2">
+      <div className="flex items-center text-sm text-secondary mb-10 gap-2">
         <Link
           to="/"
-          className="hover:text-white flex items-center gap-1"
+          className="hover:text-primary flex items-center gap-1"
         >
           <HomePageIcon />
         </Link>
@@ -247,8 +247,8 @@ export const ProductDetailPage: React.FC = () => {
                         }}
                         className={`cursor-pointer px-4 py-2 border border-elements text-sm transition-colors mb-6 ${
                           isSelected ?
-                            'bg-white text-black border-black'
-                          : 'bg-transparent text-white border-gray-300 hover:border-gray-500'
+                            'bg-primary text-black border-black'
+                          : 'bg-transparent text-primary border-secondary hover:icons'
                         }`}
                         aria-pressed={isSelected}
                         aria-label={`Select capacity ${capacity}`}
@@ -266,7 +266,7 @@ export const ProductDetailPage: React.FC = () => {
             className="text-2xl"
             aria-label="Price"
           >
-            <span className="text-white mr-2 font-[Mont-Bold]">
+            <span className="text-primary mr-2 font-[Mont-Bold]">
               ${product.priceDiscount}
             </span>
             <span className="line-through text-secondary font-[Mont-Light]">
@@ -333,7 +333,7 @@ export const ProductDetailPage: React.FC = () => {
               {section.text.map((paragraph, pidx) => (
                 <p
                   key={pidx}
-                  className="leading-relaxed mb-2 text-gray-400"
+                  className="leading-relaxed mb-2 text-secondary"
                 >
                   {paragraph}
                 </p>

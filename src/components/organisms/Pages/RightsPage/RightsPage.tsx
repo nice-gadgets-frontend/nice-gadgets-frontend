@@ -1,8 +1,8 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect } from 'react';
 
 export const RightsPage = () => {
   console.warn(
-    "Disclaimer: No actual lawyers were harmed in the making of this 'Rights' page. Some legal jargon may be purely for aesthetic purposes."
+    "Disclaimer: No actual lawyers were harmed in the making of this 'Rights' page. Some legal jargon may be purely for aesthetic purposes.",
   );
 
   const [loading, setLoading] = useState(true);
@@ -19,7 +19,7 @@ export const RightsPage = () => {
       </h1>
 
       <div className="bg-[#20233d] shadow-xl rounded-lg p-8 mb-12">
-        {loading ? (
+        {loading ?
           <div className="animate-pulse space-y-4">
             <div className="h-10 bg-[#3a3f5a] w-2/3 rounded"></div>
             <div className="h-6 bg-[#3a3f5a] w-full rounded"></div>
@@ -27,9 +27,8 @@ export const RightsPage = () => {
             <div className="h-6 bg-[#3a3f5a] w-1/2 rounded"></div>
             <div className="h-6 bg-[#3a3f5a] w-1/3 rounded"></div>
           </div>
-        ) : (
-          <>
-            <h2 className="text-4xl text-white font-bold mb-6 border-b-2 border-[#f1f2f9] pb-3">
+        : <>
+            <h2 className="text-4xl text-white font-bold mb-6 border-b-2 border-primary pb-3">
               Terms & Conditions
             </h2>
             <div className="space-y-6 text-[#cdced2] text-lg leading-relaxed">
@@ -179,11 +178,11 @@ export const RightsPage = () => {
               </p>
             </div>
           </>
-        )}
+        }
       </div>
 
       <div className="bg-[#20233d] shadow-xl rounded-lg p-8">
-        {loading ? (
+        {loading ?
           <div className="animate-pulse space-y-4">
             <div className="h-10 bg-[#3a3f5a] w-2/3 rounded"></div>
             <div className="h-6 bg-[#3a3f5a] w-full rounded"></div>
@@ -191,9 +190,8 @@ export const RightsPage = () => {
             <div className="h-6 bg-[#3a3f5a] w-1/2 rounded"></div>
             <div className="h-6 bg-[#3a3f5a] w-1/3 rounded"></div>
           </div>
-        ) : (
-          <>
-            <h2 className="text-4xl text-white font-[Mont-Bold] mb-6 border-b-2 border-[#f1f2f9] pb-3">
+        : <>
+            <h2 className="text-4xl text-white font-[Mont-Bold] mb-6 border-b-2 border-primary pb-3">
               Privacy Policy
             </h2>
             <div className="space-y-6 text-[#cdced2] text-lg leading-relaxed">
@@ -392,7 +390,7 @@ export const RightsPage = () => {
               </p>
               <ul className="list-disc list-inside mt-2 space-y-1">
                 <li>
-                  By email:{" "}
+                  By email:{' '}
                   <a
                     href="mailto:legal@nicegadgets.com"
                     className="text-blue-400 hover:underline"
@@ -401,8 +399,11 @@ export const RightsPage = () => {
                   </a>
                 </li>
                 <li>
-                  By visiting this page on our website:{" "}
-                  <a href="contacts" className="text-blue-400 hover:underline">
+                  By visiting this page on our website:{' '}
+                  <a
+                    href="contacts"
+                    className="text-blue-400 hover:underline"
+                  >
                     Contact Us
                   </a>
                 </li>
@@ -410,7 +411,7 @@ export const RightsPage = () => {
               </ul>
             </div>
           </>
-        )}
+        }
       </div>
     </div>
   );

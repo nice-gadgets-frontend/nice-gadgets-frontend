@@ -26,7 +26,7 @@ export function Dropdowns({
   options,
   selected,
   onChange,
-  buttonClassName = 'w-[176px] h-[40px] cursor-pointer bg-[#323542] text-[#F1F2F9] font-semibold border border-transparent active:border-[#905BFF] focus:outline-[#905BFF] active:outline-[#905BFF] rounded-none hover:bg-[#3B3E4A] transition-colors duration-300',
+  buttonClassName = 'w-[176px] h-[40px] cursor-pointer bg-surface-2 text-primary font-semibold border border-transparent active:border-accent focus:outline-accent active:outline-accent rounded-none hover:bg-elements transition-colors duration-300',
 }: DropdownsProps) {
   const selectedLabel = React.useMemo(() => {
     const selectedKey = Array.from(selected)[0];
@@ -47,7 +47,7 @@ export function Dropdowns({
           <span>{selectedLabel}</span>
           <ChevronDown
             size={16}
-            className="text-[#F1F2F9]"
+            className="text-primary"
           />
         </Button>
       </DropdownTrigger>
@@ -58,15 +58,15 @@ export function Dropdowns({
         selectionMode="single"
         variant="flat"
         classNames={{
-          base: 'border border-[#3B3E4A] p-0 w-[176px] bg-transparent shadow-none rounded-none -mt-[6px]',
+          base: 'border border-elements p-0 w-[176px] bg-transparent shadow-none rounded-none -mt-[6px]',
           list: 'flex flex-col',
           emptyContent: 'text-sm text-gray-400 p-4',
         }}
         itemClasses={{
-          base: 'cursor-pointer rounded-none px-3 py-2 text-[#75767F] transition-colors duration-200 data-[hover=true]:bg-[#323542] data-[hover=true]:text-[#F1F2F9]',
+          base: 'cursor-pointer rounded-none px-3 py-2 text-secondary transition-colors duration-200 data-[hover=true]:bg-surface-2 data-[hover=true]:text-primary',
           wrapper:
-            'data-[selected=true]:bg-[#323542] data-[selected=true]:text-[#F1F2F9] bg-transparent',
-          selectedIcon: 'text-[#F1F2F9]',
+            'data-[selected=true]:bg-surface-2 data-[selected=true]:text-primary bg-transparent',
+          selectedIcon: 'text-primary',
         }}
         onSelectionChange={(keys) =>
           onChange(new Set(keys as Iterable<string>))

@@ -44,7 +44,7 @@ export const CardItem: React.FC<CardItemProps> = ({ product, className }) => {
     <div
       onClick={handleCardClick}
       className={`
-      cursor-pointer product-card text-[#F1F2F9] font-[Mont-Regular] text-[14px] bg-[#161827] p-8 box-border
+      cursor-pointer product-card text-primary font-[Mont-Regular] text-[14px] bg-surface-1 p-8 box-border
       flex flex-col justify-center gap-2
       ${className}
     `}
@@ -70,21 +70,21 @@ export const CardItem: React.FC<CardItemProps> = ({ product, className }) => {
         </div>
       </div>
 
-      <div className="bg-[#3B3E4A] w-full h-[1px]"></div>
+      <div className="bg-elements w-full h-[1px]"></div>
 
       <div className="product-card__features flex flex-col gap-2 sm:gap-3 font-[Mont-SemiBold] text-[12px] flex-grow">
         <div className="product-card__feature feature-screen flex justify-between">
-          <span className="text-[#75767F]">Screen</span>
+          <span className="text-secondary">Screen</span>
           <p className="product-card-screen break-words overflow-wrap-anywhere text-right ml-10">
             {product.screen}
           </p>
         </div>
         <div className="product-card__feature feature-capacity flex justify-between">
-          <span className="text-[#75767F]">Capacity</span>
+          <span className="text-secondary">Capacity</span>
           <p className="product-card-screen">{product.capacity}</p>
         </div>
         <div className="product-card__feature feature-ram flex justify-between">
-          <span className="text-[#75767F]">RAM</span>
+          <span className="text-secondary">RAM</span>
           <p className="product-card-screen">{product.ram}</p>
         </div>
       </div>
