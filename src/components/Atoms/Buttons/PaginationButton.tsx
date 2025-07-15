@@ -18,7 +18,7 @@ export const PaginationButton: React.FC<PaginationButtonType> = ({
       onClick={onClick}
       className={classNames('cursor-pointer w-8 h-8 flex items-center justify-center text-sm font-medium transition-colors',
         {
-          'bg-accent text-primary': selected,
+          'bg-primary text-surface-1 dark:bg-accent dark:text-primary': selected,
           'bg-surface-1 text-primary hover:bg-elements': !selected,
         }
       )}

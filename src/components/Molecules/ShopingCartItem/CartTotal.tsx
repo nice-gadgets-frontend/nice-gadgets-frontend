@@ -13,9 +13,8 @@ export const CartTotal: React.FC<CartTotalProps> = ({ total, count }) => {
 
       <button
         className="
-          w-full
-          bg-[var(--color-accent)]
-          hover:bg-[#7E4FE0] 
+          w-full bg-primary text-surface-1 dark:bg-accent dark:text-primary
+        hover:bg-[#7E4FE0] 
           py-3
           font-semibold
           transition-colors
