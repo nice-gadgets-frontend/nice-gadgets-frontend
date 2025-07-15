@@ -49,7 +49,7 @@ export const CategoryCard = ({
         />
       </div>
       <div className="flex flex-col items-start">
-        <h4 className="text-[20px] font-[Mont-SemiBold] text-[#F1F2F9] leading-[26px] mb-1">
+        <h4 className="text-[20px] font-[Mont-SemiBold] text-primary leading-[26px] mb-1">
           {title}
         </h4>
         <span className="font-[Mont-Regular] text-[14px] leading-[21px] text-gray-400">

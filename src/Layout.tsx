@@ -6,7 +6,7 @@ export const Layout = () => {
   return (
     <div className="min-h-screen flex flex-col">
       <Navbar />
-      <main className="flex-grow px-4 sm:px-6 lg:px-8 py-6 bg-[#0F1121]">
+      <main className="flex-grow px-4 sm:px-6 lg:px-8 py-6 bg-black">
         <Outlet />
       </main>
       <Footer />
