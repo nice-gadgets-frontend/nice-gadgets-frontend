@@ -4,16 +4,22 @@ import { CartItem } from '../../Molecules/ShopingCartItem/CartItem';
 import { CartTotal } from '../../Molecules/ShopingCartItem/CartTotal';
 import type { ProductType } from '../../../types/ProductType';
 import { CartItemSkeleton } from '../../Molecules/ShoppingCartItemSkeleton/CartItemSkeleton';
+import { useNavigate } from 'react-router-dom';
 
 type ProductWithQuantity = ProductType & { quantity: number };
 
 export const CartPage = () => {
+  const [isLoading, setIsLoading] = useState(false);
   const [products, setProducts] = useState<ProductType[]>([]);
   const [error, setError] = useState<string | null>(null);
 
   const itemsIdsInCart = useInCartStore((state) => state.itemsIdsInCart);
+  const isCartEmpty = !isLoading && itemsIdsInCart.length < 1;
+
+  const navigate = useNavigate();
 
   useEffect(() => {
+    setIsLoading(true);
     fetch('/gadgets/products.json')
       .then((res) => {
         if (!res.ok) throw new Error(`Failed to fetch products: ${res.status}`);
@@ -24,6 +30,9 @@ export const CartPage = () => {
       })
       .catch((err) => {
         setError(err instanceof Error ? err.message : 'Unknown error');
+      })
+      .finally(() => {
+        setIsLoading(false);
       });
   }, []);
 
@@ -64,7 +73,7 @@ export const CartPage = () => {
           {/* Cart items */}
           <div className="order-1">
             <div className="flex flex-col gap-4 md:gap-6 xl:row-start-1">
-              {itemsInCart.length > 0 ?
+              {!isLoading ?
                 itemsInCart.map((item) => (
                   <CartItem
                     key={item.itemId}
@@ -72,20 +81,33 @@ export const CartPage = () => {
                     quantity={item.quantity}
                   />
                 ))
-              : Array.from({ length: 2 }).map((_, i) => (
+              : Array.from({ length: 4 }).map((_, i) => (
                   <CartItemSkeleton key={i} />
                 ))
               }
+              {isCartEmpty && (
+                <div className="text-[var(--color-white)] mt-10 font-[Mont-Regular]">
+                  <p>Your cart is currently empty.</p>
+                  <p
+                    onClick={() => navigate('/phones')}
+                    className="text-[var(--color-blue)] cursor-pointer hover:scale-[1.1] w-fit transition underline"
+                  >
+                    Go back to shopping
+                  </p>
+                </div>
+              )}
             </div>
           </div>
 
           {/* Cart total */}
-          <div className="order-2">
-            <CartTotal
-              total={total}
-              count={totalItemsCount}
-            />
-          </div>
+          {!isCartEmpty && (
+            <div className="order-2">
+              <CartTotal
+                total={total}
+                count={totalItemsCount}
+              />
+            </div>
+          )}
         </div>
       </div>
     </div>
