@@ -33,7 +33,7 @@ export const CatalogFilters = ({
   const dropdownButtonClass = `
     w-full
     h-[40px] cursor-pointer bg-surface-2 text-primary font-semibold
-    border border-transparent active:border-accent
+    active:border-accent
     focus:outline-accent active:outline-accent
     rounded-none hover:bg-elements transition-colors duration-300
   `;
