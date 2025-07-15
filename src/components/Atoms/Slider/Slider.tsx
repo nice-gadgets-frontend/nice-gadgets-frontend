@@ -49,7 +49,7 @@ export const Slider: React.FC = () => {
           style={{ margin: '0 0' }}
         >
           <SwiperSlide onClick={() => handleSlideClick()}>
-            <picture className="w-full h-full block">
+            <picture className="w-full h-full block cursor-pointer">
               <source
                 media="(max-width: 639px)"
                 srcSet="gadgets/img/banner-mobile.svg"
@@ -62,7 +62,7 @@ export const Slider: React.FC = () => {
             </picture>
           </SwiperSlide>
           <SwiperSlide onClick={() => handleSlideClick()}>
-            <picture className="w-full h-full block">
+            <picture className="w-full h-full block cursor-pointer">
               <source
                 media="(max-width: 639px)"
                 srcSet="gadgets/img/banner-mobile.svg"
@@ -75,7 +75,7 @@ export const Slider: React.FC = () => {
             </picture>
           </SwiperSlide>
           <SwiperSlide onClick={() => handleSlideClick()}>
-            <picture className="w-full h-full block">
+            <picture className="w-full h-full block cursor-pointer">
               <source
                 media="(max-width: 639px)"
                 srcSet="gadgets/img/banner-mobile.svg"
