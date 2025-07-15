@@ -66,7 +66,7 @@ export const YouMayAlsoLike: React.FC<YouMayAlsoLikeProps> = ({
       <div className="xl:w-[1136px] mx-auto">
         {/* Заголовок і кнопки */}
         <div className="grid grid-cols-[1fr_auto] items-center mb-6">
-          <span className="text-[#F1F2F9] text-[22px] leading-[140%] sm:text-[32px] sm:leading-[41px] font-[Mont-Bold] text-left">
+          <span className="text-primary text-[22px] leading-[140%] sm:text-[32px] sm:leading-[41px] font-[Mont-Bold] text-left">
             You may also like
           </span>
 
@@ -107,20 +107,22 @@ export const YouMayAlsoLike: React.FC<YouMayAlsoLikeProps> = ({
             };
 
             return (
-            <SwiperSlide
-              key={adaptedProduct.itemId}
-              className="xl:!w-[272px] sm:!w-[237px] xs:!w-[212px] !w-[212px]"
-            >
-              <div
-                onClick={() => {
-                  window.scrollTo({ top: 0, behavior: 'smooth' });
-                  navigate(`/product/${currentProductCategory}/${adaptedProduct.id ?? adaptedProduct.itemId}`);
-                }}
-                className='cursor-pointer'
+              <SwiperSlide
+                key={adaptedProduct.itemId}
+                className="xl:!w-[272px] sm:!w-[237px] xs:!w-[212px] !w-[212px]"
               >
-                <CardItem product={adaptedProduct} />
-              </div>
-            </SwiperSlide>
+                <div
+                  onClick={() => {
+                    window.scrollTo({ top: 0, behavior: 'smooth' });
+                    navigate(
+                      `/product/${currentProductCategory}/${adaptedProduct.id ?? adaptedProduct.itemId}`,
+                    );
+                  }}
+                  className="cursor-pointer"
+                >
+                  <CardItem product={adaptedProduct} />
+                </div>
+              </SwiperSlide>
             );
           })}
         </Swiper>

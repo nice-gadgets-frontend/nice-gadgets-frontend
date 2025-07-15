@@ -17,7 +17,7 @@ export const FavouritesPageIcon = ({
     >
       <Heart
         size={16}
-        color="#F1F2F9"
+        color='var(--color-primary)'
       />
       {itemsInFavourites! > 0 && (
         <CounterBadgeIcon itemCount={itemsInFavourites!} />

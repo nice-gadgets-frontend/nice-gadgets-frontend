@@ -40,7 +40,7 @@ export const ShopByCategory = () => {
 
   return (
     <section className="mx-auto tablet:px-6 tablet:max-w-[1136px] py-10">
-      <h2 className="text-[32px] text-[#F1F2F9] font-[Mont-Bold] leading-[41px] mb-6 xl:w-[1136px] xl:mx-auto">
+      <h2 className="text-[32px] text-primary font-[Mont-Bold] leading-[41px] mb-6 xl:w-[1136px] xl:mx-auto">
         Shop by category
       </h2>
       <div className="grid gap-4 grid-cols-1 md:grid-cols-3 xl:grid-cols-3 xl:w-[1136px] xl:mx-auto justify-items-center">

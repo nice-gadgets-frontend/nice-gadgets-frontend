@@ -6,7 +6,7 @@ export const HomePageIcon = () => {
     <Link to="/home" className="inline-block p-2 cursor-pointer">
       <House
         size={16}
-        color="#F1F2F9"
+        color='var(--color-primary)'
       />
     </Link>
   );

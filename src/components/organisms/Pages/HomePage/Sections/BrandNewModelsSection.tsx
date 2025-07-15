@@ -30,15 +30,15 @@ export const BrandNewmodelsSection: React.FC<BrandNewmodelsSectionType> = ({
 
   let filteredProducts = [...products];
 
-filteredProducts = filteredProducts
-  .filter((p) => p.year !== undefined)
-  .sort((a, b) => b.year! - a.year!);
+  filteredProducts = filteredProducts
+    .filter((p) => p.year !== undefined)
+    .sort((a, b) => b.year! - a.year!);
 
   return (
     <div className="bg-black pt-[80px]">
       <div className="xl:w-[1136px] mx-auto">
         <div className="flex justify-between">
-          <span className="text-[#F1F2F9] text-[22px] leading-[140%] sm:text-[32px] sm:leading-[41px] font-[Mont-Bold] mb-6 text-left xl:w-[1136px] xl:mx-auto">
+          <span className="text-primary text-[22px] leading-[140%] sm:text-[32px] sm:leading-[41px] font-[Mont-Bold] mb-6 text-left xl:w-[1136px] xl:mx-auto">
             Brand new models
           </span>
           <div className="navigation flex flex-row-reverse gap-4">

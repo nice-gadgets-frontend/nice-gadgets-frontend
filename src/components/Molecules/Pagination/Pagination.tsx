@@ -37,14 +37,14 @@ export const Pagination: React.FC<PaginationProps> = ({
         disabled={currentPage === 1}
         className={cn('w-8 h-8 flex cursor-pointer justify-center items-center bg-surface-1 transition-colors',
            {
-            'bg-surface-1 text-white hover:bg-accent': currentPage > 1,
+            'bg-surface-1 text-primary hover:bg-accent': currentPage > 1,
              'bg-black text-icons cursor-default opacity-100': currentPage === 1,
            }
   )}
       >
         <ChevronLeft
           size={16}
-          className={currentPage === 1 ? 'text-icons' : 'text-white'}
+          className={currentPage === 1 ? 'text-icons' : 'text-primary'}
         />
         </button>
 
@@ -64,11 +64,11 @@ export const Pagination: React.FC<PaginationProps> = ({
       <button
         onClick={() => updatePage(currentPage + 1)}
         disabled={currentPage === totalPages}
-        className="w-8 h-8 cursor-pointer flex justify-center items-center bg-surface-1 text-white hover:bg-accent disabled:opacity-100"
+        className="w-8 h-8 cursor-pointer flex justify-center items-center bg-surface-1 text-primary hover:bg-accent disabled:opacity-100"
       >
         <ChevronRight
           size={16}
-          className={currentPage === totalPages ? 'text-icons' : 'text-white'}
+          className={currentPage === totalPages ? 'text-icons' : 'text-primary'}
         />
       </button>
 

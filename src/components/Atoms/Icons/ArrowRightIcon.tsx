@@ -4,7 +4,7 @@ export const ArrowRightIcon = () => {
   return (
     <ChevronRight
       size={16}
-      color="#4A4D58"
+      color='var(--color-icons)'
     />
   );
 };
