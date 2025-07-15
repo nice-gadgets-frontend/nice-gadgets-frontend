@@ -1,20 +1,20 @@
-import { useState } from "react";
+import { useState } from 'react';
 
 export const ContactUsForm = () => {
   const [errors, setErrors] = useState<{ [key: string]: string }>({});
   const [form, setForm] = useState({
-    name: "",
-    email: "",
-    subject: "",
-    message: "",
+    name: '',
+    email: '',
+    subject: '',
+    message: '',
   });
   const [success, setSuccess] = useState(false);
 
   const onChangeInputHandle = (
-    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
   ) => {
     setForm({ ...form, [e.target.name]: e.target.value });
-    setErrors({ ...errors, [e.target.name]: "" });
+    setErrors({ ...errors, [e.target.name]: '' });
     setSuccess(false);
   };
 
@@ -23,18 +23,18 @@ export const ContactUsForm = () => {
 
     e.preventDefault();
     const newErrors: { [key: string]: string } = {};
-    if (!form.name) newErrors.name = "Name is required";
-    if (!form.email) newErrors.email = "Email is required";
-    if (!form.subject) newErrors.subject = "Subject is required";
-    if (!form.message) newErrors.message = "Message is required";
+    if (!form.name) newErrors.name = 'Name is required';
+    if (!form.email) newErrors.email = 'Email is required';
+    if (!form.subject) newErrors.subject = 'Subject is required';
+    if (!form.message) newErrors.message = 'Message is required';
     setErrors(newErrors);
 
     if (Object.keys(newErrors).length === 0) {
       setForm({
-        name: "",
-        email: "",
-        subject: "",
-        message: "",
+        name: '',
+        email: '',
+        subject: '',
+        message: '',
       });
       setSuccess(true);
     }
@@ -45,7 +45,10 @@ export const ContactUsForm = () => {
       <h2 className="text-3xl font-[Mont-SemiBold] text-white mb-4">
         Send Us a Message
       </h2>
-      <form className="space-y-6" onSubmit={onSubmitHandle}>
+      <form
+        className="space-y-6"
+        onSubmit={onSubmitHandle}
+      >
         <div>
           <label className="block text-sm font-[Mont-Regular] text-[#cdced2] mb-1">
             Your Name
@@ -124,13 +127,13 @@ export const ContactUsForm = () => {
           )}
         </div>
         {success && (
-          <div className="text-[#905bff] text-sm font-[Mont-SemiBold] mb-2">
+          <div className="text-accent text-sm font-[Mont-SemiBold] mb-2">
             Your message was sent successfully!
           </div>
         )}
         <button
           type="submit"
-          className="w-full inline-flex justify-center py-3 px-6 border border-transparent shadow-sm text-lg font-medium rounded-md text-white bg-[#905bff] hover:bg-[#a378ff] focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#6A0DAD] transition duration-300"
+          className="w-full inline-flex justify-center py-3 px-6 border border-transparent shadow-sm text-lg font-medium rounded-md text-white bg-accent hover:bg-[#a378ff] focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#6A0DAD] transition duration-300"
         >
           Send Message
         </button>

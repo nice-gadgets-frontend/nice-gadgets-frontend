@@ -11,6 +11,7 @@ import { MenuPage } from './components/organisms/Pages/MenuPage';
 import { ProductDetailPage } from './components/organisms/ProductDetailPage/ProductDetailsPage';
 import { ContactsPage } from './components/organisms/Pages/ContactsPage/ContactsPage';
 import { RightsPage } from './components/organisms/Pages/RightsPage/RightsPage';
+import { TeamPage } from './components/organisms/Pages/TeamPage/TeamPage';
 
 const Root = () => {
   return (
@@ -71,6 +72,10 @@ const Root = () => {
         <Route
           path="rights"
           element={<RightsPage />}
+        />
+        <Route
+          path="team"
+          element={<TeamPage />}
         />
       </Route>
     </Routes>

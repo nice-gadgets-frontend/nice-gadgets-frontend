@@ -7,7 +7,7 @@ export const CardSkeleton = ({ className }: { className?: string }) => {
   return (
     <div
       className={`
-      product-card text-[#F1F2F9] font-[Mont-Regular] text-[14px] bg-[#161827] p-8 box-border
+      product-card text-primary font-[Mont-Regular] text-[14px] bg-surface-1 p-8 box-border
       flex flex-col justify-center gap-2
       ${className}
     `}

@@ -33,7 +33,7 @@ export const Footer = () => {
             className="
               col-span-4 justify-self-start
               grid grid-flow-row gap-4
-              font-[Mont-SemiBold] text-[12px] leading-[11px] tracking-[0.04em] uppercase text-[var(--color-white)]
+              font-[Mont-SemiBold] text-[12px] leading-[11px] tracking-[0.04em] uppercase text-[var(--color-primary)]
               sm:col-span-6 sm:justify-self-center sm:grid-flow-col sm:gap-[48px]
               xl:col-start-10 xl:col-span-8 xl:gap-[107px]
             "
@@ -41,6 +41,7 @@ export const Footer = () => {
             <Link to={'/'}>github</Link>
             <Link to={'contacts'}>contacts</Link>
             <Link to={'rights'}>rights</Link>
+            <Link to={'team'}>team</Link>
           </div>
           <div className="col-span-4 justify-self-start grid grid-flow-col items-center gap-2 sm:col-span-3 sm:justify-self-end xl:col-start-20 xl:col-span-5">
             <span className="font-[Mont-Regular] font-bold text-[12px] leading-tight text-right text-[var(--color-secondary)] mr-4 sm:mr-0">
@@ -53,7 +54,7 @@ export const Footer = () => {
             >
               <ChevronUp
                 size={20}
-                color="var(--color-white)"
+                color="var(--color-primary)"
               />
             </button>
           </div>

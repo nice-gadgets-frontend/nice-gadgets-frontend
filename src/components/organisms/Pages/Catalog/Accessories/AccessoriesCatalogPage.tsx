@@ -82,8 +82,8 @@ export const AccessoriesCatalogPage = () => {
     
     <div className="flex-1 mt-10 bg-black">
       <div className="w-full max-w-[1200px] mx-auto sm:px-6 lg:px-8">
-      <h1 className=" text-white font-extrabold text-3xl md:text-5xl font-[Mont-Regular]">Accessories</h1>
-      <p className="text-gray-400 mb-6 text-sm font-semibold"> {sortedAccessories.length}</p>
+      <h1 className=" text-primary font-extrabold text-3xl md:text-5xl font-[Mont-Regular]">Accessories</h1>
+      <p className="text-secondary mb-6 text-sm font-semibold"> {sortedAccessories.length}</p>
 
     
     <div className="flex flex-col bg-black min-h-screen">

@@ -25,8 +25,8 @@ export const BurgerMenu = ({ isOpen, onClose }: Props) => {
   if (!isOpen) return null;
 
   return (
-    <div className="fixed inset-0 bg-[#0F1121] flex flex-col justify-between text-[14px] uppercase z-50 md:hidden">
-      <div className="flex justify-between items-center px-6 h-[64px] border-b border-[#2c2f3a]">
+    <div className="fixed inset-0 bg-black flex flex-col justify-between text-[14px] uppercase z-50 md:hidden">
+      <div className="flex justify-between items-center px-6 h-[64px] border-b border-surface-1">
         <img
           src="/gadgets/img/nice-gadgets-logo.png"
           alt="Nice Gadgets Logo"
@@ -35,7 +35,7 @@ export const BurgerMenu = ({ isOpen, onClose }: Props) => {
 
         <div className="flex-grow" />
 
-        <div className="w-px h-full bg-[#2c2f3a]" />
+        <div className="w-px h-full bg-surface-2" />
 
         <button
           onClick={onClose}
@@ -51,10 +51,10 @@ export const BurgerMenu = ({ isOpen, onClose }: Props) => {
           to="/home"
           onClick={onClose}
           className={({ isActive }) =>
-            `inline-block mx-auto hover:text-white ${
+            `inline-block mx-auto hover:text-primary ${
               isActive ?
-                'text-white font-bold border-b-2 border-white pb-1'
-              : 'text-gray-400'
+                'text-primary font-bold border-b-2 border-primary pb-1'
+              : 'text-secondary'
             }`
           }
         >
@@ -64,10 +64,10 @@ export const BurgerMenu = ({ isOpen, onClose }: Props) => {
           to="/phones"
           onClick={onClose}
           className={({ isActive }) =>
-            `inline-block mx-auto hover:text-white ${
+            `inline-block mx-auto hover:text-primary ${
               isActive ?
-                'text-white font-bold border-b-2 border-white pb-1'
-              : 'text-gray-400'
+                'text-primary font-bold border-b-2 border-primary pb-1'
+              : 'text-secondary'
             }`
           }
         >
@@ -77,10 +77,10 @@ export const BurgerMenu = ({ isOpen, onClose }: Props) => {
           to="/tablets"
           onClick={onClose}
           className={({ isActive }) =>
-            `inline-block mx-auto hover:text-white ${
+            `inline-block mx-auto hover:text-primary ${
               isActive ?
-                'text-white font-bold border-b-2 border-white pb-1'
-              : 'text-gray-400'
+                'text-primary font-bold border-b-2 border-primary pb-1'
+              : 'text-secondary'
             }`
           }
         >
@@ -90,10 +90,10 @@ export const BurgerMenu = ({ isOpen, onClose }: Props) => {
           to="/accessories"
           onClick={onClose}
           className={({ isActive }) =>
-            `inline-block mx-auto hover:text-white ${
+            `inline-block mx-auto hover:text-primary ${
               isActive ?
-                'text-white font-bold border-b-2 border-white pb-1'
-              : 'text-gray-400'
+                'text-primary font-bold border-b-2 border-primary pb-1'
+              : 'text-secondary'
             }`
           }
         >

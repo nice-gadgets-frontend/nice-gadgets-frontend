@@ -8,7 +8,7 @@ type ShoppingBagProps = {
 
 export const ShoppingBagIcon = ({ totalItemsCount }: ShoppingBagProps) => (
   <Link to="/cart" className="relative inline-block p-2 cursor-pointer">
-    <ShoppingBag size={16} color="#F1F2F9" />
+    <ShoppingBag size={16} color='var(--color-primary)' />
     {totalItemsCount > 0 && <CounterBadgeIcon itemCount={totalItemsCount} />}
   </Link>
 );

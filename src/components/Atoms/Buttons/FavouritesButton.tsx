@@ -15,9 +15,9 @@ export const FavouritesButton: React.FC<FavouritesButtonType> = ({
   return (
     <button
       className={classNames(
-        'bg-[#323542] hover:bg-[#4A4D58] w-[40px] flex justify-center items-center cursor-pointer',
+        'bg-surface-2 hover:bg-icons w-[40px] flex justify-center items-center cursor-pointer',
         {
-          'border border-[#3B3E4A] bg-transparent text-[#EB5757]': selected,
+          'border border-elements bg-transparent text-[#EB5757]': selected,
         },
       )}
       onClick={onClick}

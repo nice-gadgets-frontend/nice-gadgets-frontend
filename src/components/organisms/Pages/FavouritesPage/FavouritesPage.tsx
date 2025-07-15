@@ -38,16 +38,16 @@ export const FavouritesPage = () => {
       <div className="location-wrapper flex flex-row items-center gap-x-2 mb-6 sm:mb-6 lg:mb-8">
         <HomePageIcon />
         <ArrowRightIcon />
-        <span className="text-[12px] leading-[100%] text-[#75767F] font-['Mont-Regular']">
+        <span className="text-[12px] leading-[100%] text-secondary font-['Mont-Regular']">
           Favourites
         </span>
       </div>
       <div className="flex flex-col items-start gap-y-2 mb-8 sm:mb-8 lg:mb-10">
-        <span className="text-[#F1F2F9] text-[32px] leading-[41px] tracking-[-0.01em] font-['Mont-Bold']">
+        <span className="text-primary text-[32px] leading-[41px] tracking-[-0.01em] font-['Mont-Bold']">
           Favourites
         </span>
         {itemsInFavouritesCount > 0 && (
-          <span className="text-[#75767F] font-['Mont-Regular'] text-[14px] leading-[21px]">
+          <span className="text-secondary font-['Mont-Regular'] text-[14px] leading-[21px]">
             {itemsInFavouritesCount} items
           </span>
         )}
