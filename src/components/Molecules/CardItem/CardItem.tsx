@@ -44,10 +44,13 @@ export const CardItem: React.FC<CardItemProps> = ({ product, className }) => {
     <div
       onClick={handleCardClick}
       className={`
-      border border-[var(--color-elements)] dark:border-0  cursor-pointer product-card text-primary font-[Mont-Regular] text-[14px] bg-surface-1 p-8 box-border
-      flex flex-col justify-center gap-2
-      ${className}
-    `}
+  cursor-pointer product-card text-primary font-[Mont-Regular] text-[14px] bg-surface-1 p-8 box-border
+  flex flex-col justify-center gap-2 rounded-lg 
+  border-2 border-transparent
+  transition-shadow transition-colors duration-300
+  hover:shadow-[0_0_15px_2px_rgba(144,91,255,0.5)] hover:border-accent
+  ${className}
+`}
     >
       <div className="product-card__image max-h-[129px] sm:max-h-[168px] lg:max-h-[196px] aspect-square flex justify-center box-border">
         <img
