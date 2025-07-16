@@ -8,12 +8,27 @@ import { CloseIcon } from '../../Atoms/Icons/CloseMenuIcon';
 import { useInCartStore } from '../../../services/useStore/useInCartStore';
 import { useFavouritesStore } from '../../../services/useStore/useFavouritesStore';
 import { ThemeToggle } from '../../Atoms/Switcher/ThemeToggle';
+import { LogIn } from 'lucide-react';
 
 export const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-
+  
   const toggleMenu = () => setIsMenuOpen((prev) => !prev);
   const closeMenu = () => setIsMenuOpen(false);
+
+  const [isAuthenticated, setIsAuthenticated] = useState(Boolean(localStorage.getItem('access_token')));
+
+  useEffect(() => {
+    const handleStorageChange = () => {
+      setIsAuthenticated(Boolean(localStorage.getItem('access_token')));
+    };
+
+    window.addEventListener('storage', handleStorageChange);
+
+    return () => {
+      window.removeEventListener('storage', handleStorageChange);
+    };
+  }, []);
 
   useEffect(() => {
     if (isMenuOpen) {
@@ -43,6 +58,13 @@ export const Navbar = () => {
   const activeLink =
     'text-primary after:content-[""] after:absolute after:bottom-0 after:left-0 after:w-full after:h-[2px] after:bg-primary';
   const inactiveLink = 'text-secondary hover:text-primary';
+
+  const handleLogout = () => {
+    localStorage.removeItem('access_token');
+    localStorage.removeItem('refresh_token');
+    localStorage.removeItem('username');
+    window.location.reload();
+  };
 
   return (
     <>
@@ -86,6 +108,26 @@ export const Navbar = () => {
 
           {/* Іконки справа (десктоп) */}
           <div className="hidden sm:flex items-center gap-4">
+            {isAuthenticated ? (
+              <button
+                onClick={handleLogout}
+                className="cursor-pointer flex items-center text-primary transition"
+              >
+                <LogIn size={20} className="mr-1 rotate-180" /> {/* Повернута іконка */}
+                <span>Logout</span>
+              </button>
+            ) : (
+              <NavLink
+                to="/auth"
+                aria-label="Login"
+                className={({ isActive }) =>
+                  `${navLinkBase} ${isActive ? activeLink : inactiveLink}`
+                }
+              >
+                <LogIn size={20} className="mr-1" />
+                <span>Login</span>
+              </NavLink>
+            )}
             <NavLink
               to="/favourites"
               aria-label="Favourites"
@@ -118,9 +160,9 @@ export const Navbar = () => {
 
         {/* Mobile menu icon */}
         <div className="flex sm:hidden gap-4">
-          <div className="h-[64px] flex items-center">
-            <ThemeToggle />
-          </div>
+            <div className="h-[64px] flex items-center">
+              <ThemeToggle />
+            </div>
 
           <button
             onClick={toggleMenu}
@@ -138,7 +180,13 @@ export const Navbar = () => {
       <BurgerMenu
         isOpen={isMenuOpen}
         onClose={closeMenu}
+        isAuthenticated={isAuthenticated}
+        onLogout={() => {
+          handleLogout();
+          closeMenu();
+        }}
       />
     </>
   );
 };
+
