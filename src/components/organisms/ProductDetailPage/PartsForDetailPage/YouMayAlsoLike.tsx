@@ -9,10 +9,10 @@ import 'swiper/css/navigation';
 // @ts-expect-error: swiper doesn't export types for CSS
 import 'swiper/css/pagination';
 
-import { CardItem } from '../../Molecules/CardItem/CardItem';
-import { SliderButton } from '../../Atoms/Buttons/SliderButton';
+import { CardItem } from '../../../Molecules/CardItem/CardItem';
+import { SliderButton } from '../../../Atoms/Buttons/SliderButton';
 import { useState } from 'react';
-import type { ProductType } from '../../../types/ProductType';
+import type { ProductType } from '../../../../types/ProductType';
 import { useNavigate } from 'react-router-dom';
 
 type YouMayAlsoLikeProps = {
@@ -20,7 +20,6 @@ type YouMayAlsoLikeProps = {
   currentProductCategory: string;
 };
 
-// перемішування карток
 function shuffleProductsArray<T>(products: T[]): T[] {
   const productsCopy = [...products];
   for (
@@ -45,22 +44,12 @@ export const YouMayAlsoLike: React.FC<YouMayAlsoLikeProps> = ({
 
   const navigate = useNavigate();
 
-  // по категорії
   const filteredProducts = youMayAlsoLikeProducts.filter(
     (product) => product.category === currentProductCategory,
   );
 
-  // перемішати і взяти перші 8 рандомних
   const randomProducts = shuffleProductsArray(filteredProducts).slice(0, 8);
-  console.log('Random products:', randomProducts);
-  console.log('Current category:', currentProductCategory);
-  console.log('All products:', youMayAlsoLikeProducts);
-  console.log(
-    'Random products IDs:',
-    randomProducts.map((p) => p.itemId),
-  );
-  console.log('Filtered products:', filteredProducts);
-  console.log('Example product:', youMayAlsoLikeProducts[0]);
+
   return (
     <div className="bg-black pt-[80px]">
       <div className="xl:w-[1136px] mx-auto">
@@ -107,22 +96,23 @@ export const YouMayAlsoLike: React.FC<YouMayAlsoLikeProps> = ({
             };
 
             return (
-              <SwiperSlide
-                key={adaptedProduct.itemId}
-                className="xl:!w-[272px] sm:!w-[237px] xs:!w-[212px] !w-[212px]"
-              >
-                <div
-                  onClick={() => {
-                    window.scrollTo({ top: 0, behavior: 'smooth' });
-                    navigate(
-                      `/product/${currentProductCategory}/${adaptedProduct.id ?? adaptedProduct.itemId}`,
-                    );
-                  }}
-                  className="cursor-pointer"
-                >
-                  <CardItem product={adaptedProduct} />
-                </div>
-              </SwiperSlide>
+<SwiperSlide
+  key={adaptedProduct.itemId}
+   className="max-w-[212px] sm:max-w-[237px] lg:max-w-[272px] !h-auto flex"
+>
+  <div
+    onClick={() => {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+      navigate(`/product/${currentProductCategory}/${adaptedProduct.id ?? adaptedProduct.itemId}`);
+    }}
+    className="h-full"
+  >
+    <div className="h-full flex">
+      <CardItem product={adaptedProduct} className="h-full flex flex-col"/>
+    </div>
+  </div>
+</SwiperSlide>
+
             );
           })}
         </Swiper>
