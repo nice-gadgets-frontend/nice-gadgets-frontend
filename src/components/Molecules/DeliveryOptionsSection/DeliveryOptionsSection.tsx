@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { NovaPoshtaModal } from '../NovaPoshtaModal/NovaPoshtaModal';
-import type { WarehouseType } from '../../../types/NovaPoshtaTypes/WareHouseType';
+import type { WarehouseType } from '../../../types/NovaPoshtaTypes/WarehouseType';
 
 export const DeliveryOptionsSection = () => {
   const [selectedDelivery, setSelectedDelivery] = useState<

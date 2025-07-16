@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import { useRecipientStore } from '../../../services/useStore/useRecipientStore';
 import { getWarehouses } from '../../../services/NovaPoshtaService';
 import { X } from 'lucide-react';
-import type { WarehouseType } from '../../../types/NovaPoshtaTypes/WareHouseType';
+import type { WarehouseType } from '../../../types/NovaPoshtaTypes/WarehouseType';
 
 type NovaPoshtaModalProps = {
   onClose: () => void;
@@ -35,8 +35,7 @@ export const NovaPoshtaModal = ({
       setLoading(false);
     }
     fetchPostOffices();
-  });
-
+  }, [selectedCity]);
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center backdrop-blur-sm">
