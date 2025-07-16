@@ -13,6 +13,7 @@ import { ContactsPage } from './components/organisms/Pages/ContactsPage/Contacts
 import { RightsPage } from './components/organisms/Pages/RightsPage/RightsPage';
 import { TeamPage } from './components/organisms/Pages/TeamPage/TeamPage';
 import { CheckoutPage } from './components/organisms/Pages/CheckoutPage/CheckoutPage';
+import { AuthPage } from './components/organisms/Pages/Authorization/AuthPage';
 
 const Root = () => {
   return (
@@ -62,6 +63,7 @@ const Root = () => {
           path="menu"
           element={<MenuPage />}
         />
+  <Route path="/auth" element={<AuthPage />} />
         <Route
           path="*"
           element={<ErrorPage />}

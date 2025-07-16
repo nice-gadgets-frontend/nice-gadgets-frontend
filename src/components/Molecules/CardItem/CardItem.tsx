@@ -46,7 +46,7 @@ export const CardItem: React.FC<CardItemProps> = ({ product, className }) => {
       className={`
   cursor-pointer product-card text-primary font-[Mont-Regular] text-[14px] bg-surface-1 p-8 box-border
   flex flex-col justify-center gap-2 rounded-lg 
-  border-2 border-transparent
+  border-2 border-elements dark:border-transparent
   transition-shadow transition-colors duration-300
   hover:shadow-[0_0_15px_2px_rgba(144,91,255,0.5)] hover:border-accent
   ${className}
