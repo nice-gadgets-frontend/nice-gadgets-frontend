@@ -65,9 +65,7 @@ export const CartPage = () => {
   return (
     <div className="px-4 py-8 bg-black min-h-screen flex justify-center">
       <div className="w-full max-w-[1040px]">
-        <h1 className="text-primary text-3xl font-bold mb-6">
-          Cart
-        </h1>
+        <h1 className="text-primary text-3xl font-bold mb-6">Cart</h1>
 
         <div className="grid grid-cols-1 xl:grid-cols-[1fr_288px] gap-6 items-start">
           {/* Cart items */}
@@ -86,11 +84,11 @@ export const CartPage = () => {
                 ))
               }
               {isCartEmpty && (
-                <div className="text-[var(--color-white)] mt-10 font-[Mont-Regular]">
+                <div className="text-primary mt-10 font-[Mont-Regular]">
                   <p>Your cart is currently empty.</p>
                   <p
                     onClick={() => navigate('/phones')}
-                    className="text-[var(--color-blue)] cursor-pointer hover:scale-[1.1] w-fit transition underline"
+                    className="text-accent cursor-pointer hover:scale-[1.1] w-fit transition underline"
                   >
                     Go back to shopping
                   </p>
