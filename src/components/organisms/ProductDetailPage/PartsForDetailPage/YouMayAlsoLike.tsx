@@ -20,7 +20,6 @@ type YouMayAlsoLikeProps = {
   currentProductCategory: string;
 };
 
-// перемішування карток
 function shuffleProductsArray<T>(products: T[]): T[] {
   const productsCopy = [...products];
   for (
@@ -45,12 +44,10 @@ export const YouMayAlsoLike: React.FC<YouMayAlsoLikeProps> = ({
 
   const navigate = useNavigate();
 
-  // по категорії
   const filteredProducts = youMayAlsoLikeProducts.filter(
     (product) => product.category === currentProductCategory,
   );
 
-  // перемішати і взяти перші 8 рандомних
   const randomProducts = shuffleProductsArray(filteredProducts).slice(0, 8);
 
   return (
