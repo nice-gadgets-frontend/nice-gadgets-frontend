@@ -6,8 +6,16 @@ import { useRecipientStore } from '../../../services/useStore/useRecipientStore'
 import { RecipientModal } from '../RecipientModal/RecipientModal';
 import type { RecipientType } from '../../../types/RecipientType';
 import { DeliveryOptionsSection } from '../DeliveryOptionsSection/DeliveryOptionsSection';
+import Skeleton from 'react-loading-skeleton';
 
 export const DeliveryInfoSection = () => {
+  const [isLoading, setIsLoading] = useState(true);
+
+  useEffect(() => {
+    const timer = setTimeout(() => setIsLoading(false), 300);
+    return () => clearTimeout(timer);
+  }, []);
+
   const selectedCity = useRecipientStore((state) => state.selectedCity);
   const setSelectedCity = useRecipientStore((state) => state.setSelectedCity);
 
@@ -95,6 +103,32 @@ export const DeliveryInfoSection = () => {
     setIsRecipientModalOpen(false);
   };
 
+  if (isLoading) {
+    return (
+      <section className="flex-1 p-6 rounded-2xl shadow-2xl inset-shadow-sm bg-[var(--color-surface-1)] border-[var(--color-secondary)] max-w-[1050px]">
+        <Skeleton
+          height={32}
+          width={220}
+          className="mb-6"
+        />
+        <Skeleton
+          height={24}
+          width={180}
+          className="mb-4"
+        />
+        <Skeleton
+          height={24}
+          width={180}
+          className="mb-4"
+        />
+        <Skeleton
+          height={48}
+          className="mb-4"
+        />
+      </section>
+    );
+  }
+
   return (
     <section className="flex-1 p-6 rounded-2xl shadow-2xl inset-shadow-sm bg-[var(--color-surface-1)] border-[var(--color-secondary)] max-w-[1050px]">
       <h2 className="text-[23px] text-[var(--color-primary)] font-[Mont-SemiBold] mb-6">
@@ -130,7 +164,7 @@ export const DeliveryInfoSection = () => {
                       className="p-3 cursor-pointer hover:bg-[var(--color-primary)] flex justify-between items-center"
                       onClick={() => handleCitySelect(res)}
                     >
-                      <span className="font-[Mont-SemiBold] text-[var(--color-primary)]">
+                      <span className="font-[Mont-SemiBold] text-[var(--color-primary)] hover:text-[var(--color-elements)]">
                         {res.Present}
                       </span>
                     </li>

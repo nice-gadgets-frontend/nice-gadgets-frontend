@@ -26,7 +26,6 @@ export const DeliveryOptionsSection = () => {
   const setShippingPrice = useRecipientStore((state) => state.setShippingPrice);
 
   const selectedCity = useRecipientStore((state) => state.selectedCity);
-  const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
     setSelectedDelivery(null);

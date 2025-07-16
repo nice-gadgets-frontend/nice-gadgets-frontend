@@ -4,6 +4,7 @@ import { getProducts } from '../../../services/getProducts';
 import type { ProductType } from '../../../types/ProductType';
 import { useRecipientStore } from '../../../services/useStore/useRecipientStore';
 import { useNavigate } from 'react-router-dom';
+import Skeleton from 'react-loading-skeleton';
 
 type ProductWithQuantity = ProductType & { quantity: number };
 
@@ -76,6 +77,28 @@ export const CheckoutTotal = () => {
 
   const discountTotal = checkoutTotalFullPrice - checkoutTotal;
 
+  if (isLoading) {
+    return (
+      <section className="flex-1 p-6 rounded-2xl shadow-2xl inset-shadow-sm bg-[var(--color-surface-1)] border-[var(--color-secondary)] max-w-[1050px]">
+        <Skeleton
+          height={32}
+          width={200}
+          className="mb-6"
+        />
+        <Skeleton
+          count={4}
+          height={24}
+          className="mb-4"
+        />
+        <Skeleton
+          height={48}
+          className="mb-4"
+        />
+        <Skeleton height={48} />
+      </section>
+    );
+  }
+
   return (
     <section className="flex-1 p-6 rounded-2xl shadow-2xl inset-shadow-sm bg-[var(--color-surface-1)] border-[var(--color-secondary)] max-w-[1050px]">
       <div className="flex items-center justify-between mb-6 pb-4 border-b border-gray-200">
@@ -84,7 +107,6 @@ export const CheckoutTotal = () => {
         </h2>
       </div>
 
-      {/* Summary Totals */}
       <div className="mb-6">
         <div className="flex justify-between mb-2">
           <span className="font-[Mont-Regular] text-[var(--color-primary)]">
@@ -113,8 +135,12 @@ export const CheckoutTotal = () => {
             <span className="font-[Mont-SemiBold] text-[var(--color-primary)]">
               {Math.round(shippingPrice / 41.2)}$
             </span>
-          : <span className="font-[Mont-SemiBold] text-[var(--color-primary)]">
+          : selectedDelivery === 'pickup' ?
+            <span className="font-[Mont-SemiBold] text-[var(--color-primary)]">
               Free
+            </span>
+          : <span className="font-[Mont-SemiBold] text-[var(--color-primary)]">
+              ...
             </span>
           }
         </div>
