@@ -53,11 +53,11 @@ export const FavouritesPage = () => {
         )}
       </div>
       {isEmpty && (
-        <div className="text-[var(--color-white)] mt-10 font-[Mont-Regular]">
+        <div className="text-primary mt-10 font-[Mont-Regular]">
           <p>You haven&apos;t added any favourites yet.</p>
           <p
             onClick={() => navigate('/phones')}
-            className="text-[var(--color-blue)] cursor-pointer hover:scale-[1.1] w-fit transition underline"
+            className="text-accent cursor-pointer hover:scale-[1.1] w-fit transition underline"
           >
             Explore products
           </p>

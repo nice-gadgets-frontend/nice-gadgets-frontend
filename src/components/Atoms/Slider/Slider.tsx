@@ -26,7 +26,7 @@ export const Slider: React.FC = () => {
       <div className="grid grid-cols-[auto_1fr_auto] gap-0 sm:gap-4 items-center xl:w-[1136px] mx-auto ">
         <div className="navigate-left border border-[var(--color-icons)] dark:border-0 bg-surface-2 hidden sm:flex w-[32px] h-full cursor-pointer justify-center items-center">
           <ChevronLeft
-            color='var(--color-primary)'
+            color="var(--color-primary)"
             size={16}
           />
         </div>
@@ -47,6 +47,7 @@ export const Slider: React.FC = () => {
           }}
           className="w-full"
           style={{ margin: '0 0' }}
+          loop={true}
         >
           <SwiperSlide onClick={() => handleSlideClick()}>
             <picture className="w-full h-full block cursor-pointer">
@@ -90,7 +91,7 @@ export const Slider: React.FC = () => {
         </Swiper>
         <div className="navigate-right border border-[var(--color-icons)] dark:border-0  bg-surface-2 hidden sm:flex w-[32px] h-full cursor-pointer justify-center items-center">
           <ChevronRight
-            color='var(--color-primary)'
+            color="var(--color-primary)"
             size={16}
           />
         </div>
