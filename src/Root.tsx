@@ -12,6 +12,7 @@ import { ProductDetailPage } from './components/organisms/ProductDetailPage/Prod
 import { ContactsPage } from './components/organisms/Pages/ContactsPage/ContactsPage';
 import { RightsPage } from './components/organisms/Pages/RightsPage/RightsPage';
 import { TeamPage } from './components/organisms/Pages/TeamPage/TeamPage';
+import { CheckoutPage } from './components/organisms/Pages/CheckoutPage/CheckoutPage';
 
 const Root = () => {
   return (
@@ -76,6 +77,10 @@ const Root = () => {
         <Route
           path="team"
           element={<TeamPage />}
+        />
+        <Route
+          path="/cart/checkout"
+          element={<CheckoutPage />}
         />
       </Route>
     </Routes>
