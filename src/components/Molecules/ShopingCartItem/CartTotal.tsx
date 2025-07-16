@@ -1,3 +1,5 @@
+import { Link } from "react-router-dom";
+
 type CartTotalProps = {
   total: number;
   count: number;
@@ -11,17 +13,19 @@ export const CartTotal: React.FC<CartTotalProps> = ({ total, count }) => {
         Total for {count} {count === 1 ? 'item' : 'items'}
       </p>
 
-      <button
-        className="
+      <Link to="/cart/checkout">
+        <button
+          className="
           w-full bg-primary text-surface-1 dark:bg-accent dark:text-primary
         hover:bg-[#7E4FE0] 
           py-3
           font-semibold
           transition-colors
         "
-      >
-        Checkout
-      </button>
+        >
+          Checkout
+        </button>
+      </Link>
     </div>
   );
 };
