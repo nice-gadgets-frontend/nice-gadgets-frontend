@@ -44,7 +44,7 @@ export const CardItem: React.FC<CardItemProps> = ({ product, className }) => {
     <div
       onClick={handleCardClick}
       className={`
-      cursor-pointer product-card text-primary font-[Mont-Regular] text-[14px] bg-surface-1 p-8 box-border
+      border border-[var(--color-elements)] dark:border-0  cursor-pointer product-card text-primary font-[Mont-Regular] text-[14px] bg-surface-1 p-8 box-border
       flex flex-col justify-center gap-2
       ${className}
     `}
