@@ -42,7 +42,7 @@ export const ContactUsForm = () => {
 
   return (
     <div className="space-y-6">
-      <h2 className="text-3xl font-[Mont-SemiBold] text-white mb-4">
+      <h2 className="text-3xl font-[Mont-SemiBold] text-primary mb-4">
         Send Us a Message
       </h2>
       <form
@@ -50,14 +50,14 @@ export const ContactUsForm = () => {
         onSubmit={onSubmitHandle}
       >
         <div>
-          <label className="block text-sm font-[Mont-Regular] text-[#cdced2] mb-1">
+          <label className="block text-sm font-[Mont-Regular] text-secondary mb-1">
             Your Name
           </label>
           <input
             id="name"
             name="name"
             value={form.name}
-            className="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm text-white"
+            className="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm text-primary"
             placeholder="John Smith"
             onChange={onChangeInputHandle}
           />
@@ -68,7 +68,7 @@ export const ContactUsForm = () => {
           )}
         </div>
         <div>
-          <label className="block text-sm font-[Mont-Regular] text-[#cdced2] mb-1">
+          <label className="block text-sm font-[Mont-Regular] text-secondary mb-1">
             Your Email
           </label>
           <input
@@ -76,7 +76,7 @@ export const ContactUsForm = () => {
             id="email"
             name="email"
             value={form.email}
-            className="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm text-white"
+            className="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm text-primary"
             placeholder="you@example.com"
             onChange={onChangeInputHandle}
           />
@@ -87,14 +87,14 @@ export const ContactUsForm = () => {
           )}
         </div>
         <div>
-          <label className="block text-sm font-[Mont-Regular] text-[#cdced2] mb-1">
+          <label className="block text-sm font-[Mont-Regular] text-secondary mb-1">
             Subject
           </label>
           <input
             id="subject"
             name="subject"
             value={form.subject}
-            className="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm text-white"
+            className="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm text-primary"
             placeholder="Inquiry about a product"
             onChange={onChangeInputHandle}
           />
@@ -107,7 +107,7 @@ export const ContactUsForm = () => {
         <div>
           <label
             htmlFor="message"
-            className="block text-sm font-[Mont-Regular] text-[#cdced2] mb-1"
+            className="block text-sm font-[Mont-Regular] text-secondary mb-1"
           >
             Your Message
           </label>
@@ -116,7 +116,7 @@ export const ContactUsForm = () => {
             name="message"
             value={form.message}
             rows={6}
-            className="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm text-white"
+            className="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm text-primary"
             placeholder="Type your message here..."
             onChange={onChangeInputHandle}
           ></textarea>
@@ -133,7 +133,7 @@ export const ContactUsForm = () => {
         )}
         <button
           type="submit"
-          className="w-full inline-flex justify-center py-3 px-6 border border-transparent shadow-sm text-lg font-medium rounded-md text-white bg-accent hover:bg-[#a378ff] focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#6A0DAD] transition duration-300"
+          className="w-full inline-flex justify-center py-3 px-6 border border-transparent shadow-sm text-lg font-medium rounded-md text-primary bg-accent hover:bg-[#a378ff] focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#6A0DAD] transition duration-300"
         >
           Send Message
         </button>
