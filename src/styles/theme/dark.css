@@ -17,7 +17,8 @@
   --color-accent: #905bff;
   --color-green: #27ae60;
   --color-red: #eb5757;
-  --color-hover: #3B3E4A;
+  --color-hover: #3b3e4a;
+  --color-card: transparent;
 }
 
 .dark {
@@ -32,4 +33,5 @@
   --color-green: #27ae60;
   --color-red: #eb5757;
   --color-hover: #a378ff;
+  --color-card: #20233d;
 }
