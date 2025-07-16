@@ -7,7 +7,7 @@ export const Footer = () => {
   };
 
   return (
-    <footer className="bg-[var(--color-black)] py-8 sm:py-0 h-auto sm:h-[96px] flex items-center drop-shadow-[0_-1px_0.5px_var(--color-surface-2)]">
+    <footer className="bg-[var(--color-black)] border border-[var(--color-elements)] dark:border-0  py-8 sm:py-0 h-auto sm:h-[96px] flex items-center drop-shadow-[0_-1px_0.5px_var(--color-surface-2)]">
       <div className="w-full px-4 sm:px-6 max-w-full mx-auto sm:max-w-[928px] xl:max-w-[1136px]">
         <div
           className="
@@ -23,10 +23,14 @@ export const Footer = () => {
         >
           <div className="col-span-4 justify-self-start grid items-center sm:col-span-3 xl:col-span-4">
             <img
+              src="/gadgets/img/light-theme-nice-gadgets-logo.png"
+              alt="Nice Gadgets Logo"
+              className="h-[32px] block dark:hidden"
+            />
+            <img
               src="/gadgets/img/nice-gadgets-logo.png"
-              alt="Logo Text"
-              width={89}
-              height={32}
+              alt="Nice Gadgets Logo"
+              className="h-[32px] hidden dark:block"
             />
           </div>
           <div
