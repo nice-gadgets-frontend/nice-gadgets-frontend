@@ -1,11 +1,14 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { NovaPoshtaModal } from '../NovaPoshtaModal/NovaPoshtaModal';
 import type { WarehouseType } from '../../../types/NovaPoshtaTypes/WarehouseType';
+import { getShippingPrice } from '../../../services/NovaPoshtaService';
+import { useRecipientStore } from '../../../services/useStore/useRecipientStore';
 
 export const DeliveryOptionsSection = () => {
-  const [selectedDelivery, setSelectedDelivery] = useState<
-    'pickup' | 'novaposhta' | null
-  >(null);
+  const selectedDelivery = useRecipientStore((state) => state.selectedDelivery);
+  const setSelectedDelivery = useRecipientStore(
+    (state) => state.setSelectedDelivery,
+  );
 
   const [selectedDepartment, setSelectedDepartment] =
     useState<WarehouseType | null>(null);
@@ -18,6 +21,32 @@ export const DeliveryOptionsSection = () => {
   const onCloseNovaPoshtaModal = () => {
     setIsNovaPoshtaModalOpen(false);
   };
+
+  const shippingPrice = useRecipientStore((state) => state.shippingPrice);
+  const setShippingPrice = useRecipientStore((state) => state.setShippingPrice);
+
+  const selectedCity = useRecipientStore((state) => state.selectedCity);
+  const [error, setError] = useState<string | null>(null);
+
+  useEffect(() => {
+    setSelectedDelivery(null);
+    setSelectedDepartment(null);
+    setShippingPrice(null);
+  }, [selectedCity, setSelectedDelivery, setShippingPrice]);
+
+  useEffect(() => {
+    if (selectedDelivery === 'novaposhta' && selectedDepartment) {
+      getShippingPrice(selectedDepartment.CityRef)
+        .then((res) => res.json())
+        .then((data) => {
+          if (data.success && data.data && data.data[0]?.Cost) {
+            setShippingPrice(Number(data.data[0].Cost));
+          } else {
+            setShippingPrice(null);
+          }
+        });
+    }
+  }, [selectedDepartment, selectedDelivery, setShippingPrice]);
 
   return (
     <>
@@ -115,7 +144,9 @@ export const DeliveryOptionsSection = () => {
           </div>
 
           <span className="text-[var(--color-primary)] font-[Mont-Regular]">
-            100₴
+            {selectedDepartment && shippingPrice !== null ?
+              `${Math.round(shippingPrice / 41.2)}$`
+            : '...'}
           </span>
         </div>
 
@@ -147,13 +178,6 @@ export const DeliveryOptionsSection = () => {
                 Choose a Nova Poshta department
               </button>
             }
-            {/* <button
-              type="button"
-              className="mt-4 px-4 py-2 bg-[var(--color-accent)]/50 shadow-sm text-[var(--color-primary)] rounded font-[Mont-Regular] text-[15px] hover:bg-[var(--color-accent)]/80"
-              onClick={() => setIsNovaPoshtaModalOpen(true)}
-            >
-              Choose a Nova Poshta department
-            </button> */}
           </>
         )}
 

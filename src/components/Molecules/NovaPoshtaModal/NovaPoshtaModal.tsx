@@ -28,7 +28,6 @@ export const NovaPoshtaModal = ({
         setLoading(false);
         return;
       }
-
       const response = await getWarehouses(cityRef, '');
       const data = await response.json();
       setPostOffices(data.data || []);
