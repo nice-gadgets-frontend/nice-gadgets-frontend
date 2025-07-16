@@ -1,7 +1,7 @@
 import { NavLink, useLocation } from 'react-router-dom';
 import { FavouritesPageIcon } from '../../Atoms/Icons/FavouritePageIcon';
 import { ShoppingBagIcon } from '../../Atoms/Icons/ShoppingBagIcon';
-import { X } from 'lucide-react';
+import { LogIn, X } from 'lucide-react';
 import { useInCartStore } from '../../../services/useStore/useInCartStore';
 import { useFavouritesStore } from '../../../services/useStore/useFavouritesStore';
 import clsx from 'clsx';
@@ -9,9 +9,11 @@ import clsx from 'clsx';
 type Props = {
   isOpen: boolean;
   onClose: () => void;
+    isAuthenticated: boolean;
+  onLogout: () => void;
 };
 
-export const BurgerMenu = ({ isOpen, onClose }: Props) => {
+export const BurgerMenu = ({ isOpen, onClose, isAuthenticated, onLogout }: Props) => {
   const location = useLocation();
 
   const itemsIdsInCart = useInCartStore((state) => state.itemsIdsInCart);
@@ -99,7 +101,28 @@ export const BurgerMenu = ({ isOpen, onClose }: Props) => {
               {label}
             </NavLink>
           ))}
+
+<button
+  onClick={() => {
+    if (isAuthenticated) {
+      onLogout();
+    } else {
+      window.location.href = '/auth';
+    }
+    onClose();
+  }}
+  aria-label={isAuthenticated ? 'Logout' : 'Login'}
+  className="flex items-center justify-center gap-2 p-2 mx-auto mt-6 text-primary hover:text-primary/80 transition"
+>
+  <LogIn size={24} className={isAuthenticated ? 'rotate-180' : ''} />
+  <span className="text-sm font-semibold">
+    {isAuthenticated ? 'Logout' : 'Login'}
+  </span>
+</button>
+
         </nav>
+
+ 
 
         {/* Bottom icons */}
         <div className="flex border-t border-[#2c2f3a] divide-x divide-[#2c2f3a]">
