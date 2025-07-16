@@ -5,10 +5,14 @@ import type { AddressType } from '../../../types/NovaPoshtaTypes/AddressType';
 import { useRecipientStore } from '../../../services/useStore/useRecipientStore';
 import { RecipientModal } from '../RecipientModal/RecipientModal';
 import type { RecipientType } from '../../../types/RecipientType';
+import { DeliveryOptionsSection } from '../DeliveryOptionsSection/DeliveryOptionsSection';
 
 
 export const DeliveryInfoSection = () => {
-  const [searchQueryValue, setSearchQueryValue] = useState('Київ');
+  const selectedCity = useRecipientStore((state) => state.selectedCity);
+  const setSelectedCity = useRecipientStore((state) => state.setSelectedCity);
+
+  const [searchQueryValue, setSearchQueryValue] = useState(selectedCity.MainDescription);
   const [searchCityResults, setSearchCityResults] = useState<AddressType[]>([]);
 
   const [isCityEditing, setIsCityEditing] = useState<boolean>(false);
@@ -16,8 +20,6 @@ export const DeliveryInfoSection = () => {
 
   const inputWrapperRef = useRef<HTMLDivElement>(null);
 
-  const selectedCity = useRecipientStore((state) => state.selectedCity);
-  const setSelectedCity = useRecipientStore((state) => state.setSelectedCity);
 
   const recipient = useRecipientStore((state) => state.recipient);
   const setRecipient = useRecipientStore((state) => state.setRecipient);
@@ -94,7 +96,7 @@ export const DeliveryInfoSection = () => {
   };
 
   return (
-    <section className="flex-1 p-6 rounded-lg shadow bg-[var(--color-surface-1)] max-w-[1050px]">
+    <section className="flex-1 p-6 rounded-2xl shadow-2xl inset-shadow-sm bg-[var(--color-surface-1)] border-[var(--color-secondary)] max-w-[1050px]">
       <h2 className="text-xl text-[var(--color-primary)] font-semibold mb-6">
         Fill in the delivery information
       </h2>
@@ -202,6 +204,8 @@ export const DeliveryInfoSection = () => {
         </div>
       }
 
+      <DeliveryOptionsSection />
+    
       {/* recipients modal */}
       {isRecipientModalOpen && (
         <RecipientModal
