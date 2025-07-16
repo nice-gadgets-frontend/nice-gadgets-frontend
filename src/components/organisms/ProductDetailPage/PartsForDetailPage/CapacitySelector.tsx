@@ -27,7 +27,7 @@ export const CapacitySelector: React.FC<CapacitySelectorProps> = ({
   return (
     <fieldset className="border-b border-b-[0.5px] border-elements">
       <legend className="block mb-2">Select capacity</legend>
-      <div className="grid grid-cols-3 sm:grid-cols-4 gap-2 w-full">
+      <div className="grid grid-cols-[repeat(auto-fit,minmax(80px,1fr))] gap-2 w-full">
         {capacities.map((capacity) => {
           const isSelected = capacity === selectedCapacity;
 
@@ -51,13 +51,15 @@ export const CapacitySelector: React.FC<CapacitySelectorProps> = ({
                   );
                 }
               }}
-              className={`cursor-pointer px-4 py-2 border border-elements text-sm transition-colors mb-6 ${
-                isSelected ?
-                  'bg-primary text-black border-black'
-                : 'bg-transparent text-primary border-secondary hover:icons'
-              }`}
+              className={`cursor-pointer px-4 py-2 border border-elements text-sm transition-colors 
+                flex justify-center items-center
+                ${isSelected
+                  ? 'bg-primary text-black border-black'
+                  : 'bg-transparent text-primary border-secondary hover:icons'
+                }`}
               aria-pressed={isSelected}
               aria-label={`Select capacity ${capacity}`}
+              type="button"
             >
               {capacity}
             </button>

@@ -45,7 +45,7 @@ export const ColorsSelector: React.FC<ColorsSelectorProps> = ({
   return (
     <fieldset className="border-b border-b-[0.5px] border-elements">
       <legend className="block mb-2">Available colors</legend>
-      <div className="grid grid-cols-8 gap-2 w-full">
+<div className="grid grid-cols-[repeat(auto-fit,minmax(30px,1fr))] gap-[8px] w-full">
         {colors.map(colorKey => {
           const sameColorAndCapacityProduct = allProducts.find(
             p =>

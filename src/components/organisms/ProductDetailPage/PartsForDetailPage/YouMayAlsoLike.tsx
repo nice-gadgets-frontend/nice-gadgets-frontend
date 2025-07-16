@@ -99,20 +99,23 @@ export const YouMayAlsoLike: React.FC<YouMayAlsoLikeProps> = ({
             };
 
             return (
-            <SwiperSlide
-              key={adaptedProduct.itemId}
-              className="xl:!w-[272px] sm:!w-[237px] xs:!w-[212px] !w-[212px]"
-            >
-              <div
-                onClick={() => {
-                  window.scrollTo({ top: 0, behavior: 'smooth' });
-                  navigate(`/product/${currentProductCategory}/${adaptedProduct.id ?? adaptedProduct.itemId}`);
-                }}
-                className='cursor-pointer'
-              >
-                <CardItem product={adaptedProduct} />
-              </div>
-            </SwiperSlide>
+<SwiperSlide
+  key={adaptedProduct.itemId}
+   className="max-w-[212px] sm:max-w-[237px] lg:max-w-[272px] !h-auto flex"
+>
+  <div
+    onClick={() => {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+      navigate(`/product/${currentProductCategory}/${adaptedProduct.id ?? adaptedProduct.itemId}`);
+    }}
+    className="h-full"
+  >
+    <div className="h-full flex">
+      <CardItem product={adaptedProduct} className="h-full flex flex-col"/>
+    </div>
+  </div>
+</SwiperSlide>
+
             );
           })}
         </Swiper>
