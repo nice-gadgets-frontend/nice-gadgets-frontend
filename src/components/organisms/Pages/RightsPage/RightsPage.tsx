@@ -18,7 +18,7 @@ export const RightsPage = () => {
         Legal Information
       </h1>
 
-      <div className="bg-[#20233d] shadow-xl rounded-lg p-8 mb-12">
+      <div className="bg-card shadow-xl rounded-lg p-8 mb-12">
         {loading ?
           <div className="animate-pulse space-y-4">
             <div className="h-10 bg-[#3a3f5a] w-2/3 rounded"></div>
@@ -28,10 +28,10 @@ export const RightsPage = () => {
             <div className="h-6 bg-[#3a3f5a] w-1/3 rounded"></div>
           </div>
         : <>
-            <h2 className="text-4xl text-white font-bold mb-6 border-b-2 border-primary pb-3">
+            <h2 className="text-4xl text-primary font-bold mb-6 border-b-2 border-primary pb-3">
               Terms & Conditions
             </h2>
-            <div className="space-y-6 text-[#cdced2] text-lg leading-relaxed">
+            <div className="space-y-6 text-primary text-lg leading-relaxed">
               <p>
                 Welcome to Nice Gadgets! By accessing and using our website, you
                 agree to comply with and be bound by the following terms and
@@ -181,7 +181,7 @@ export const RightsPage = () => {
         }
       </div>
 
-      <div className="bg-[#20233d] shadow-xl rounded-lg p-8">
+      <div className="bg-card shadow-xl rounded-lg p-8">
         {loading ?
           <div className="animate-pulse space-y-4">
             <div className="h-10 bg-[#3a3f5a] w-2/3 rounded"></div>
@@ -191,10 +191,10 @@ export const RightsPage = () => {
             <div className="h-6 bg-[#3a3f5a] w-1/3 rounded"></div>
           </div>
         : <>
-            <h2 className="text-4xl text-white font-[Mont-Bold] mb-6 border-b-2 border-primary pb-3">
+            <h2 className="text-4xl text-primary font-[Mont-Bold] mb-6 border-b-2 border-primary pb-3">
               Privacy Policy
             </h2>
-            <div className="space-y-6 text-[#cdced2] text-lg leading-relaxed">
+            <div className="space-y-6 text-primary text-lg leading-relaxed">
               <p>
                 Your privacy is of utmost importance to Nice Gadgets. This
                 Privacy Policy describes how we collect, use, and disclose

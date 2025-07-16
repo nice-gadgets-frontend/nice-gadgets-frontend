@@ -104,7 +104,7 @@ export const TeamPage = () => {
   }, []);
 
   return (
-    <div className="bg-[#0F1121] min-h-screen text-[#f1f2f9] font-sans px-4 sm:px-6 xl:px-0 xl:max-w-[1200px] mx-auto">
+    <div className="bg-black min-h-screen text-primary font-sans px-4 sm:px-6 xl:px-0 xl:max-w-[1200px] mx-auto">
       <h1 className="text-5xl font-extrabold text-center mb-12 animate-fade-in-down">
         Meet Our Team
       </h1>
@@ -119,7 +119,7 @@ export const TeamPage = () => {
           <div className="h-5 bg-[#3a3f5a] w-4/5 mt-6 mb-3 rounded"></div>
           <div className="h-5 bg-[#3a3f5a] w-full rounded"></div>
         </div>
-      : <div className="bg-[#20233d] shadow-xl rounded-lg p-8 mb-12 text-[#cdced2]">
+      : <div className="bg-card shadow-xl rounded-lg p-8 mb-12 text-primary">
           <h2 className="text-3xl font-semibold mb-4 border-b-2 border-[#f1f2f9] pb-3">
             Behind Nice Gadgets
           </h2>
