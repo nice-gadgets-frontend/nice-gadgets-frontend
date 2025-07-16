@@ -4,6 +4,7 @@ import { ShoppingBagIcon } from '../../Atoms/Icons/ShoppingBagIcon';
 import { X } from 'lucide-react';
 import { useInCartStore } from '../../../services/useStore/useInCartStore';
 import { useFavouritesStore } from '../../../services/useStore/useFavouritesStore';
+import clsx from 'clsx';
 
 type Props = {
   isOpen: boolean;
@@ -12,120 +13,121 @@ type Props = {
 
 export const BurgerMenu = ({ isOpen, onClose }: Props) => {
   const location = useLocation();
+
   const itemsIdsInCart = useInCartStore((state) => state.itemsIdsInCart);
   const totalItemsCount = itemsIdsInCart.reduce(
     (sum, item) => sum + (item.quantity ?? 0),
     0,
   );
+
   const itemIdsInFavourites = useFavouritesStore(
     (state) => state.itemsInFavourites,
   );
   const itemsInFavouritesCount = itemIdsInFavourites.length;
 
-  if (!isOpen) return null;
+  const isActivePath = (path: string) => location.pathname === path;
 
   return (
-    <div className="fixed inset-0 bg-black flex flex-col justify-between text-[14px] uppercase z-50 md:hidden">
-      <div className="flex justify-between items-center px-6 h-[64px] border-b border-surface-1">
-        <img
-          src="/gadgets/img/nice-gadgets-logo.png"
-          alt="Nice Gadgets Logo"
-          className="h-[32px]"
-        />
+    <div
+      className={clsx(
+        'fixed inset-0 z-[100] md:hidden transition-opacity duration-300',
+        isOpen ?
+          'opacity-100 pointer-events-auto'
+        : 'opacity-0 pointer-events-none',
+      )}
+    >
+      {/* Бекдроп з блюром */}
+      <div
+        className="absolute inset-0 bg-black/60 backdrop-blur-sm"
+        onClick={onClose}
+      />
 
-        <div className="flex-grow" />
+      {/* Слайд-меню */}
+      <div
+        className={clsx(
+          'absolute top-0 left-0 w-full h-full bg-black flex flex-col justify-between text-[14px] uppercase transform transition-transform duration-300',
+          isOpen ? 'translate-x-0' : '-translate-x-full',
+        )}
+      >
+        {/* Header */}
+        <div className="flex justify-between items-center px-6 h-[64px] border-b border-surface-1">
+          <img
+            src="/gadgets/img/light-theme-nice-gadgets-logo.png"
+            alt="Nice Gadgets Logo"
+            className="h-[32px] block dark:hidden"
+          />
+          <img
+            src="/gadgets/img/nice-gadgets-logo.png"
+            alt="Nice Gadgets Logo"
+            className="h-[32px] hidden dark:block"
+          />
 
-        <div className="w-px h-full bg-surface-2" />
+          <div className="flex-grow" />
 
-        <button
-          onClick={onClose}
-          aria-label="Close Menu"
-          className="w-[48px] h-full flex items-center justify-end"
-        >
-          <X size={24} />
-        </button>
-      </div>
+          <div className="w-px h-full bg-surface-2" />
 
-      <div className="flex flex-col gap-6 px-8 mt-6 text-center">
-        <NavLink
-          to="/home"
-          onClick={onClose}
-          className={({ isActive }) =>
-            `inline-block mx-auto hover:text-primary ${
-              isActive ?
-                'text-primary font-bold border-b-2 border-primary pb-1'
-              : 'text-secondary'
-            }`
-          }
-        >
-          Home
-        </NavLink>
-        <NavLink
-          to="/phones"
-          onClick={onClose}
-          className={({ isActive }) =>
-            `inline-block mx-auto hover:text-primary ${
-              isActive ?
-                'text-primary font-bold border-b-2 border-primary pb-1'
-              : 'text-secondary'
-            }`
-          }
-        >
-          Phones
-        </NavLink>
-        <NavLink
-          to="/tablets"
-          onClick={onClose}
-          className={({ isActive }) =>
-            `inline-block mx-auto hover:text-primary ${
-              isActive ?
-                'text-primary font-bold border-b-2 border-primary pb-1'
-              : 'text-secondary'
-            }`
-          }
-        >
-          Tablets
-        </NavLink>
-        <NavLink
-          to="/accessories"
-          onClick={onClose}
-          className={({ isActive }) =>
-            `inline-block mx-auto hover:text-primary ${
-              isActive ?
-                'text-primary font-bold border-b-2 border-primary pb-1'
-              : 'text-secondary'
-            }`
-          }
-        >
-          Accessories
-        </NavLink>
-      </div>
+          <button
+            onClick={onClose}
+            aria-label="Close Menu"
+            className="w-[48px] h-full flex items-center justify-end text-primary"
+          >
+            <X size={24} />
+          </button>
+        </div>
 
-      <div className="flex border-t border-[#2c2f3a] divide-x divide-[#2c2f3a]">
-        <NavLink
-          to="/favourites"
-          onClick={onClose}
-          className="w-1/2 flex justify-center py-4"
-        >
-          <div className="relative flex flex-col items-center">
-            <FavouritesPageIcon itemsInFavourites={itemsInFavouritesCount} />
-            {location.pathname === '/favourites' && (
-              <span className="absolute -bottom-1 w-6 border-t-2 border-white" />
-            )}
-          </div>
-        </NavLink>
-        <NavLink
-          to="/cart"
-          onClick={onClose}
-          className="w-1/2 flex justify-center py-4"
-        >
-          <div className="relative flex flex-col items-center">
-            <ShoppingBagIcon totalItemsCount={totalItemsCount} />
-            {location.pathname === '/cart' && (
-              <span className="absolute -bottom-1 w-6 border-t-2 border-white" />
-            )}
-          </div>
-        </NavLink>
+        {/* Навігація */}
+        <nav className="flex flex-col gap-6 px-8 mt-6 text-center">
+          {[
+            { label: 'Home', path: '/home' },
+            { label: 'Phones', path: '/phones' },
+            { label: 'Tablets', path: '/tablets' },
+            { label: 'Accessories', path: '/accessories' },
+          ].map(({ label, path }) => (
+            <NavLink
+              key={path}
+              to={path}
+              onClick={onClose}
+              className={({ isActive }) =>
+                clsx(
+                  'inline-block mx-auto hover:text-primary transition',
+                  isActive ?
+                    'text-primary font-bold border-b-2 border-primary pb-1'
+                  : 'text-secondary',
+                )
+              }
+            >
+              {label}
+            </NavLink>
+          ))}
+        </nav>
+
+        {/* Bottom icons */}
+        <div className="flex border-t border-[#2c2f3a] divide-x divide-[#2c2f3a]">
+          <NavLink
+            to="/favourites"
+            onClick={onClose}
+            className="w-1/2 flex justify-center py-4"
+          >
+            <div className="relative flex flex-col items-center">
+              <FavouritesPageIcon itemsInFavourites={itemsInFavouritesCount} />
+              {isActivePath('/favourites') && (
+                <span className="absolute -bottom-1 w-6 border-t-2 border-white" />
+              )}
+            </div>
+          </NavLink>
+          <NavLink
+            to="/cart"
+            onClick={onClose}
+            className="w-1/2 flex justify-center py-4"
+          >
+            <div className="relative flex flex-col items-center">
+              <ShoppingBagIcon totalItemsCount={totalItemsCount} />
+              {isActivePath('/cart') && (
+                <span className="absolute -bottom-1 w-6 border-t-2 border-white" />
+              )}
+            </div>
+          </NavLink>
+        </div>
       </div>
     </div>
   );
