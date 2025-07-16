@@ -30,6 +30,50 @@ export const Pagination: React.FC<PaginationProps> = ({
     return null;
   }
 
+  const showMobilePages = () => (
+    <>
+      <PaginationButton page={1} selected={currentPage === 1} onClick={() => updatePage(1)} />
+      {currentPage > 3 && <span className="text-primary px-1 ">...</span>}
+
+      {[currentPage - 1, currentPage, currentPage + 1]
+        .filter((page) => page > 1 && page < totalPages)
+        .map((page) => (
+          <PaginationButton
+            key={page}
+            page={page}
+            selected={currentPage === page}
+            onClick={() => updatePage(page)}
+          />
+        )
+      )}
+      
+      {currentPage < totalPages - 2 && <span className="text-primary px-1">...</span>}
+
+      {totalPages > 1 && (
+        <PaginationButton
+          page={totalPages}
+          selected={currentPage === totalPages}
+          onClick={() => updatePage(totalPages)}
+        />
+      )}
+    </>
+  );
+  const showFullPages = () =>  
+  
+    [...Array(totalPages)].map((_, i) => {
+      const page = i + 1;
+      return (
+        <PaginationButton
+          key={page}
+          page={page}
+          selected={currentPage === page}
+          onClick={() => updatePage(page)}
+        />
+      );
+    }
+    
+  );
+
   return (
     <div className="flex justify-center items-center gap-2 py-4">
       <button
@@ -49,17 +93,8 @@ export const Pagination: React.FC<PaginationProps> = ({
         </button>
 
        <div className="flex mx-4 gap-2">
-        {[...Array(totalPages)].map((_, i) => {
-          const page = i + 1;
-          return (
-            <PaginationButton
-              key={page}
-              page={page}
-              selected={currentPage === page}
-              onClick={() => updatePage(page)}
-            />
-          )
-        })}
+         <div className="hidden md:flex gap-2">{showFullPages()}</div>
+        <div className="flex md:hidden gap-2">{showMobilePages()}</div>
         </div>
       <button
         onClick={() => updatePage(currentPage + 1)}
