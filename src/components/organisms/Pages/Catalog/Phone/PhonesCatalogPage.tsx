@@ -9,6 +9,8 @@ import { CardItem } from '../../../../Molecules/CardItem/CardItem';
 import { getProducts } from '../../../../../services/getProducts';
 import { mergedPhonesWithProducts } from '../../../../../types/Utils/mergedPhonesWithProducts';
 import { CardSkeleton } from '../../../../Molecules/CardSkeleton/CardSkeleton';
+import { HomePageIcon } from '../../../../Atoms/Icons/HomePageIcon';
+import { ArrowRightIcon } from '../../../../Atoms/Icons/ArrowRightIcon';
 
 type MergedPhone = Omit<Phone, 'id'> & {
   id: number;
@@ -82,6 +84,13 @@ export const PhonesCatalogPage = () => {
     
     <div className="flex-1 mt-10 bg-black">
       <div className="w-full max-w-[1200px] mx-auto sm:px-6 lg:px-8">
+        <div className="location-wrapper flex flex-row items-center gap-x-2 mb-6 sm:mb-6 lg:mb-8">
+                <HomePageIcon />
+                <ArrowRightIcon />
+                <span className="text-[12px] leading-[100%] text-secondary font-['Mont-Regular']">
+                  Mobile phones
+          </span>
+          </div>
       <h1 className=" text-primary font-extrabold text-3xl md:text-5xl font-[Mont-Regular]">Mobile phones</h1>
       <p className="text-secondary mb-6 text-sm font-semibold"> {sortedPhones.length}</p>
 

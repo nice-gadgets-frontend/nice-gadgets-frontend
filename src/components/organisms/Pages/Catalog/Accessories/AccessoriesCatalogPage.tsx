@@ -8,6 +8,8 @@ import { CardItem } from "../../../../Molecules/CardItem/CardItem";
 import { getProducts } from "../../../../../services/getProducts";
 import { mergedAccessoriesWithProducts } from "../../../../../types/Utils/mergedAccessoriesWithProducts";
 import { getAccessories } from "../../../../../services/getAccessories";
+import { HomePageIcon } from "../../../../Atoms/Icons/HomePageIcon";
+import { ArrowRightIcon } from "../../../../Atoms/Icons/ArrowRightIcon";
 
 
 type MergedAccessory =  Omit<Accessory, 'id'> & {
@@ -82,6 +84,13 @@ export const AccessoriesCatalogPage = () => {
     
     <div className="flex-1 mt-10 bg-black">
       <div className="w-full max-w-[1200px] mx-auto sm:px-6 lg:px-8">
+         <div className="location-wrapper flex flex-row items-center gap-x-2 mb-6 sm:mb-6 lg:mb-8">
+                        <HomePageIcon />
+                        <ArrowRightIcon />
+                        <span className="text-[12px] leading-[100%] text-secondary font-['Mont-Regular']">
+                          Accessories
+          </span>
+          </div>
       <h1 className=" text-primary font-extrabold text-3xl md:text-5xl font-[Mont-Regular]">Accessories</h1>
       <p className="text-secondary mb-6 text-sm font-semibold"> {sortedAccessories.length}</p>
 
