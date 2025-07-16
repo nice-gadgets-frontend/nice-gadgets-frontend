@@ -114,19 +114,23 @@ export const Navbar = () => {
               <ThemeToggle />
             </div>
           </div>
+        </div>
 
-          {/* Mobile menu icon */}
-          <div className="sm:hidden">
-            <button
-              onClick={toggleMenu}
-              aria-label="Menu Toggle"
-              className="h-[64px] flex items-center"
-            >
-              {isMenuOpen ?
-                <CloseIcon />
-              : <MenuIcon />}
-            </button>
+        {/* Mobile menu icon */}
+        <div className="flex sm:hidden gap-4">
+          <div className="h-[64px] flex items-center">
+            <ThemeToggle />
           </div>
+
+          <button
+            onClick={toggleMenu}
+            aria-label="Menu Toggle"
+            className="h-[64px] flex items-center"
+          >
+            {isMenuOpen ?
+              <CloseIcon />
+            : <MenuIcon />}
+          </button>
         </div>
       </header>
 
