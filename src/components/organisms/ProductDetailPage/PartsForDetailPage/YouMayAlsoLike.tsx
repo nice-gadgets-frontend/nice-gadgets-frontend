@@ -58,7 +58,7 @@ export const YouMayAlsoLike: React.FC<YouMayAlsoLikeProps> = ({
       <div className="xl:w-[1136px] mx-auto">
         {/* Заголовок і кнопки */}
         <div className="grid grid-cols-[1fr_auto] items-center mb-6">
-          <span className="text-[#F1F2F9] text-[22px] leading-[140%] sm:text-[32px] sm:leading-[41px] font-[Mont-Bold] text-left">
+          <span className="text-primary text-[22px] leading-[140%] sm:text-[32px] sm:leading-[41px] font-[Mont-Bold] text-left">
             You may also like
           </span>
 
