@@ -10,10 +10,13 @@ export const DeliveryOptionsSection = () => {
     (state) => state.setSelectedDelivery,
   );
 
-  const [selectedDepartment, setSelectedDepartment] =
-    useState<WarehouseType | null>(null);
+  const selectedNovaPoshtaBranch = useRecipientStore(
+    (state) => state.novaPoshtaBranch,
+  );
+  const setSelectedNovaPoshtaBranch = useRecipientStore((state) => state.setNovaPoshtaBranch);
+
   const onDepartmentSelect = (department: WarehouseType) => {
-    setSelectedDepartment(department);
+    setSelectedNovaPoshtaBranch(department);
   };
 
   const [isNovaPoshtaModalOpen, setIsNovaPoshtaModalOpen] =
@@ -29,13 +32,13 @@ export const DeliveryOptionsSection = () => {
 
   useEffect(() => {
     setSelectedDelivery(null);
-    setSelectedDepartment(null);
+    setSelectedNovaPoshtaBranch(null);
     setShippingPrice(null);
-  }, [selectedCity, setSelectedDelivery, setShippingPrice]);
+  }, [selectedCity, setSelectedDelivery, setSelectedNovaPoshtaBranch, setShippingPrice]);
 
   useEffect(() => {
-    if (selectedDelivery === 'novaposhta' && selectedDepartment) {
-      getShippingPrice(selectedDepartment.CityRef)
+    if (selectedDelivery === 'novaposhta' && selectedNovaPoshtaBranch) {
+      getShippingPrice(selectedNovaPoshtaBranch.CityRef)
         .then((res) => res.json())
         .then((data) => {
           if (data.success && data.data && data.data[0]?.Cost) {
@@ -45,7 +48,7 @@ export const DeliveryOptionsSection = () => {
           }
         });
     }
-  }, [selectedDepartment, selectedDelivery, setShippingPrice]);
+  }, [selectedNovaPoshtaBranch, selectedDelivery, setShippingPrice]);
 
   return (
     <>
@@ -143,7 +146,7 @@ export const DeliveryOptionsSection = () => {
           </div>
 
           <span className="text-[var(--color-primary)] font-[Mont-Regular]">
-            {selectedDepartment && shippingPrice !== null ?
+            {selectedNovaPoshtaBranch && shippingPrice !== null ?
               `${Math.round(shippingPrice / 41.2)}$`
             : '...'}
           </span>
@@ -151,14 +154,14 @@ export const DeliveryOptionsSection = () => {
 
         {selectedDelivery === 'novaposhta' && (
           <>
-            {selectedDepartment ?
+            {selectedNovaPoshtaBranch ?
               <>
                 <div className="mt-2 p-2">
                   <div className="font-[Mont-SemiBold] text-[var(--color-primary)] text-sm">
-                    {selectedDepartment.Description}
+                    {selectedNovaPoshtaBranch.Description}
                   </div>
                   <div className="text-xs text-[var(--color-primary)]/85 font-[Mont-Regular]">
-                    {selectedDepartment.ShortAddress}
+                    {selectedNovaPoshtaBranch.ShortAddress}
                   </div>
                 </div>
                 <button

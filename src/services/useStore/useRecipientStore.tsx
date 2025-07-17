@@ -1,6 +1,7 @@
 import { create } from 'zustand';
 import { persist } from 'zustand/middleware';
 import type { AddressType } from '../../types/NovaPoshtaTypes/AddressType';
+import type { WarehouseType } from '../../types/NovaPoshtaTypes/WarehouseType';
 
 type Recipient = {
   name: string;
@@ -18,6 +19,8 @@ type RecipientStore = {
   setSelectedDelivery: (delivery: 'pickup' | 'novaposhta' | null) => void;
   shippingPrice: number | null;
   setShippingPrice: (price: number | null) => void;
+  novaPoshtaBranch: WarehouseType | null,
+  setNovaPoshtaBranch: (bramch: WarehouseType | null) => void;
 };
 
 const defaultCity = {
@@ -54,6 +57,8 @@ export const useRecipientStore = create<RecipientStore>()(
         set({ selectedDelivery: delivery }),
       shippingPrice: null,
       setShippingPrice: (price: number | null) => set({ shippingPrice: price }),
+      novaPoshtaBranch: null,
+      setNovaPoshtaBranch: (branch: WarehouseType | null) => set({novaPoshtaBranch: branch}),
     }),
     {
       name: 'recipient-storage',
