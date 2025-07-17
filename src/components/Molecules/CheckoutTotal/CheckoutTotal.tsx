@@ -64,7 +64,7 @@ export const CheckoutTotal = () => {
     if (!recipient.name) {
       newErrors.firstName = "Recipient's first name is required.";
     }
-    if (!selectedNovaPoshtaBranch) {
+    if (!selectedNovaPoshtaBranch && selectedDelivery === 'novaposhta') {
       newErrors.NovaPoshtaBranch = 'Delivery destination is required.';
     }
 
