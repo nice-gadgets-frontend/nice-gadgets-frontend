@@ -37,7 +37,6 @@ export const CardItem: React.FC<CardItemProps> = ({ product, className }) => {
   const deleteFromCartHandle = () => {
     deleteFromCart(product.itemId);
     setIsInCart(false);
-    console.log('deleted');
   };
 
   const addToFavouritesHandle = () => {
