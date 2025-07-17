@@ -12,11 +12,13 @@ import { LogIn } from 'lucide-react';
 
 export const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  
+
   const toggleMenu = () => setIsMenuOpen((prev) => !prev);
   const closeMenu = () => setIsMenuOpen(false);
 
-  const [isAuthenticated, setIsAuthenticated] = useState(Boolean(localStorage.getItem('access_token')));
+  const [isAuthenticated, setIsAuthenticated] = useState(
+    Boolean(localStorage.getItem('access_token')),
+  );
 
   useEffect(() => {
     const handleStorageChange = () => {
@@ -86,7 +88,7 @@ export const Navbar = () => {
             </NavLink>
 
             {/* Desktop навігація */}
-            <nav className="hidden sm:flex gap-[32px] xl:gap-[62px]">
+            <nav className="hidden lg:flex gap-[32px] xl:gap-[62px]">
               {[
                 { label: 'Home', path: '/home' },
                 { label: 'Phones', path: '/phones' },
@@ -107,27 +109,33 @@ export const Navbar = () => {
           </div>
 
           {/* Іконки справа (десктоп) */}
-          <div className="hidden sm:flex items-center gap-4">
-            {isAuthenticated ? (
+          <div className="hidden lg:flex items-center gap-4">
+            {isAuthenticated ?
               <button
                 onClick={handleLogout}
                 className="cursor-pointer flex items-center text-primary transition"
               >
-                <LogIn size={20} className="mr-1 rotate-180" /> {/* Повернута іконка */}
+                <LogIn
+                  size={20}
+                  className="mr-1 rotate-180"
+                />
                 <span>Logout</span>
               </button>
-            ) : (
-              <NavLink
+            : <NavLink
                 to="/auth"
                 aria-label="Login"
                 className={({ isActive }) =>
                   `${navLinkBase} ${isActive ? activeLink : inactiveLink}`
                 }
               >
-                <LogIn size={20} className="mr-1" />
+                <LogIn
+                  size={20}
+                  className="mr-1"
+                />
                 <span>Login</span>
               </NavLink>
-            )}
+            }
+
             <NavLink
               to="/favourites"
               aria-label="Favourites"
@@ -158,11 +166,11 @@ export const Navbar = () => {
           </div>
         </div>
 
-        {/* Mobile menu icon */}
-        <div className="flex sm:hidden gap-4">
-            <div className="h-[64px] flex items-center">
-              <ThemeToggle />
-            </div>
+        {/* Mobile & Tablet menu icon */}
+        <div className="flex lg:hidden gap-4">
+          <div className="h-[64px] flex items-center">
+            <ThemeToggle />
+          </div>
 
           <button
             onClick={toggleMenu}
@@ -176,7 +184,7 @@ export const Navbar = () => {
         </div>
       </header>
 
-      {/* Бургер меню ПОЗА header */}
+      {/* Бургер меню поза header */}
       <BurgerMenu
         isOpen={isMenuOpen}
         onClose={closeMenu}
@@ -189,4 +197,3 @@ export const Navbar = () => {
     </>
   );
 };
-
