@@ -1,5 +1,5 @@
 import { ChevronUp } from 'lucide-react';
-import { Link } from 'react-router-dom';
+import { Link, NavLink } from 'react-router-dom';
 
 export const Footer = () => {
   const backToTopHandle = () => {
@@ -22,16 +22,19 @@ export const Footer = () => {
           "
         >
           <div className="col-span-4 justify-self-start grid items-center sm:col-span-3 xl:col-span-4">
-            <img
-              src="/gadgets/img/light-theme-nice-gadgets-logo.png"
-              alt="Nice Gadgets Logo"
-              className="h-[32px] block dark:hidden"
-            />
-            <img
-              src="/gadgets/img/nice-gadgets-logo.png"
-              alt="Nice Gadgets Logo"
-              className="h-[32px] hidden dark:block"
-            />
+            <NavLink to="/home" onClick={backToTopHandle}>
+              <img
+                src="/gadgets/img/light-theme-nice-gadgets-logo.png"
+                alt="Nice Gadgets Logo"
+                className="h-[32px] block dark:hidden"
+              />
+
+              <img
+                src="/gadgets/img/nice-gadgets-logo.png"
+                alt="Nice Gadgets Logo"
+                className="h-[32px] hidden dark:block"
+              />
+            </NavLink>
           </div>
           <div
             className="
@@ -42,7 +45,14 @@ export const Footer = () => {
               xl:col-start-10 xl:col-span-8 xl:gap-[107px]
             "
           >
-            <Link to={'/'}>github</Link>
+            <Link
+              to={
+                'https://github.com/nice-gadgets-frontend/nice-gadgets-frontend'
+              }
+              target="__blank"
+            >
+              github
+            </Link>
             <Link to={'contacts'}>contacts</Link>
             <Link to={'rights'}>rights</Link>
             <Link to={'team'}>team</Link>
