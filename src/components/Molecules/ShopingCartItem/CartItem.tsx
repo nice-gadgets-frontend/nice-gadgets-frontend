@@ -16,7 +16,7 @@ export const CartItem: React.FC<CartItemProps> = ({ product, quantity }) => {
       {/* Delete button */}
       <button
         onClick={() => deleteFromCart(product.itemId)}
-        className="text-[var(--color-primary)] text-xl hover:text-[var(--color-red)]"
+        className="text-[var(--color-primary)] text-xl hover:text-[var(--color-red)] cursor-pointer"
         aria-label="Remove item"
       >
         ×
@@ -38,14 +38,14 @@ export const CartItem: React.FC<CartItemProps> = ({ product, quantity }) => {
       <div className="hidden sm:flex items-center gap-2">
         <button
           onClick={() => decreaseItemInCart(product.itemId)}
-          className="text-[var(--color-primary)]  w-8 h-8 flex items-center justify-center border border-[var(--color-elements)] hover:bg-[var(--color-surface-2)] transition"
+          className="text-[var(--color-primary)]  w-8 h-8 flex cursor-pointer items-center justify-center border border-[var(--color-elements)] hover:bg-[var(--color-surface-2)] transition"
         >
           <span className="text-xl">−</span>
         </button>
         <span className="w-6 text-center">{quantity}</span>
         <button
           onClick={() => increaseItemInCart(product.itemId)}
-          className="text-[var(--color-primary)]  w-8 h-8 flex items-center justify-center border border-[var(--color-elements)] hover:bg-[var(--color-surface-2)] transition"
+          className="text-[var(--color-primary)] cursor-pointer w-8 h-8 flex items-center justify-center border border-[var(--color-elements)] hover:bg-[var(--color-surface-2)] transition"
         >
           <span className="text-xl">+</span>
         </button>

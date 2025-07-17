@@ -24,6 +24,7 @@ export const CartTotal: React.FC<CartTotalProps> = ({ total, count }) => {
           py-3
           font-semibold
           transition-colors
+          cursor-pointer
         "
           >
             Checkout
@@ -31,12 +32,12 @@ export const CartTotal: React.FC<CartTotalProps> = ({ total, count }) => {
         </Link>
       : <Link to={{ pathname: '/auth', search: '?redirectToCheckout=true' }}>
           <button
-            className="
-          w-full bg-primary text-surface-1 dark:bg-accent dark:text-primary
+            className="w-full bg-primary text-surface-1 dark:bg-accent dark:text-primary
         hover:bg-[#7E4FE0] 
           py-3
           font-semibold
           transition-colors
+          cursor-pointer
         "
           >
             Checkout

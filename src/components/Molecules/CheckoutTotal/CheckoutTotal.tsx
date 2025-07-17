@@ -196,7 +196,7 @@ export const CheckoutTotal = () => {
       )}
 
       <button
-        className="w-full bg-[var(--color-accent)]/50 shadow-sm text-[var(--color-primary)] py-3 rounded-lg text-lg font-[Mont-SemiBold] hover:bg-[var(--color-accent)]/80 transition-colors"
+        className="w-full bg-[var(--color-accent)]/50 cursor-pointer shadow-sm text-[var(--color-primary)] py-3 rounded-lg text-lg font-[Mont-SemiBold] hover:bg-[var(--color-accent)]/80 transition-colors"
         onClick={handleConfirmPurchase}
       >
         Confirm purchase
