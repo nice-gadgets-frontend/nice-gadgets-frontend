@@ -65,7 +65,7 @@ export const ThankYouPage = () => {
 
         <button
           onClick={handleSupportClick}
-          className="bg-[var(--color-accent)]/20 hover:bg-[var(--color-accent)] shadow-sm inset-shadow-sm text-[var(--color-primary)] font-[Mont-Bold] py-3 px-6 rounded-lg text-xl transition duration-300 ease-in-out transform hover:scale-105"
+          className="bg-[var(--color-accent)]/20 hover:bg-[var(--color-accent)] cursor-pointer shadow-sm inset-shadow-sm text-[var(--color-primary)] font-[Mont-Bold] py-3 px-6 rounded-lg text-xl transition duration-300 ease-in-out transform hover:scale-105"
         >
           Support Our Army & Go to Homepage
         </button>
