@@ -20,9 +20,6 @@ export const PrimaryButton: React.FC<PrimaryButtonType> = ({
       disabled={isDisabled}
       onClick={onClick}
       className={classNames('flex-1 py-[9.5px] cursor-pointer', {
-        // 'bg-surface-2 cursor-not-allowed': isDisabled,
-        // 'bg-accent text-surface-1 dark:bg-accent dark:text-primary hover:bg-hover ':
-        //   !isDisabled,
         'bg-accent text-surface-1 dark:bg-accent dark:text-primary hover:bg-hover':
           !isDelete,
         'bg-purple-900 text-surface-1 dark:text-primary hover:bg-purple-800':

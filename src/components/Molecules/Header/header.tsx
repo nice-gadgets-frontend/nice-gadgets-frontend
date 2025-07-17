@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { NavLink, useLocation } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 import { FavouritesPageIcon } from '../../Atoms/Icons/FavouritePageIcon';
 import { MenuIcon } from '../../Atoms/Icons/MenuIcon';
 import { ShoppingBagIcon } from '../../Atoms/Icons/ShoppingBagIcon';
@@ -9,19 +9,28 @@ import { useInCartStore } from '../../../services/useStore/useInCartStore';
 import { useFavouritesStore } from '../../../services/useStore/useFavouritesStore';
 import { ThemeToggle } from '../../Atoms/Switcher/ThemeToggle';
 import { LogIn } from 'lucide-react';
-import { useUserStore } from '../../../services/useStore/useUserStore';
 
 export const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const location = useLocation();
 
   const toggleMenu = () => setIsMenuOpen((prev) => !prev);
   const closeMenu = () => setIsMenuOpen(false);
 
-  const user = useUserStore((state) => state.user);
-  const setUser = useUserStore((state) => state.setUser);
+  const [isAuthenticated, setIsAuthenticated] = useState(
+    Boolean(localStorage.getItem('access_token')),
+  );
 
-  const isCheckoutPage = location.pathname === '/cart/checkout';
+  useEffect(() => {
+    const handleStorageChange = () => {
+      setIsAuthenticated(Boolean(localStorage.getItem('access_token')));
+    };
+
+    window.addEventListener('storage', handleStorageChange);
+
+    return () => {
+      window.removeEventListener('storage', handleStorageChange);
+    };
+  }, []);
 
   useEffect(() => {
     if (isMenuOpen) {
@@ -53,7 +62,9 @@ export const Navbar = () => {
   const inactiveLink = 'text-secondary hover:text-primary';
 
   const handleLogout = () => {
-    setUser(null);
+    localStorage.removeItem('access_token');
+    localStorage.removeItem('refresh_token');
+    localStorage.removeItem('username');
     window.location.reload();
   };
 
@@ -77,7 +88,7 @@ export const Navbar = () => {
             </NavLink>
 
             {/* Desktop навігація */}
-            <nav className="hidden sm:flex gap-[32px] xl:gap-[62px]">
+            <nav className="hidden md:flex gap-[32px] xl:gap-[62px]">
               {[
                 { label: 'Home', path: '/home' },
                 { label: 'Phones', path: '/phones' },
@@ -98,28 +109,18 @@ export const Navbar = () => {
           </div>
 
           {/* Іконки справа (десктоп) */}
-          <div className="hidden sm:flex items-center gap-4 text-[var(--color-secondary)]">
-            {user ?
-              <div className="h-[64px] flex items-center">
-                <button
-                  onClick={handleLogout}
-                  disabled={isCheckoutPage}
-                  className={`flex items-center justify-center transition h-full ${
-                    isCheckoutPage ?
-                      'text-gray-400 cursor-not-allowed'
-                    : 'text-secondary hover:text-primary cursor-pointer'
-                  }`}
-                >
-                  <LogIn
-                    size={20}
-                    className="mr-1 rotate-180 mb-0.5"
-                  />{' '}
-                  {/* Повернута іконка */}
-                  <span className="text-[12px] font-[Mont-SemiBold] uppercase leading-none mt-0.1">
-                    Logout
-                  </span>
-                </button>
-              </div>
+          <div className="hidden md:flex items-center gap-4">
+            {isAuthenticated ?
+              <button
+                onClick={handleLogout}
+                className="cursor-pointer flex items-center text-primary transition"
+              >
+                <LogIn
+                  size={20}
+                  className="mr-1 rotate-180"
+                />
+                <span>Logout</span>
+              </button>
             : <NavLink
                 to="/auth"
                 aria-label="Login"
@@ -129,13 +130,12 @@ export const Navbar = () => {
               >
                 <LogIn
                   size={20}
-                  className="mr-1 mb-0.5"
+                  className="mr-1"
                 />
-                <span className="text-[12px] font-[Mont-SemiBold] leading-none">
-                  Login
-                </span>
+                <span>Login</span>
               </NavLink>
             }
+
             <NavLink
               to="/favourites"
               aria-label="Favourites"
@@ -166,8 +166,8 @@ export const Navbar = () => {
           </div>
         </div>
 
-        {/* Mobile menu icon */}
-        <div className="flex sm:hidden gap-4">
+        {/* Mobile & Tablet menu icon */}
+        <div className="flex md:hidden gap-4">
           <div className="h-[64px] flex items-center">
             <ThemeToggle />
           </div>
@@ -184,11 +184,11 @@ export const Navbar = () => {
         </div>
       </header>
 
-      {/* Бургер меню ПОЗА header */}
+      {/* Бургер меню поза header */}
       <BurgerMenu
         isOpen={isMenuOpen}
         onClose={closeMenu}
-        isAuthenticated={Boolean(user)}
+        isAuthenticated={isAuthenticated}
         onLogout={() => {
           handleLogout();
           closeMenu();
