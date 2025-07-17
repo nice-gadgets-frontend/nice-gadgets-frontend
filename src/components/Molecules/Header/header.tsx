@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { NavLink } from 'react-router-dom';
+import { NavLink, useLocation } from 'react-router-dom';
 import { FavouritesPageIcon } from '../../Atoms/Icons/FavouritePageIcon';
 import { MenuIcon } from '../../Atoms/Icons/MenuIcon';
 import { ShoppingBagIcon } from '../../Atoms/Icons/ShoppingBagIcon';
@@ -9,26 +9,19 @@ import { useInCartStore } from '../../../services/useStore/useInCartStore';
 import { useFavouritesStore } from '../../../services/useStore/useFavouritesStore';
 import { ThemeToggle } from '../../Atoms/Switcher/ThemeToggle';
 import { LogIn } from 'lucide-react';
+import { useUserStore } from '../../../services/useStore/useUserStore';
 
 export const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  
+  const location = useLocation();
+
   const toggleMenu = () => setIsMenuOpen((prev) => !prev);
   const closeMenu = () => setIsMenuOpen(false);
 
-  const [isAuthenticated, setIsAuthenticated] = useState(Boolean(localStorage.getItem('access_token')));
+  const user = useUserStore((state) => state.user);
+  const setUser = useUserStore((state) => state.setUser);
 
-  useEffect(() => {
-    const handleStorageChange = () => {
-      setIsAuthenticated(Boolean(localStorage.getItem('access_token')));
-    };
-
-    window.addEventListener('storage', handleStorageChange);
-
-    return () => {
-      window.removeEventListener('storage', handleStorageChange);
-    };
-  }, []);
+  const isCheckoutPage = location.pathname === '/cart/checkout';
 
   useEffect(() => {
     if (isMenuOpen) {
@@ -60,9 +53,7 @@ export const Navbar = () => {
   const inactiveLink = 'text-secondary hover:text-primary';
 
   const handleLogout = () => {
-    localStorage.removeItem('access_token');
-    localStorage.removeItem('refresh_token');
-    localStorage.removeItem('username');
+    setUser(null);
     window.location.reload();
   };
 
@@ -107,27 +98,44 @@ export const Navbar = () => {
           </div>
 
           {/* Іконки справа (десктоп) */}
-          <div className="hidden sm:flex items-center gap-4">
-            {isAuthenticated ? (
-              <button
-                onClick={handleLogout}
-                className="cursor-pointer flex items-center text-primary transition"
-              >
-                <LogIn size={20} className="mr-1 rotate-180" /> {/* Повернута іконка */}
-                <span>Logout</span>
-              </button>
-            ) : (
-              <NavLink
+          <div className="hidden sm:flex items-center gap-4 text-[var(--color-secondary)]">
+            {user ?
+              <div className="h-[64px] flex items-center">
+                <button
+                  onClick={handleLogout}
+                  disabled={isCheckoutPage}
+                  className={`flex items-center justify-center transition h-full ${
+                    isCheckoutPage ?
+                      'text-gray-400 cursor-not-allowed'
+                    : 'text-secondary hover:text-primary cursor-pointer'
+                  }`}
+                >
+                  <LogIn
+                    size={20}
+                    className="mr-1 rotate-180 mb-0.5"
+                  />{' '}
+                  {/* Повернута іконка */}
+                  <span className="text-[12px] font-[Mont-SemiBold] uppercase leading-none mt-0.1">
+                    Logout
+                  </span>
+                </button>
+              </div>
+            : <NavLink
                 to="/auth"
                 aria-label="Login"
                 className={({ isActive }) =>
                   `${navLinkBase} ${isActive ? activeLink : inactiveLink}`
                 }
               >
-                <LogIn size={20} className="mr-1" />
-                <span>Login</span>
+                <LogIn
+                  size={20}
+                  className="mr-1 mb-0.5"
+                />
+                <span className="text-[12px] font-[Mont-SemiBold] leading-none">
+                  Login
+                </span>
               </NavLink>
-            )}
+            }
             <NavLink
               to="/favourites"
               aria-label="Favourites"
@@ -160,9 +168,9 @@ export const Navbar = () => {
 
         {/* Mobile menu icon */}
         <div className="flex sm:hidden gap-4">
-            <div className="h-[64px] flex items-center">
-              <ThemeToggle />
-            </div>
+          <div className="h-[64px] flex items-center">
+            <ThemeToggle />
+          </div>
 
           <button
             onClick={toggleMenu}
@@ -180,7 +188,7 @@ export const Navbar = () => {
       <BurgerMenu
         isOpen={isMenuOpen}
         onClose={closeMenu}
-        isAuthenticated={isAuthenticated}
+        isAuthenticated={Boolean(user)}
         onLogout={() => {
           handleLogout();
           closeMenu();
@@ -189,4 +197,3 @@ export const Navbar = () => {
     </>
   );
 };
-

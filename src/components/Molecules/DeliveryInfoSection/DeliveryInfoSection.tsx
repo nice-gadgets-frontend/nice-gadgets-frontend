@@ -208,25 +208,32 @@ export const DeliveryInfoSection = () => {
 
       {/* recipients info */}
       {!isRecipientEmpty ?
-        <div className="mb-6 pb-4 border-b border-[var(--color-elements)]">
-          <h3 className="text-lg font-[Mont-SemiBold] mb-2 text-[var(--color-primary)]">
-            Recipient
-          </h3>
-          <p className="text-[var(--color-secondary)]">
-            {recipient.surname} {recipient.name} {recipient.patronymic}
-          </p>
-          <p className="text-[var(--color-secondary)]">{recipient.phone}</p>
-          <button
-            type="button"
-            className="text-[var(--color-accent)] font-[Mont-SemiBold] mt-2 flex items-center group"
-            onClick={handleOpenRecipientModal}
-          >
-            Edit
-            <span className="ml-1 transition-transform group-hover:translate-x-1">
-              →
-            </span>
-          </button>
-        </div>
+        <>
+          <div className="mb-3 pb-4 border-b border-[var(--color-elements)]">
+            <h3 className="text-lg font-[Mont-SemiBold] mb-2 text-[var(--color-primary)]">
+              Recipient
+            </h3>
+            <p className="text-[var(--color-secondary)]">
+              {recipient.surname} {recipient.name} {recipient.patronymic}
+            </p>
+            <p className="text-[var(--color-secondary)]">{recipient.phone}</p>
+            <button
+              type="button"
+              className="text-[var(--color-accent)] font-[Mont-SemiBold] mt-2 flex items-center group"
+              onClick={handleOpenRecipientModal}
+            >
+              Edit
+              <span className="ml-1 transition-transform group-hover:translate-x-1">
+                →
+              </span>
+            </button>
+          </div>
+          {!recipient.phone && (
+            <div className="text-[var(--color-red)] text-[14px] font-[Mont-SemiBold] mb-3">
+              Add recipient&apos;s phone number
+            </div>
+          )}
+        </>
       : <div className="mb-6 pb-4 border-b border-[var(--color-elements)]">
           <h3 className="text-lg font-[Mont-SemiBold] mb-2 text-[var(--color-primary)]">
             Recipient

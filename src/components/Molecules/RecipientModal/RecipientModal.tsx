@@ -75,7 +75,7 @@ export const RecipientModal = ({
     if (!name.trim()) newErrors.name = 'Name is required';
     if (!phone.trim()) {
       newErrors.phone = 'Phone is required';
-    } else if (!/^\+?\d[\d\s\-()]{8,}$/.test(phone.trim())) {
+    } else if (!/^\+?\d[\d\s\-()]{1,}$/.test(phone.trim())) {
       newErrors.phone = 'Phone must contain only numbers';
     }
     return newErrors;
@@ -144,14 +144,18 @@ export const RecipientModal = ({
               type="text"
               id="surname"
               className={`w-full text-[var(--color-primary)]/80 font-[Mont-Regular] text-sm p-2 bg-[var(--color-surface-1)]/50 border rounded-md focus:ring-[var(--color-primary)] focus:border-[var(--color-primary)] ${
-                errors.surname ? 'border-[var(--color-red)]' : 'border-[var(--color-primary)]/30'
+                errors.surname ?
+                  'border-[var(--color-red)]'
+                : 'border-[var(--color-primary)]/30'
               }`}
               value={surname}
               onChange={(e) => setSurname(e.target.value)}
               placeholder="Smith"
             />
             {errors.surname && (
-              <p className="text-[var(--color-red)] text-xs mt-1">{errors.surname}</p>
+              <p className="text-[var(--color-red)] text-xs mt-1">
+                {errors.surname}
+              </p>
             )}
           </div>
           <div>
@@ -165,14 +169,18 @@ export const RecipientModal = ({
               type="text"
               id="name"
               className={`w-full text-[var(--color-primary)]/80 font-[Mont-Regular] text-sm p-2 border bg-[var(--color-surface-1)]/50 rounded-md focus:ring-[var(--color-primary)] focus:border-[var(--color-primary)] ${
-                errors.name ? 'border-[var(--color-red)]' : 'border-[var(--color-primary)]/30'
+                errors.name ?
+                  'border-[var(--color-red)]'
+                : 'border-[var(--color-primary)]/30'
               }`}
               value={name}
               onChange={(e) => setName(e.target.value)}
               placeholder="John"
             />
             {errors.name && (
-              <p className="text-[var(--color-red)] text-xs mt-1">{errors.name}</p>
+              <p className="text-[var(--color-red)] text-xs mt-1">
+                {errors.name}
+              </p>
             )}
           </div>
           <div>
@@ -202,14 +210,18 @@ export const RecipientModal = ({
               type="tel"
               id="phone"
               className={`w-full p-2 text-[var(--color-primary)]/80 font-[Mont-Regular] text-sm border bg-[var(--color-surface-1)]/50 rounded-md focus:ring-[var(--color-primary)] focus:ring-[var(--color-primary)] ${
-                errors.phone ? 'border-[var(--color-red)]' : 'border-[var(--color-primary)]/30'
+                errors.phone ?
+                  'border-[var(--color-red)]'
+                : 'border-[var(--color-primary)]/30'
               }`}
               value={phone}
               onChange={(e) => setPhone(e.target.value)}
               placeholder="+38 (XXX) XXX-XX-XX"
             />
             {errors.phone && (
-              <p className="text-[var(--color-red)] text-xs mt-1">{errors.phone}</p>
+              <p className="text-[var(--color-red)] text-xs mt-1">
+                {errors.phone}
+              </p>
             )}
           </div>
         </div>
@@ -220,13 +232,13 @@ export const RecipientModal = ({
             onClick={onClose}
             className="px-4 py-2 border bg-[var(--color-primary)]/30 border-[var(--color-primary)]/5 rounded-md text-[var(--color-primary)] font-[Mont-Regular] hover:bg-[var(--color-primary)]/20 focus:outline-none focus:ring-2 focus:ring-[var(--color-primary)]/20"
           >
-            Скасувати
+            Cancel
           </button>
           <button
             onClick={handleSave}
             className="px-4 font-[Mont-Regular] py-2 bg-[var(--color-accent)] text-[var(--color-primary)] rounded-md hover:bg-[var(--color-accent)]/60 focus:outline-none focus:ring-2 focus:ring-[var(--color-accent)]"
           >
-            Зберегти зміни
+            Save changes
           </button>
         </div>
       </div>
