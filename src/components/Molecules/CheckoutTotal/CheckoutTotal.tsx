@@ -18,7 +18,9 @@ export const CheckoutTotal = () => {
   const shippingPrice = useRecipientStore((state) => state.shippingPrice);
 
   const selectedDelivery = useRecipientStore((state) => state.selectedDelivery);
-  const selectedNovaPoshtaBranch = useRecipientStore((state) => state.novaPoshtaBranch);
+  const selectedNovaPoshtaBranch = useRecipientStore(
+    (state) => state.novaPoshtaBranch,
+  );
 
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [errors, setErrors] = useState<{ [key: string]: string }>({});
@@ -63,7 +65,7 @@ export const CheckoutTotal = () => {
       newErrors.firstName = "Recipient's first name is required.";
     }
     if (!selectedNovaPoshtaBranch) {
-      newErrors.NovaPoshtaBranch = "Delivery destination is required."
+      newErrors.NovaPoshtaBranch = 'Delivery destination is required.';
     }
 
     if (Object.keys(newErrors).length > 0) {
@@ -171,7 +173,12 @@ export const CheckoutTotal = () => {
 
         <div className="flex justify-between text-xl font-[Mont-Bold] text-[var(--color-primary)] mb-6">
           <span>Total sum</span>
-          <span>{checkoutTotal}$</span>
+          <span>
+            {shippingPrice ?
+              checkoutTotal + Math.round(shippingPrice! / 41.2)
+            : checkoutTotal}
+            $
+          </span>
         </div>
       </div>
 
