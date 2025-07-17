@@ -10,6 +10,7 @@ import { getProducts } from "../../../../../services/getProducts";
 import { mergedTabletsWithProducts } from "../../../../../types/Utils/mergedTabletsWithProducts";
 import { HomePageIcon } from "../../../../Atoms/Icons/HomePageIcon";
 import { ArrowRightIcon } from "../../../../Atoms/Icons/ArrowRightIcon";
+import { InputFilter } from "../../../../Molecules/InputFilter/InputFilter";
 
 
 type MergedTablet =  Omit<Tablet, 'id'> & {
@@ -27,13 +28,15 @@ export const TabletsCatalogPage = () => {
   const [itemsOnPage, setItemsOnPage] = useState(new Set(["16"]));
   const [tablets, setTablets] = useState<MergedTablet[]>([]);
   const [searchParams, setSearchParams] = useSearchParams();
+  const [query, setQuery] = useState('')
+
 
   const selected = Array.from(itemsOnPage)[0]; // наприклад "16" або "all"
   // const perPage = selected === "all" ? 50 : Number(selected); // конвертуємо
   const pageParam = Number(searchParams.get('page')) || 1;
   const perPageParam = searchParams.get('perPage') || selected;
 
-  const perPage = perPageParam === 'All'
+  const perPage = perPageParam.toLowerCase() === 'all'
     ? tablets.length || 16
     : Number(perPageParam);
   const currentPage = pageParam;
@@ -73,12 +76,37 @@ export const TabletsCatalogPage = () => {
     }
   }, [tablets, sortBy]);
 
+   useEffect(() => {
+    const queryParam = searchParams.get('query') || '';
+    setQuery(queryParam);
+  }, []);
+
+  useEffect(() => {
+    const newParams = new URLSearchParams(searchParams);
+
+    if (query) {
+      newParams.set('query', query)
+    } else {
+      newParams.delete('query')
+    }
+
+    newParams.set('page', '1');
+    setSearchParams(newParams);
+  }, [query])
+
+
+  const filteredTablets = useMemo(() => {
+    return sortedTablets.filter(tablet =>
+      tablet.name.toLowerCase().includes(query.toLowerCase())
+    );
+  }, [sortedTablets, query])
+
   const paginatedTablets = useMemo(() => {
     const start = (currentPage - 1) * perPage;
     const end = start + perPage;
-    return sortedTablets.slice(start, end);
+    return filteredTablets.slice(start, end);
 
-  }, [sortedTablets, currentPage, perPage])
+  }, [filteredTablets, currentPage, perPage])
 
   return (
     
@@ -92,8 +120,9 @@ export const TabletsCatalogPage = () => {
                   </span>
                   </div>
       <h1 className=" text-primary font-extrabold text-3xl md:text-5xl font-[Mont-Regular]">Tablets</h1>
-      <p className="text-secondary mb-6 text-sm font-semibold"> {sortedTablets.length}</p>
+      <p className="text-secondary mb-6 text-sm font-semibold"> {filteredTablets.length}</p>
 
+        <InputFilter query={query} setQuery={setQuery} placeholder="Search..." />
     
     <div className="flex flex-col bg-black min-h-screen">
       <CatalogFilters
@@ -105,13 +134,21 @@ export const TabletsCatalogPage = () => {
 
 
       <div className="w-full grid gap-y-10 gap-x-4 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 justify-center px-4 sm:px-6 xl:px-0 max-w-[1200px] mx-auto">
-        {paginatedTablets .map(tablet => (
+            {paginatedTablets.length > 0 ? (
+              paginatedTablets.map(tablet => (
           <CardItem key={tablet.id} product={tablet}/>
-        ))}
+              ))
+            ) : (
+                <p className=" text-secondary text-lg py-10">
+                  No items found
+                 </p>
+            )
+      
+            }
 
       </div>
 
-        <Pagination totalItems={sortedTablets.length}
+        <Pagination totalItems={filteredTablets.length}
           perPage={perPage}
           currentPage={currentPage} 
           onPageChange={(page) => {

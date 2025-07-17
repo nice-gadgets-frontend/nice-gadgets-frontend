@@ -1,16 +1,22 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { NovaPoshtaModal } from '../NovaPoshtaModal/NovaPoshtaModal';
 import type { WarehouseType } from '../../../types/NovaPoshtaTypes/WarehouseType';
+import { getShippingPrice } from '../../../services/NovaPoshtaService';
+import { useRecipientStore } from '../../../services/useStore/useRecipientStore';
 
 export const DeliveryOptionsSection = () => {
-  const [selectedDelivery, setSelectedDelivery] = useState<
-    'pickup' | 'novaposhta' | null
-  >(null);
+  const selectedDelivery = useRecipientStore((state) => state.selectedDelivery);
+  const setSelectedDelivery = useRecipientStore(
+    (state) => state.setSelectedDelivery,
+  );
 
-  const [selectedDepartment, setSelectedDepartment] =
-    useState<WarehouseType | null>(null);
+  const selectedNovaPoshtaBranch = useRecipientStore(
+    (state) => state.novaPoshtaBranch,
+  );
+  const setSelectedNovaPoshtaBranch = useRecipientStore((state) => state.setNovaPoshtaBranch);
+
   const onDepartmentSelect = (department: WarehouseType) => {
-    setSelectedDepartment(department);
+    setSelectedNovaPoshtaBranch(department);
   };
 
   const [isNovaPoshtaModalOpen, setIsNovaPoshtaModalOpen] =
@@ -18,6 +24,31 @@ export const DeliveryOptionsSection = () => {
   const onCloseNovaPoshtaModal = () => {
     setIsNovaPoshtaModalOpen(false);
   };
+
+  const shippingPrice = useRecipientStore((state) => state.shippingPrice);
+  const setShippingPrice = useRecipientStore((state) => state.setShippingPrice);
+
+  const selectedCity = useRecipientStore((state) => state.selectedCity);
+
+  useEffect(() => {
+    setSelectedDelivery(null);
+    setSelectedNovaPoshtaBranch(null);
+    setShippingPrice(null);
+  }, [selectedCity, setSelectedDelivery, setSelectedNovaPoshtaBranch, setShippingPrice]);
+
+  useEffect(() => {
+    if (selectedDelivery === 'novaposhta' && selectedNovaPoshtaBranch) {
+      getShippingPrice(selectedNovaPoshtaBranch.CityRef)
+        .then((res) => res.json())
+        .then((data) => {
+          if (data.success && data.data && data.data[0]?.Cost) {
+            setShippingPrice(Number(data.data[0].Cost));
+          } else {
+            setShippingPrice(null);
+          }
+        });
+    }
+  }, [selectedNovaPoshtaBranch, selectedDelivery, setShippingPrice]);
 
   return (
     <>
@@ -115,20 +146,22 @@ export const DeliveryOptionsSection = () => {
           </div>
 
           <span className="text-[var(--color-primary)] font-[Mont-Regular]">
-            100₴
+            {selectedNovaPoshtaBranch && shippingPrice !== null ?
+              `${Math.round(shippingPrice / 41.2)}$`
+            : '...'}
           </span>
         </div>
 
         {selectedDelivery === 'novaposhta' && (
           <>
-            {selectedDepartment ?
+            {selectedNovaPoshtaBranch ?
               <>
                 <div className="mt-2 p-2">
                   <div className="font-[Mont-SemiBold] text-[var(--color-primary)] text-sm">
-                    {selectedDepartment.Description}
+                    {selectedNovaPoshtaBranch.Description}
                   </div>
                   <div className="text-xs text-[var(--color-primary)]/85 font-[Mont-Regular]">
-                    {selectedDepartment.ShortAddress}
+                    {selectedNovaPoshtaBranch.ShortAddress}
                   </div>
                 </div>
                 <button
@@ -147,13 +180,6 @@ export const DeliveryOptionsSection = () => {
                 Choose a Nova Poshta department
               </button>
             }
-            {/* <button
-              type="button"
-              className="mt-4 px-4 py-2 bg-[var(--color-accent)]/50 shadow-sm text-[var(--color-primary)] rounded font-[Mont-Regular] text-[15px] hover:bg-[var(--color-accent)]/80"
-              onClick={() => setIsNovaPoshtaModalOpen(true)}
-            >
-              Choose a Nova Poshta department
-            </button> */}
           </>
         )}
 

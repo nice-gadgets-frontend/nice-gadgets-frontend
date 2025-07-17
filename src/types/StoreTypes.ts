@@ -10,6 +10,7 @@ export type InCartStore = {
   changeQuantity: (id: string, quantity: number) => void;
   increase: (id: string) => void;
   decrease: (id: string) => void;
+  resetCart: () => void;
 };
 
 export type ItemInCart = {

@@ -8,9 +8,9 @@ import { getPhones } from '../../../../../services/getPhones';
 import { CardItem } from '../../../../Molecules/CardItem/CardItem';
 import { getProducts } from '../../../../../services/getProducts';
 import { mergedPhonesWithProducts } from '../../../../../types/Utils/mergedPhonesWithProducts';
-import { CardSkeleton } from '../../../../Molecules/CardSkeleton/CardSkeleton';
 import { HomePageIcon } from '../../../../Atoms/Icons/HomePageIcon';
 import { ArrowRightIcon } from '../../../../Atoms/Icons/ArrowRightIcon';
+import { InputFilter } from '../../../../Molecules/InputFilter/InputFilter';
 
 type MergedPhone = Omit<Phone, 'id'> & {
   id: number;
@@ -26,16 +26,19 @@ export const PhonesCatalogPage = () => {
   const [itemsOnPage, setItemsOnPage] = useState(new Set(['16']));
   const [phones, setPhones] = useState<MergedPhone[]>([]);
   const [searchParams, setSearchParams] = useSearchParams();
+  const [query, setQuery] = useState('');
 
   const selected = Array.from(itemsOnPage)[0]; // наприклад "16" або "all"
   // const perPage = selected === "all" ? 50 : Number(selected); // конвертуємо
   const pageParam = Number(searchParams.get('page')) || 1;
   const perPageParam = searchParams.get('perPage') || selected;
 
-  const perPage = perPageParam === 'All'
+  const perPage = perPageParam.toLowerCase() === 'all'
     ? phones.length || 16
     : Number(perPageParam);
   const currentPage = pageParam;
+
+  
 
   useEffect(() => {
     const selectedValue = Array.from(itemsOnPage)[0];
@@ -73,12 +76,37 @@ export const PhonesCatalogPage = () => {
     }
   }, [phones, sortBy]);
 
+   useEffect(() => {
+    const queryParam = searchParams.get('query') || '';
+    setQuery(queryParam);
+  }, []);
+
+  useEffect(() => {
+    const newParams = new URLSearchParams(searchParams);
+
+    if (query) {
+      newParams.set('query', query)
+    } else {
+      newParams.delete('query')
+    }
+
+    newParams.set('page', '1');
+    setSearchParams(newParams);
+  }, [query])
+
+
+   const filteredPhones = useMemo(() => {
+    return sortedPhones.filter(phone =>
+      phone.name.toLowerCase().includes(query.toLowerCase())
+    );
+  }, [sortedPhones, query])
+
   const paginatedPhones = useMemo(() => {
     const start = (currentPage - 1) * perPage;
     const end = start + perPage;
-    return sortedPhones.slice(start, end);
+    return filteredPhones.slice(start, end);
 
-  }, [sortedPhones, currentPage, perPage])
+  }, [filteredPhones, currentPage, perPage])
 
   return (
     
@@ -92,8 +120,9 @@ export const PhonesCatalogPage = () => {
           </span>
           </div>
       <h1 className=" text-primary font-extrabold text-3xl md:text-5xl font-[Mont-Regular]">Mobile phones</h1>
-      <p className="text-secondary mb-6 text-sm font-semibold"> {sortedPhones.length}</p>
+      <p className="text-secondary mb-6 text-sm font-semibold"> {filteredPhones.length}</p>
 
+         <InputFilter query={query} setQuery={setQuery} placeholder="Search..." />
     
     <div className="flex flex-col bg-black min-h-screen">
       <CatalogFilters
@@ -103,27 +132,24 @@ export const PhonesCatalogPage = () => {
         setItemsOnPage={setItemsOnPage}
       />
 
-
-      <div className="w-full grid gap-y-10 gap-x-4 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 justify-center px-4 sm:px-6 xl:px-0 max-w-[1200px] mx-auto">
-        {paginatedPhones.map(phone => (
-          <CardItem key={phone.id} product={phone}/>
-        ))}
-
-      </div>
-
         <div className="grid gap-6 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
-          {paginatedPhones.length > 0 ?
+          {paginatedPhones.length > 0 ? (
             paginatedPhones.map((product) => (
               <CardItem
                 key={product.id}
                 product={product}
               />
             ))
-          : Array.from({ length: 16 }).map((_, i) => <CardSkeleton key={i} />)}
+          ) : (
+                 <p className=" text-secondary text-lg py-10">
+                  No items found
+                 </p>
+            )
+            }
         </div>
 
         <Pagination
-          totalItems={sortedPhones.length}
+          totalItems={filteredPhones.length}
           perPage={perPage}
           currentPage={currentPage}
           onPageChange={(page) => {

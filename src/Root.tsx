@@ -13,6 +13,7 @@ import { ContactsPage } from './components/organisms/Pages/ContactsPage/Contacts
 import { RightsPage } from './components/organisms/Pages/RightsPage/RightsPage';
 import { TeamPage } from './components/organisms/Pages/TeamPage/TeamPage';
 import { CheckoutPage } from './components/organisms/Pages/CheckoutPage/CheckoutPage';
+import { ThankYouPage } from './components/organisms/Pages/ThankYouPage/ThankYouPage';
 import { AuthPage } from './components/organisms/Pages/Authorization/AuthPage';
 
 const Root = () => {
@@ -83,6 +84,10 @@ const Root = () => {
         <Route
           path="/cart/checkout"
           element={<CheckoutPage />}
+        />
+        <Route
+          path="thankyou"
+          element={<ThankYouPage />}
         />
       </Route>
     </Routes>

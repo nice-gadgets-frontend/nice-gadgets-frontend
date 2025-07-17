@@ -60,6 +60,7 @@ export const useInCartStore = create<InCartStore>()(
           }),
         });
       },
+      resetCart: () => set({ itemsIdsInCart: [] }),
     }),
     {
       name: 'in-cart-storage',
@@ -67,4 +68,3 @@ export const useInCartStore = create<InCartStore>()(
     },
   ),
 );
-

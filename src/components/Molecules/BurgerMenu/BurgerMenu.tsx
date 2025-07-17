@@ -123,7 +123,7 @@ export const BurgerMenu = ({
               size={24}
               className={isAuthenticated ? 'rotate-180' : ''}
             />
-            <span className="text-sm font-semibold">
+            <span className="text-sm font-[Mont-Semibold] uppercase mt-0.1">
               {isAuthenticated ? 'Logout' : 'Login'}
             </span>
           </button>

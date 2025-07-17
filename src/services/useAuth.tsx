@@ -20,7 +20,7 @@ export async function loginUser({ username, password }: LoginParams) {
         'Content-Type': 'application/x-www-form-urlencoded',
       },
       body: params.toString(),
-    }
+    },
   );
 
   const data = await response.json();
@@ -28,9 +28,6 @@ export async function loginUser({ username, password }: LoginParams) {
   if (!response.ok) {
     throw new Error(data.error_description || 'Login failed');
   }
-
-  localStorage.setItem('access_token', data.access_token);
-  localStorage.setItem('refresh_token', data.refresh_token);
 
   return data;
 }
@@ -50,7 +47,7 @@ export async function registerUser({
   lastName,
   password,
 }: RegisterParams) {
-  const response = await fetch('https://yelyzavetaz.website/register', {
+  const response = await fetch('https://yelyzavetaz.website/api/register', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
