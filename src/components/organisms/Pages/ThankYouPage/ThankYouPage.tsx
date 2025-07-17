@@ -5,11 +5,11 @@ const randomPages = [
   'https://send.monobank.ua/jar/9sUDBwtQRL',
   'https://send.monobank.ua/jar/FkAqmGUWT',
   'https://send.monobank.ua/jar/2rNbLUsugH',
-  'https://send.monobank.ua/jar/7xge81rhf6'
+  'https://send.monobank.ua/jar/7xge81rhf6',
 ];
 
 export const ThankYouPage = () => {
-  const user = useUserStore(state => state.user);
+  const user = useUserStore((state) => state.user);
   const randomPathRef = useRef(
     randomPages[Math.floor(Math.random() * randomPages.length)],
   );
@@ -36,9 +36,14 @@ export const ThankYouPage = () => {
             d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"
           ></path>
         </svg>
-        <h1 className="text-4xl md:text-5xl font-[Mont-Bold] mb-4 text-[var(--color-primary)]">
-          Thank You for Your Purchase, {user?.firstName}!
-        </h1>
+        {user ?
+          <h1 className="text-4xl md:text-5xl font-[Mont-Bold] mb-4 text-[var(--color-primary)]">
+            Thank You for Your Purchase, {user?.firstName}!
+          </h1>
+        : <h1 className="text-4xl md:text-5xl font-[Mont-Bold] mb-4 text-[var(--color-primary)]">
+            Thank You for Your Purchase!
+          </h1>
+        }
         <p className="text-xl md:text-2xl text-[var(--color-primary)]/70 font-[Mont-regular] mb-8 leading-relaxed">
           We appreciate your order and will contact you shortly with
           confirmation and tracking details.
