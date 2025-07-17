@@ -20,7 +20,7 @@ export async function loginUser({ username, password }: LoginParams) {
         'Content-Type': 'application/x-www-form-urlencoded',
       },
       body: params.toString(),
-    }
+    },
   );
 
   const data = await response.json();
@@ -50,7 +50,7 @@ export async function registerUser({
   lastName,
   password,
 }: RegisterParams) {
-  const response = await fetch('https://yelyzavetaz.website/register', {
+  const response = await fetch('https://yelyzavetaz.website/api/register', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
