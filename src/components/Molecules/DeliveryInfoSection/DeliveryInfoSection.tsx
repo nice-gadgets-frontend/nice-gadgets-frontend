@@ -194,7 +194,7 @@ export const DeliveryInfoSection = () => {
             </p>
             <button
               type="button"
-              className="text-[var(--color-accent)] font-[Mont-SemiBold] mt-2 flex items-center group"
+              className="text-[var(--color-accent)] font-[Mont-SemiBold] mt-2 flex items-center group cursor-pointer"
               onClick={handleEditCityClick}
             >
               Change
@@ -219,7 +219,7 @@ export const DeliveryInfoSection = () => {
             <p className="text-[var(--color-secondary)]">{recipient.phone}</p>
             <button
               type="button"
-              className="text-[var(--color-accent)] font-[Mont-SemiBold] mt-2 flex items-center group"
+              className="text-[var(--color-accent)] font-[Mont-SemiBold] mt-2 flex items-center group cursor-pointer"
               onClick={handleOpenRecipientModal}
             >
               Edit
@@ -240,7 +240,7 @@ export const DeliveryInfoSection = () => {
           </h3>
           <button
             type="button"
-            className="text-[var(--color-accent)] font-[Mont-SemiBold] mt-2 flex items-center group"
+            className="text-[var(--color-accent)] font-[Mont-SemiBold] mt-2 flex items-center group cursor-pointer"
             onClick={handleOpenRecipientModal}
           >
             Add recipient information

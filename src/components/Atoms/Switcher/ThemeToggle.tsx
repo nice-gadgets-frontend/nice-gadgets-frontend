@@ -33,12 +33,12 @@ export function ThemeToggle() {
     <Switch
       checked={isDark}
       onChange={toggleTheme}
-      className={`group inline-flex h-6 w-11 items-center rounded-full transition ${
+      className={`group inline-flex h-6 w-11 items-center rounded-full transition cursor-pointer ${
         isDark ? 'bg-[var(--color-accent)]' : 'bg-[var(--color-elements)]'
       }`}
     >
       <span
-        className={`size-4 transform rounded-full bg-white transition ${
+        className={`size-4 transform rounded-full bg-white transition cursor-pointer ${
           isDark ? 'translate-x-6' : 'translate-x-1'
         }`}
       />
