@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { NavLink } from 'react-router-dom';
+import { NavLink, useLocation } from 'react-router-dom';
 import { FavouritesPageIcon } from '../../Atoms/Icons/FavouritePageIcon';
 import { MenuIcon } from '../../Atoms/Icons/MenuIcon';
 import { ShoppingBagIcon } from '../../Atoms/Icons/ShoppingBagIcon';
@@ -13,12 +13,15 @@ import { useUserStore } from '../../../services/useStore/useUserStore';
 
 export const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const location = useLocation();
 
   const toggleMenu = () => setIsMenuOpen((prev) => !prev);
   const closeMenu = () => setIsMenuOpen(false);
 
   const user = useUserStore((state) => state.user);
   const setUser = useUserStore((state) => state.setUser);
+
+  const isCheckoutPage = location.pathname === '/cart/checkout';
 
   useEffect(() => {
     if (isMenuOpen) {
@@ -100,7 +103,12 @@ export const Navbar = () => {
               <div className="h-[64px] flex items-center">
                 <button
                   onClick={handleLogout}
-                  className="cursor-pointer flex items-center justify-center text-secondary hover:text-primary transition h-full"
+                  disabled={isCheckoutPage}
+                  className={`flex items-center justify-center transition h-full ${
+                    isCheckoutPage ?
+                      'text-gray-400 cursor-not-allowed'
+                    : 'text-secondary hover:text-primary cursor-pointer'
+                  }`}
                 >
                   <LogIn
                     size={20}

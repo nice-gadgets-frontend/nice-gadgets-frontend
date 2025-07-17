@@ -1,12 +1,14 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { Eye, EyeOff } from 'lucide-react';
 import { loginUser, registerUser } from '../../../../services/useAuth';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useSearchParams } from 'react-router-dom';
 import { useUserStore } from '../../../../services/useStore/useUserStore';
 import { jwtDecode } from 'jwt-decode';
 import type { UserJwtPayload } from '../../../../types/UserJwtPayload';
 
 export function AuthPage() {
+  const [searchParams] = useSearchParams();
+
   const [mode, setMode] = useState<'login' | 'register'>('login');
   const [showPassword, setShowPassword] = useState(false);
   const navigate = useNavigate();
@@ -55,7 +57,11 @@ export function AuthPage() {
           refreshToken: userData.refresh_token,
         });
       }
-      navigate('/home');
+      if (searchParams.get('redirectToCheckout')) {
+        navigate('/cart/checkout');
+      } else {
+        navigate('/home');
+      }
     } catch (error: unknown) {
       if (error instanceof Error) {
         setLoginError(error.message);
