@@ -1,4 +1,5 @@
 import { useRef } from 'react';
+import { useUserStore } from '../../../../services/useStore/useUserStore';
 
 const randomPages = [
   'https://send.monobank.ua/jar/9sUDBwtQRL',
@@ -8,6 +9,7 @@ const randomPages = [
 ];
 
 export const ThankYouPage = () => {
+  const user = useUserStore(state => state.user);
   const randomPathRef = useRef(
     randomPages[Math.floor(Math.random() * randomPages.length)],
   );
@@ -35,7 +37,7 @@ export const ThankYouPage = () => {
           ></path>
         </svg>
         <h1 className="text-4xl md:text-5xl font-[Mont-Bold] mb-4 text-[var(--color-primary)]">
-          Thank You for Your Purchase!
+          Thank You for Your Purchase, {user?.firstName}!
         </h1>
         <p className="text-xl md:text-2xl text-[var(--color-primary)]/70 font-[Mont-regular] mb-8 leading-relaxed">
           We appreciate your order and will contact you shortly with
