@@ -32,10 +32,12 @@ export const PhonesCatalogPage = () => {
   const pageParam = Number(searchParams.get('page')) || 1;
   const perPageParam = searchParams.get('perPage') || selected;
 
-  const perPage = perPageParam === 'All'
+  const perPage = perPageParam.toLowerCase() === 'all'
     ? phones.length || 16
     : Number(perPageParam);
   const currentPage = pageParam;
+
+  
 
   useEffect(() => {
     const selectedValue = Array.from(itemsOnPage)[0];
@@ -102,14 +104,6 @@ export const PhonesCatalogPage = () => {
         itemsOnPage={itemsOnPage}
         setItemsOnPage={setItemsOnPage}
       />
-
-
-      <div className="w-full grid gap-y-10 gap-x-4 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 justify-center px-4 sm:px-6 xl:px-0 max-w-[1200px] mx-auto">
-        {paginatedPhones.map(phone => (
-          <CardItem key={phone.id} product={phone}/>
-        ))}
-
-      </div>
 
         <div className="grid gap-6 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
           {paginatedPhones.length > 0 ?
