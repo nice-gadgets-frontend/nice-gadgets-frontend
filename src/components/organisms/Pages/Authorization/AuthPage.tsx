@@ -5,6 +5,7 @@ import { useNavigate, useSearchParams } from 'react-router-dom';
 import { useUserStore } from '../../../../services/useStore/useUserStore';
 import { jwtDecode } from 'jwt-decode';
 import type { UserJwtPayload } from '../../../../types/UserJwtPayload';
+import { useRecipientStore } from '../../../../services/useStore/useRecipientStore';
 
 export function AuthPage() {
   const [searchParams] = useSearchParams();
@@ -15,6 +16,7 @@ export function AuthPage() {
   const usernameInputRef = useRef<HTMLInputElement>(null);
 
   const setUser = useUserStore((state) => state.setUser);
+  const setRecipient = useRecipientStore((state) => state.setRecipient);
 
   useEffect(() => {
     usernameInputRef.current?.focus();
@@ -55,6 +57,13 @@ export function AuthPage() {
           email: decodedToken.email,
           accessToken: userData.access_token,
           refreshToken: userData.refresh_token,
+        });
+
+        setRecipient({
+          name: decodedToken.given_name,
+          surname: decodedToken.family_name,
+          patronymic: null,
+          phone: null,
         });
       }
       if (searchParams.get('redirectToCheckout')) {
