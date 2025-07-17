@@ -19,7 +19,7 @@ const itemsPerPageOptions = [
   { key: '8', label: '8' },
   { key: '16', label: '16' },
   { key: '32', label: '32' },
-  { key: 'All', label: 'All' },
+  { key: 'all', label: 'All' },
 ];
 
 export const CatalogFilters = ({

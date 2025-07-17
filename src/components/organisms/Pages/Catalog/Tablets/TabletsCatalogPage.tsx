@@ -33,7 +33,7 @@ export const TabletsCatalogPage = () => {
   const pageParam = Number(searchParams.get('page')) || 1;
   const perPageParam = searchParams.get('perPage') || selected;
 
-  const perPage = perPageParam === 'All'
+  const perPage = perPageParam.toLowerCase() === 'all'
     ? tablets.length || 16
     : Number(perPageParam);
   const currentPage = pageParam;
