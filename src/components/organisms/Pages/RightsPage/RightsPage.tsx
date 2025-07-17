@@ -14,7 +14,7 @@ export const RightsPage = () => {
 
   return (
     <div className="bg-black min-h-screen px-4 sm:px-6 xl:px-0 xl:max-w-[1136px] mx-auto">
-      <h1 className="text-5xl text-white font-[Mont-Bold] text-center mb-12 animate-fade-in-down">
+      <h1 className="text-5xl text-primary font-[Mont-Bold] text-center mb-12 animate-fade-in-down">
         Legal Information
       </h1>
 
