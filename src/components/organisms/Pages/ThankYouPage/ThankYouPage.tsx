@@ -4,6 +4,7 @@ const randomPages = [
   'https://send.monobank.ua/jar/9sUDBwtQRL',
   'https://send.monobank.ua/jar/FkAqmGUWT',
   'https://send.monobank.ua/jar/2rNbLUsugH',
+  'https://send.monobank.ua/jar/7xge81rhf6'
 ];
 
 export const ThankYouPage = () => {

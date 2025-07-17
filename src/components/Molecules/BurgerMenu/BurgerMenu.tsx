@@ -115,7 +115,7 @@ export const BurgerMenu = ({ isOpen, onClose, isAuthenticated, onLogout }: Props
   className="flex items-center justify-center gap-2 p-2 mx-auto mt-6 text-primary hover:text-primary/80 transition"
 >
   <LogIn size={24} className={isAuthenticated ? 'rotate-180' : ''} />
-  <span className="text-sm font-semibold">
+  <span className="text-sm font-[Mont-Semibold] uppercase mt-0.1">
     {isAuthenticated ? 'Logout' : 'Login'}
   </span>
 </button>

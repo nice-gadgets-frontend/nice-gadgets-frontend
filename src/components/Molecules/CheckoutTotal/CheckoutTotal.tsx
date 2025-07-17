@@ -11,6 +11,8 @@ type ProductWithQuantity = ProductType & { quantity: number };
 export const CheckoutTotal = () => {
   const navigate = useNavigate();
 
+  const recipient = useRecipientStore((state) => state.recipient);
+
   const itemsIdsInCart = useInCartStore((state) => state.itemsIdsInCart);
 
   const shippingPrice = useRecipientStore((state) => state.shippingPrice);
@@ -18,14 +20,20 @@ export const CheckoutTotal = () => {
   const selectedDelivery = useRecipientStore((state) => state.selectedDelivery);
 
   const [isLoading, setIsLoading] = useState<boolean>(false);
-  const [error, setError] = useState<string | null>(null);
+  const [errors, setErrors] = useState<{ [key: string]: string }>({});
 
   const [products, setProducts] = useState<ProductType[]>([]);
 
   const resetCart = useInCartStore((state) => state.resetCart);
 
   useEffect(() => {
-    if (selectedDelivery) setError(null);
+    if (selectedDelivery) {
+      setErrors((prev) => {
+        const newErrors = { ...prev };
+        delete newErrors.delivery;
+        return newErrors;
+      });
+    }
   }, [selectedDelivery]);
 
   useEffect(() => {
@@ -34,21 +42,33 @@ export const CheckoutTotal = () => {
       .then((data: ProductType[]) => {
         setProducts(data);
       })
-      .catch((err) => {
-        setError(err instanceof Error ? err.message : 'Unknown error');
-      })
+      .catch(() => {})
       .finally(() => {
         setIsLoading(false);
       });
   }, []);
 
   const handleConfirmPurchase = () => {
+    const newErrors: { [key: string]: string } = {};
+
     if (!selectedDelivery) {
-      setError('Please select a delivery option to confirm purchase.');
+      newErrors.delivery =
+        'Select a delivery option to proceed with the purchase.';
+    }
+    if (!recipient.phone) {
+      newErrors.phone = "Recipient's phone number is required.";
+    }
+    if (!recipient.name) {
+      newErrors.firstName = "Recipient's first name is required.";
+    }
+
+    if (Object.keys(newErrors).length > 0) {
+      setErrors(newErrors);
       return;
     }
+
     resetCart();
-    setError(null);
+    setErrors({});
     navigate('/thankyou');
   };
 
@@ -151,9 +171,16 @@ export const CheckoutTotal = () => {
         </div>
       </div>
 
-      {error && (
-        <div className="text-[var(--color-red)] font-[Mont-SemiBold] mb-4">
-          {error}
+      {Object.keys(errors).length > 0 && (
+        <div className="mb-4">
+          {Object.values(errors).map((err, index) => (
+            <div
+              key={index}
+              className="text-[var(--color-red)] font-[Mont-SemiBold] mb-2"
+            >
+              {err}
+            </div>
+          ))}
         </div>
       )}
 

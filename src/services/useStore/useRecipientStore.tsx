@@ -5,8 +5,8 @@ import type { AddressType } from '../../types/NovaPoshtaTypes/AddressType';
 type Recipient = {
   name: string;
   surname: string;
-  patronymic: string;
-  phone: string;
+  patronymic: string | null;
+  phone: string | null;
 };
 
 type RecipientStore = {
