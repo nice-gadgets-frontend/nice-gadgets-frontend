@@ -111,7 +111,7 @@ export const CardItem: React.FC<CardItemProps> = ({ product, className }) => {
             }
           }}
         >
-          {isInCart ? 'Delete from cart' : 'Add to cart'}
+          {isInCart ? 'Added to cart' : 'Add to cart'}
         </PrimaryButton>
         <FavouritesButton
           onClick={(e) => {
