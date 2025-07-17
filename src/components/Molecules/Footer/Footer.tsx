@@ -42,7 +42,14 @@ export const Footer = () => {
               xl:col-start-10 xl:col-span-8 xl:gap-[107px]
             "
           >
-            <Link to={'/'}>github</Link>
+            <Link
+              to={
+                'https://github.com/nice-gadgets-frontend/nice-gadgets-frontend'
+              }
+              target="__blank"
+            >
+              github
+            </Link>
             <Link to={'contacts'}>contacts</Link>
             <Link to={'rights'}>rights</Link>
             <Link to={'team'}>team</Link>
