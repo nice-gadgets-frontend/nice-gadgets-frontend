@@ -22,7 +22,10 @@ export const Footer = () => {
           "
         >
           <div className="col-span-4 justify-self-start grid items-center sm:col-span-3 xl:col-span-4">
-            <NavLink to="/home" onClick={backToTopHandle}>
+            <NavLink
+              to="/home"
+              onClick={backToTopHandle}
+            >
               <img
                 src="/gadgets/img/light-theme-nice-gadgets-logo.png"
                 alt="Nice Gadgets Logo"
@@ -50,12 +53,28 @@ export const Footer = () => {
                 'https://github.com/nice-gadgets-frontend/nice-gadgets-frontend'
               }
               target="__blank"
+              className="text-[var(--color-primary)]/50 hover:text-[var(--color-primary)] transition-colors duration-300"
             >
               github
             </Link>
-            <Link to={'contacts'}>contacts</Link>
-            <Link to={'rights'}>rights</Link>
-            <Link to={'team'}>team</Link>
+            <Link
+              to={'contacts'}
+              className="text-[var(--color-primary)]/50 hover:text-[var(--color-primary)] transition-colors duration-300"
+            >
+              contacts
+            </Link>
+            <Link
+              to={'rights'}
+              className="text-[var(--color-primary)]/50 hover:text-[var(--color-primary)] transition-colors duration-300"
+            >
+              rights
+            </Link>
+            <Link
+              to={'team'}
+              className="text-[var(--color-primary)]/50 hover:text-[var(--color-primary)] transition-colors duration-300"
+            >
+              team
+            </Link>
           </div>
           <div className="col-span-4 justify-self-center grid grid-flow-col items-center gap-2 sm:col-span-3 sm:justify-self-end xl:col-start-20 xl:col-span-5">
             <span className="font-[Mont-Regular] font-bold text-[12px] leading-tight text-right text-[var(--color-secondary)] mr-4 sm:mr-0">

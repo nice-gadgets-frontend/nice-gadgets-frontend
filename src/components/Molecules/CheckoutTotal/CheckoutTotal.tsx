@@ -64,7 +64,7 @@ export const CheckoutTotal = () => {
     if (!recipient.name) {
       newErrors.firstName = "Recipient's first name is required.";
     }
-    if (!selectedNovaPoshtaBranch) {
+    if (!selectedNovaPoshtaBranch && selectedDelivery === 'novaposhta') {
       newErrors.NovaPoshtaBranch = 'Delivery destination is required.';
     }
 
@@ -196,7 +196,7 @@ export const CheckoutTotal = () => {
       )}
 
       <button
-        className="w-full bg-[var(--color-accent)]/50 shadow-sm text-[var(--color-primary)] py-3 rounded-lg text-lg font-[Mont-SemiBold] hover:bg-[var(--color-accent)]/80 transition-colors"
+        className="w-full bg-[var(--color-accent)]/50 cursor-pointer shadow-sm text-[var(--color-primary)] py-3 rounded-lg text-lg font-[Mont-SemiBold] hover:bg-[var(--color-accent)]/80 transition-colors"
         onClick={handleConfirmPurchase}
       >
         Confirm purchase

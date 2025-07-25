@@ -16,20 +16,27 @@ export const CardItem: React.FC<CardItemProps> = ({ product, className }) => {
   const itemsInFavourites = useFavouritesStore(
     (state) => state.itemsInFavourites,
   );
+  const itemsInCart = useInCartStore((state) => state.itemsIdsInCart);
+  const itemsIdsInCart = itemsInCart.map((item) => item.id);
   const addToFavourites = useFavouritesStore((state) => state.addToFavourites);
   const addToCart = useInCartStore((state) => state.addToCart);
+  const deleteFromCart = useInCartStore((state) => state.deleteFromCart);
 
   const isSelected = itemsInFavourites.includes(product.itemId);
-  const [isInCart, setIsInCart] = useState(false);
+  const [isInCart, setIsInCart] = useState(
+    itemsIdsInCart.includes(String(product.itemId)),
+  );
 
   const navigate = useNavigate();
 
   const addToCartHandle = () => {
     addToCart(product.itemId);
     setIsInCart(true);
-    setTimeout(() => {
-      setIsInCart(false);
-    }, 1500);
+  };
+
+  const deleteFromCartHandle = () => {
+    deleteFromCart(product.itemId);
+    setIsInCart(false);
   };
 
   const addToFavouritesHandle = () => {
@@ -94,11 +101,15 @@ export const CardItem: React.FC<CardItemProps> = ({ product, className }) => {
 
       <div className="product-interaction flex flex-row justify-between gap-2 sm:gap-3 mt-auto">
         <PrimaryButton
+          isDelete={isInCart}
           onClick={(e) => {
             e.stopPropagation();
-            addToCartHandle();
+            if (isInCart) {
+              deleteFromCartHandle();
+            } else {
+              addToCartHandle();
+            }
           }}
-          isDisabled={isInCart}
         >
           {isInCart ? 'Added to cart' : 'Add to cart'}
         </PrimaryButton>

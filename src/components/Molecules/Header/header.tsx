@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { NavLink } from 'react-router-dom';
+import { NavLink, useLocation } from 'react-router-dom';
 import { FavouritesPageIcon } from '../../Atoms/Icons/FavouritePageIcon';
 import { MenuIcon } from '../../Atoms/Icons/MenuIcon';
 import { ShoppingBagIcon } from '../../Atoms/Icons/ShoppingBagIcon';
@@ -9,28 +9,19 @@ import { useInCartStore } from '../../../services/useStore/useInCartStore';
 import { useFavouritesStore } from '../../../services/useStore/useFavouritesStore';
 import { ThemeToggle } from '../../Atoms/Switcher/ThemeToggle';
 import { LogIn } from 'lucide-react';
+import { useUserStore } from '../../../services/useStore/useUserStore';
 
 export const Navbar = () => {
+  const location = useLocation();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   const toggleMenu = () => setIsMenuOpen((prev) => !prev);
   const closeMenu = () => setIsMenuOpen(false);
 
-  const [isAuthenticated, setIsAuthenticated] = useState(
-    Boolean(localStorage.getItem('access_token')),
-  );
+  const user = useUserStore((state) => state.user);
+  const setUser = useUserStore((state) => state.setUser);
 
-  useEffect(() => {
-    const handleStorageChange = () => {
-      setIsAuthenticated(Boolean(localStorage.getItem('access_token')));
-    };
-
-    window.addEventListener('storage', handleStorageChange);
-
-    return () => {
-      window.removeEventListener('storage', handleStorageChange);
-    };
-  }, []);
+  const isCheckoutPage = location.pathname === '/cart/checkout';
 
   useEffect(() => {
     if (isMenuOpen) {
@@ -62,9 +53,7 @@ export const Navbar = () => {
   const inactiveLink = 'text-secondary hover:text-primary';
 
   const handleLogout = () => {
-    localStorage.removeItem('access_token');
-    localStorage.removeItem('refresh_token');
-    localStorage.removeItem('username');
+    setUser(null);
     window.location.reload();
   };
 
@@ -73,22 +62,22 @@ export const Navbar = () => {
       <header className="relative border border-[var(--color-elements)] dark:border-0 bg-black text-primary h-[64px] flex items-center px-6 drop-shadow-[0_1px_1px_var(--color-surface-2)] z-40">
         <div className="flex justify-between items-center w-full">
           {/* Ліва частина */}
-          <div className="flex items-center gap-12">
+          <div className="flex items-center gap-12 min-w-[89px]">
             <NavLink to="/home">
               <img
                 src="/gadgets/img/light-theme-nice-gadgets-logo.png"
                 alt="Nice Gadgets Logo"
-                className="h-[32px] block dark:hidden"
+                className="h-[32px] block dark:hidden min-w-[89px]"
               />
               <img
                 src="/gadgets/img/nice-gadgets-logo.png"
                 alt="Nice Gadgets Logo"
-                className="h-[32px] hidden dark:block"
+                className="h-[32px] hidden dark:block min-w-[89px]"
               />
             </NavLink>
 
             {/* Desktop навігація */}
-            <nav className="hidden lg:flex gap-[32px] xl:gap-[62px]">
+            <nav className="hidden md:flex gap-[32px] xl:gap-[62px]">
               {[
                 { label: 'Home', path: '/home' },
                 { label: 'Phones', path: '/phones' },
@@ -109,17 +98,24 @@ export const Navbar = () => {
           </div>
 
           {/* Іконки справа (десктоп) */}
-          <div className="hidden lg:flex items-center gap-4">
-            {isAuthenticated ?
+          <div className="hidden md:flex items-center gap-2">
+            {user ?
               <button
                 onClick={handleLogout}
-                className="cursor-pointer flex items-center text-primary transition"
+                className={`flex items-center text-primary transition ${
+                  isCheckoutPage ?
+                    'text-gray-400 cursor-not-allowed'
+                  : 'text-secondary hover:text-primary cursor-pointer'
+                }`}
+                disabled={isCheckoutPage}
               >
                 <LogIn
                   size={20}
                   className="mr-1 rotate-180"
                 />
-                <span>Logout</span>
+                <span className="text-[12px] font-[Mont-SemiBold] uppercase leading-none mt-0.5">
+                  Logout
+                </span>
               </button>
             : <NavLink
                 to="/auth"
@@ -130,9 +126,11 @@ export const Navbar = () => {
               >
                 <LogIn
                   size={20}
-                  className="mr-1"
+                  className="mr-1 mb-0.5"
                 />
-                <span>Login</span>
+                <span className="text-[12px] font-[Mont-SemiBold] leading-none mt-0.5">
+                  Login
+                </span>
               </NavLink>
             }
 
@@ -167,7 +165,7 @@ export const Navbar = () => {
         </div>
 
         {/* Mobile & Tablet menu icon */}
-        <div className="flex lg:hidden gap-4">
+        <div className="flex md:hidden gap-4">
           <div className="h-[64px] flex items-center">
             <ThemeToggle />
           </div>
@@ -188,7 +186,7 @@ export const Navbar = () => {
       <BurgerMenu
         isOpen={isMenuOpen}
         onClose={closeMenu}
-        isAuthenticated={isAuthenticated}
+        isAuthenticated={Boolean(user)}
         onLogout={() => {
           handleLogout();
           closeMenu();
