@@ -9,11 +9,16 @@ import clsx from 'clsx';
 type Props = {
   isOpen: boolean;
   onClose: () => void;
-    isAuthenticated: boolean;
+  isAuthenticated: boolean;
   onLogout: () => void;
 };
 
-export const BurgerMenu = ({ isOpen, onClose, isAuthenticated, onLogout }: Props) => {
+export const BurgerMenu = ({
+  isOpen,
+  onClose,
+  isAuthenticated,
+  onLogout,
+}: Props) => {
   const location = useLocation();
 
   const itemsIdsInCart = useInCartStore((state) => state.itemsIdsInCart);
@@ -32,7 +37,7 @@ export const BurgerMenu = ({ isOpen, onClose, isAuthenticated, onLogout }: Props
   return (
     <div
       className={clsx(
-        'fixed inset-0 z-[100] md:hidden transition-opacity duration-300',
+        'fixed inset-0 z-[100] lg:hidden transition-opacity duration-300',
         isOpen ?
           'opacity-100 pointer-events-auto'
         : 'opacity-0 pointer-events-none',
@@ -102,27 +107,27 @@ export const BurgerMenu = ({ isOpen, onClose, isAuthenticated, onLogout }: Props
             </NavLink>
           ))}
 
-<button
-  onClick={() => {
-    if (isAuthenticated) {
-      onLogout();
-    } else {
-      window.location.href = '/auth';
-    }
-    onClose();
-  }}
-  aria-label={isAuthenticated ? 'Logout' : 'Login'}
-  className="flex items-center justify-center gap-2 p-2 mx-auto mt-6 text-primary hover:text-primary/80 transition"
->
-  <LogIn size={24} className={isAuthenticated ? 'rotate-180' : ''} />
-  <span className="text-sm font-[Mont-Semibold] uppercase mt-0.1">
-    {isAuthenticated ? 'Logout' : 'Login'}
-  </span>
-</button>
-
+          <button
+            onClick={() => {
+              if (isAuthenticated) {
+                onLogout();
+              } else {
+                window.location.href = '/auth';
+              }
+              onClose();
+            }}
+            aria-label={isAuthenticated ? 'Logout' : 'Login'}
+            className="flex items-center justify-center gap-2 p-2 mx-auto mt-6 text-primary hover:text-primary/80 transition"
+          >
+            <LogIn
+              size={24}
+              className={isAuthenticated ? 'rotate-180' : ''}
+            />
+            <span className="text-sm font-[Mont-Semibold] uppercase mt-0.1">
+              {isAuthenticated ? 'Logout' : 'Login'}
+            </span>
+          </button>
         </nav>
-
- 
 
         {/* Bottom icons */}
         <div className="flex border-t border-[#2c2f3a] divide-x divide-[#2c2f3a]">
@@ -138,6 +143,7 @@ export const BurgerMenu = ({ isOpen, onClose, isAuthenticated, onLogout }: Props
               )}
             </div>
           </NavLink>
+
           <NavLink
             to="/cart"
             onClick={onClose}
